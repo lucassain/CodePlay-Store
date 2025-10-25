@@ -4,7 +4,7 @@
 
 int main()
 {
-    void loginUsuarios (ARCHIVOS_USUARIOS);
+    loginUsuarios (ARCHIVOS_USUARIOS);
 
     return 0;
 }
