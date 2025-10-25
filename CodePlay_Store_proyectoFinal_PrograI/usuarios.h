@@ -17,6 +17,10 @@ void loginUsuarios(char archivo[]);
 void registrarUnUsuario (stLogin* usuario);
 int registrarse (stLogin* usuario);
 void guardarUsuarios (char archivo[], stLogin usuarios);
+void mostrarUsuarios (char archivo[]);
+void mostrarUnUsuario (stLogin user);
+void iniciarSesion (char archivo[]);
+
 
 
 #endif

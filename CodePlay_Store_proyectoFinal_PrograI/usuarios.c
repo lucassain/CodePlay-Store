@@ -17,12 +17,13 @@ void loginUsuarios (char archivos[])
 
         do
         {
+            mostrarUsuarios (ARCHIVOS_USUARIOS);
             printf("INICIAR SESION (I) - REGISTRARSE (R): ");
             scanf(" %c", &usuario.opcion);
 
             if( usuario.opcion=='i' || usuario.opcion=='I')
             {
-
+                iniciarSesion(ARCHIVOS_USUARIOS);
 
             }
             else if(usuario.opcion == 'r' || usuario.opcion=='R')
@@ -89,8 +90,68 @@ void guardarUsuarios (char archivo[], stLogin usuarios)
         fwrite(&usuarios, sizeof(stLogin), 1, buffer);
 
         fclose(buffer);
-    }else
+    }
+    else
     {
         printf("Error\n");
+    }
+}
+
+void iniciarSesion (char archivo[])
+{
+    FILE* buffer=fopen(archivo, "rb");
+    stLogin aux;
+
+    if (buffer!=NULL)
+    {
+        printf("INICIAR SESION\n");
+        printf("Ingrese su dreccion de correo electronico: ");
+        scanf("%s", aux.email);
+        printf("Ingrese su nombre de usuario: ");
+        scanf("%s", aux.usuario);
+        printf("Ingrese su contrasenia: ");
+        scanf("%s", aux.contrasenia);
+        int registroExitoso=0;
+
+        do
+        {
+            while (fread(&aux, sizeof(stLogin), 1, buffer)==1)
+            {
+                if (strcmp(aux.usuario, usuarios.usuario)==0 && strcmp(aux.email, usuarios.email)==0 && strcmp(aux.contrasenia, usuarios.contrasenia)==0)
+                {
+                    printf("Inicio de sesion exitoso.\n");
+                    registroExitoso=1;
+                }
+                else
+
+                {
+                    printf("Correo, usuario o contrasenia incorrecta\n");
+                    registroExitoso=0;
+                }
+            }
+        }while (registroExitoso!=1);
+
+            fclose(buffer);
+    }
+}
+
+void mostrarUnUsuario (stLogin user)
+{
+    printf("Nombre de usuario: %s\n", user.usuario);
+    printf("Direccion de correo electronico: %s\n", user.email);
+    printf("Contrasenia: %s\n", user.contrasenia);
+}
+
+void mostrarUsuarios (char archivo[])
+{
+    FILE* usuarios=fopen(archivo, "rb");
+    stLogin user;
+
+    if (usuarios!=NULL)
+    {
+        while (fread(&user, sizeof(stLogin), 1, usuarios))
+        {
+            mostrarUnUsuario(user);
+        }
     }
 }
