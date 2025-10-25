@@ -9,5 +9,8 @@ typedef struct
     char contrasenia [DIMENSION_LOGIN];
 }stLogin;
 
+//Prototipado
+void loginUsuarios ();
+
 
 #endif // USUARIOS_H_INCLUDED

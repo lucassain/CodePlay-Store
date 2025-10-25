@@ -4,5 +4,7 @@
 
 int main()
 {
+    void loginUsuarios ();
+
     return 0;
 }
