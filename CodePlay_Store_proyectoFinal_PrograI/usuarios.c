@@ -17,7 +17,7 @@ void loginUsuarios (char archivos[])
 
         do
         {
-            printf("INICIAR SESION(I)-REGISTRAR(R)\n");
+            printf("INICIAR SESION (I) - REGISTRARSE (R): ");
             scanf(" %c", &usuario.opcion);
 
             if( usuario.opcion=='i' || usuario.opcion=='I')
@@ -79,4 +79,17 @@ int registrarse (stLogin* usuario)
     }
 }
 
+void guardarUsuarios (char archivo[], stLogin usuarios)
+{
+    FILE* buffer=fopen(archivo, "ab");
 
+    if (buffer!=NULL)
+    {
+        fwrite(&usuarios, sizeof(stLogin), 1, buffer);
+
+        fclose(buffer);
+    }else
+    {
+        printf("Error\n");
+    }
+}
