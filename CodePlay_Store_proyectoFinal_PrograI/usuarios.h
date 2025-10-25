@@ -12,7 +12,7 @@ typedef struct
 }stLogin;
 
 //Prototipado
-void loginUsuarios ();
+void loginUsuarios (char archivos[]);
 
 
 #endif // USUARIOS_H_INCLUDED
