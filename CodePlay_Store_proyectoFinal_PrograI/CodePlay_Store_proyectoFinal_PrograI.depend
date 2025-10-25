@@ -10,3 +10,15 @@
 
 1761427709 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.h
 
+1761428169 source:c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
+	<stdio.h>
+	<stdlib.h>
+	"usuarios.h"
+
+1761428718 c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.h
+
+1761428959 source:c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
+	<stdio.h>
+	<stdlib.h>
+	"usuarios.h"
+
