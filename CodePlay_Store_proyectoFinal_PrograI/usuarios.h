@@ -14,5 +14,8 @@ typedef struct
 
 // Prototipo
 void loginUsuarios(char archivo[]);
+void registrarUnUsuario (stLogin* usuario);
+int registrarse (stLogin* usuario);
+
 
 #endif
