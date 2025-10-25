@@ -32,6 +32,7 @@ void loginUsuarios (char archivos[])
                 if (registro==1)
                 {
                     printf("Usuario registrado correctamente.\n");
+                    guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
                 }
                 else
                 {

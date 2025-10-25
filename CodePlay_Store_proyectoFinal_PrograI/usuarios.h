@@ -16,6 +16,7 @@ typedef struct
 void loginUsuarios(char archivo[]);
 void registrarUnUsuario (stLogin* usuario);
 int registrarse (stLogin* usuario);
+void guardarUsuarios (char archivo[], stLogin usuarios);
 
 
 #endif
