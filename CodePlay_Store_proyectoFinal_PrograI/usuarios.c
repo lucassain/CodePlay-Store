@@ -3,14 +3,10 @@
 #include "usuarios.h"
 #include <string.h>
 
-void loginUsuarios (char archivos[])
+void loginUsuarios ()
 {
     int registro=0;
 
-    FILE* buffer=fopen(archivos, "ab");
-
-    if(buffer!=NULL)
-    {
         stLogin usuario;
 
         printf("Bienvenido a CodePlay\n");
@@ -48,9 +44,8 @@ void loginUsuarios (char archivos[])
         }
         while (usuario.opcion!='i' && usuario.opcion!='I' && usuario.opcion!='r' && usuario.opcion!='R');
 
-        fclose(buffer);
     }
-}
+
 
 void registrarUnUsuario (stLogin* usuario)
 {
@@ -104,12 +99,11 @@ void iniciarSesion (char archivo[])
     stLogin ingreso;
     int registroExitoso=0;
 
-    fseek(buffer, 0, SEEK_SET);
-
     if (buffer!=NULL)
     {
+        fseek(buffer, 0, SEEK_SET);
         printf("INICIAR SESION\n");
-        printf("Ingrese su dreccion de correo electronico: ");
+        printf("Ingrese su direccion de correo electronico: ");
         scanf("%s", ingreso.email);
         printf("Ingrese su nombre de usuario: ");
         scanf("%s", ingreso.usuario);
@@ -156,5 +150,6 @@ void mostrarUsuarios (char archivo[])
         {
             mostrarUnUsuario(user);
         }
+        fclose(usuarios);
     }
 }

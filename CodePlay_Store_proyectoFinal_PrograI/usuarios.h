@@ -13,7 +13,7 @@ typedef struct
 } stLogin;
 
 // Prototipo
-void loginUsuarios(char archivo[]);
+void loginUsuarios();
 void registrarUnUsuario (stLogin* usuario);
 int registrarse (stLogin* usuario);
 void guardarUsuarios (char archivo[], stLogin usuarios);
