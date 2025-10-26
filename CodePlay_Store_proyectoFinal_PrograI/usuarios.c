@@ -100,40 +100,43 @@ void guardarUsuarios (char archivo[], stLogin usuarios)
 void iniciarSesion (char archivo[])
 {
     FILE* buffer=fopen(archivo, "rb");
-    stLogin aux;
+    stLogin guardado;
+    stLogin ingreso;
+    int registroExitoso=0;
+
+    fseek(buffer, 0, SEEK_SET);
 
     if (buffer!=NULL)
     {
         printf("INICIAR SESION\n");
         printf("Ingrese su dreccion de correo electronico: ");
-        scanf("%s", aux.email);
+        scanf("%s", ingreso.email);
         printf("Ingrese su nombre de usuario: ");
-        scanf("%s", aux.usuario);
+        scanf("%s", ingreso.usuario);
         printf("Ingrese su contrasenia: ");
-        scanf("%s", aux.contrasenia);
-        int registroExitoso=0;
+        scanf("%s", ingreso.contrasenia);
 
-        do
-        {
-            while (fread(&aux, sizeof(stLogin), 1, buffer)==1)
+
+        while (fread(&guardado, sizeof(stLogin), 1, buffer)==1)
             {
-                if (strcmp(aux.usuario, usuarios.usuario)==0 && strcmp(aux.email, usuarios.email)==0 && strcmp(aux.contrasenia, usuarios.contrasenia)==0)
+                if (strcmp(ingreso.usuario, guardado.usuario)==0 && strcmp(ingreso.email, guardado.email)==0 && strcmp(ingreso.contrasenia, guardado.contrasenia)==0)
                 {
-                    printf("Inicio de sesion exitoso.\n");
+                    printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.usuario);
                     registroExitoso=1;
+                    break;
                 }
-                else
 
-                {
-                    printf("Correo, usuario o contrasenia incorrecta\n");
-                    registroExitoso=0;
-                }
             }
-        }while (registroExitoso!=1);
+            if(registroExitoso==0){
+        printf("Correo,usuario o contrasenia incorrectas\n");
+        }
 
             fclose(buffer);
+        }  else {
+        printf("Error en el achivo\n");
+        }
     }
-}
+
 
 void mostrarUnUsuario (stLogin user)
 {
