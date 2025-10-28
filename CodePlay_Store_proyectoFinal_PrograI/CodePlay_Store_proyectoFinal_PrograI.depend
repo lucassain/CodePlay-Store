@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1761438344 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
+1761691495 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
 	<stdio.h>
 	<stdlib.h>
 	"usuarios.h"
