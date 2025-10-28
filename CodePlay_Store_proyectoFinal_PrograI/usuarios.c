@@ -7,44 +7,44 @@ void loginUsuarios ()
 {
     int registro=0;
 
-        stLogin usuario;
+    stLogin usuario;
 
-        printf("Bienvenido a CodePlay\n");
+    printf("Bienvenido a CodePlay\n");
 
-        do
+    do
+    {
+        mostrarUsuarios (ARCHIVOS_USUARIOS);
+        printf("INICIAR SESION (I) - REGISTRARSE (R): ");
+        scanf(" %c", &usuario.opcion);
+
+        if( usuario.opcion=='i' || usuario.opcion=='I')
         {
-            mostrarUsuarios (ARCHIVOS_USUARIOS);
-            printf("INICIAR SESION (I) - REGISTRARSE (R): ");
-            scanf(" %c", &usuario.opcion);
+            iniciarSesion(ARCHIVOS_USUARIOS);
 
-            if( usuario.opcion=='i' || usuario.opcion=='I')
+        }
+        else if(usuario.opcion == 'r' || usuario.opcion=='R')
+        {
+            registro=registrarse(&usuario);
+
+            if (registro==1)
             {
-                iniciarSesion(ARCHIVOS_USUARIOS);
-
-            }
-            else if(usuario.opcion == 'r' || usuario.opcion=='R')
-            {
-                registro=registrarse(&usuario);
-
-                if (registro==1)
-                {
-                    printf("Usuario registrado correctamente.\n");
-                    guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
-                }
-                else
-                {
-                    printf("Error al registrarse.");
-                }
-
+                printf("Usuario registrado correctamente.\n");
+                guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
             }
             else
             {
-                printf("Opcion invalida. Elija otra opcion\n");
+                printf("Error al registrarse.");
             }
-        }
-        while (usuario.opcion!='i' && usuario.opcion!='I' && usuario.opcion!='r' && usuario.opcion!='R');
 
+        }
+        else
+        {
+            printf("Opcion invalida. Elija otra opcion\n");
+        }
     }
+    while (usuario.opcion!='i' && usuario.opcion!='I' && usuario.opcion!='r' && usuario.opcion!='R');
+
+}
 
 
 void registrarUnUsuario (stLogin* usuario)
@@ -112,24 +112,27 @@ void iniciarSesion (char archivo[])
 
 
         while (fread(&guardado, sizeof(stLogin), 1, buffer)==1)
+        {
+            if (strcmp(ingreso.usuario, guardado.usuario)==0 && strcmp(ingreso.email, guardado.email)==0 && strcmp(ingreso.contrasenia, guardado.contrasenia)==0)
             {
-                if (strcmp(ingreso.usuario, guardado.usuario)==0 && strcmp(ingreso.email, guardado.email)==0 && strcmp(ingreso.contrasenia, guardado.contrasenia)==0)
-                {
-                    printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.usuario);
-                    registroExitoso=1;
-                    break;
-                }
-
+                printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.usuario);
+                registroExitoso=1;
+                break;
             }
-            if(registroExitoso==0){
-        printf("Correo,usuario o contrasenia incorrectas\n");
+
+        }
+        if(registroExitoso==0)
+        {
+            printf("Correo,usuario o contrasenia incorrectas\n");
         }
 
-            fclose(buffer);
-        }  else {
-        printf("Error en el achivo\n");
-        }
+        fclose(buffer);
     }
+    else
+    {
+        printf("Error en el achivo\n");
+    }
+}
 
 
 void mostrarUnUsuario (stLogin user)
