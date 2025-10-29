@@ -13,7 +13,7 @@ void loginUsuarios ()
 
     do
     {
-        mostrarUsuarios (ARCHIVOS_USUARIOS);
+        mostrarUsuarios (ARCHIVOS_USUARIOS); //BORRAR MAS TARDE
         printf("INICIAR SESION (I) - REGISTRARSE (R): ");
         scanf(" %c", &usuario.opcion);
 
@@ -135,14 +135,14 @@ void iniciarSesion (char archivo[])
 }
 
 
-void mostrarUnUsuario (stLogin user)
+void mostrarUnUsuario (stLogin user) //BORRAR MAS TARDE
 {
     printf("Nombre de usuario: %s\n", user.usuario);
     printf("Direccion de correo electronico: %s\n", user.email);
     printf("Contrasenia: %s\n", user.contrasenia);
 }
 
-void mostrarUsuarios (char archivo[])
+void mostrarUsuarios (char archivo[]) //BORRAR MAS TARDE
 {
     FILE* usuarios=fopen(archivo, "rb");
     stLogin user;

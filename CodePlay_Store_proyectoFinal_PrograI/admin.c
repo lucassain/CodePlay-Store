@@ -5,8 +5,6 @@
 
 void loginAdmin ()
 {
-
-
     printf("Bienvenido a CodePlay\n");
     printf("Ingrese con su cuenta de admin:\n");
 
@@ -17,10 +15,8 @@ void loginAdmin ()
 }
 void creacionAdmin ()
 {
-    FILE* buffer=fopen(ARCHIVOS_ADMINS, "rb");
+    FILE* buffer=fopen(ARCHIVOS_ADMINS, "ab");
 
-    if(buffer==NULL){
-    buffer = fopen(ARCHIVOS_ADMINS, "wb");
 
     if(buffer!=NULL)
     {
@@ -42,7 +38,6 @@ void creacionAdmin ()
  fclose(buffer);
 }
 
-}
 
 void iniciarSesionAdmin (char archivo[])
 {

@@ -5,8 +5,8 @@
 
 int main()
 {
-    loginUsuarios ();
-    //loginAdmin ();
+    //loginUsuarios ();
+    loginAdmin ();
 
     return 0;
 }
