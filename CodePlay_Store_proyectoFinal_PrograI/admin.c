@@ -3,30 +3,27 @@
 #include "admin.h"
 #include <string.h>
 
-int main()
-{
-    loginAdmin ();
-    return 0;
-}
 void loginAdmin ()
 {
-    int registro=0;
 
 
     printf("Bienvenido a CodePlay\n");
     printf("Ingrese con su cuenta de admin:\n");
 
-    creacionAdmin ()
+    creacionAdmin ();
     iniciarSesionAdmin (ARCHIVOS_ADMINS);
 
 
 }
 void creacionAdmin ()
 {
-    FILE* buffer=fopen(ARCHIVO_ADMINS, "rb");
+    FILE* buffer=fopen(ARCHIVOS_ADMINS, "rb");
 
     if(buffer==NULL){
-    buffer = fopen(ARCHIVO_ADMINS, "wb");
+    buffer = fopen(ARCHIVOS_ADMINS, "wb");
+
+    if(buffer!=NULL)
+    {
 
 
     stAdmin admins[]= {
@@ -37,9 +34,12 @@ void creacionAdmin ()
 
   fwrite(admins, sizeof(stAdmin),3,buffer);
   fclose(buffer);
+    }
 
 
-
+} else
+{
+ fclose(buffer);
 }
 
 }
@@ -66,22 +66,30 @@ void iniciarSesionAdmin (char archivo[])
 
  FILE* buffer=fopen(archivo, "rb");
  stAdmin aux;
+ int registroExitoso=0;
 
+  if(buffer != NULL)
+{
 
  while (fread(&aux, sizeof(stAdmin), 1, buffer)==1)
         {
             if (strcmp(aux.usuario, recibido.usuario)==0 && strcmp(aux.email, recibido.email)==0 && strcmp(aux.contrasenia, recibido.contrasenia)==0)
             {
-                printf("Inicio de sesion exitoso. Bienvenido admin %s!\n", ingreso.usuario);
+                printf("Inicio de sesion exitoso. Bienvenido admin %s!\n", recibido.usuario);
                 registroExitoso=1;
                 break;
             }
-
+        }
+        fclose(buffer);
+         }
+         else
+        {
+            printf("Error con el archivo de admins\n");
         }
         if(registroExitoso==0)
         {
             printf("Correo,usuario o contrasenia incorrectas\n");
         }
 
-        fclose(buffer);
+    return registroExitoso;
  }

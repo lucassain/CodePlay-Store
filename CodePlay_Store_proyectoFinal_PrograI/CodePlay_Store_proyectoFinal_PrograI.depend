@@ -12,10 +12,11 @@
 
 1761438344 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.h
 
-1761438536 source:c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
+1761696332 source:c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
 	<stdio.h>
 	<stdlib.h>
 	"usuarios.h"
+	"admin.h"
 
 1761438536 c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.h
 
@@ -24,4 +25,14 @@
 	<stdlib.h>
 	"usuarios.h"
 	<string.h>
+
+1761691634 source:c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+
+1761696189 source:c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\admin.c
+	<stdio.h>
+	<stdlib.h>
+	"admin.h"
+	<string.h>
+
+1761695654 c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\admin.h
 
