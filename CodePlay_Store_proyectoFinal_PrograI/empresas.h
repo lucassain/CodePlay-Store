@@ -19,5 +19,7 @@ typedef struct {
 } stEmpresa;
 
 //Prototipado
+void loginEmpresas ();
+
 
 #endif // EMPRESAS_H_INCLUDED

@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1761696458 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
+1761711663 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
 	<stdio.h>
 	<stdlib.h>
 	"usuarios.h"
 	"admin.h"
+	"empresas.h"
 
 1761696458 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
 	<stdio.h>
@@ -41,7 +42,21 @@
 
 1761698023 c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\admin.h
 
-1761695247 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.h
+1761706174 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.h
 
 1761696973 c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
+
+1761706174 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"admin.h"
+
+1761696459 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+	<stdio.h>
+	<stdlib.h>
+	"empresas.h"
+	<string.h>
+
+1761711626 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
 
