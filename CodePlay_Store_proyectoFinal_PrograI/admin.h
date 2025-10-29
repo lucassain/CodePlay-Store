@@ -17,5 +17,6 @@ typedef struct
 void loginAdmin ();
 void creacionAdmin ();
 void iniciarSesionAdmin (char archivo[]);
- int validarInicioSesionAdmin(char archivo[], stAdmin recibido);
+int validarInicioSesionAdmin(char archivo[], stAdmin recibido);
+
 #endif // ADMIN_H_INCLUDED
