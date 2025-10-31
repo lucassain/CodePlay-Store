@@ -24,7 +24,7 @@ void loginUsuarios ()
         }
         else if(usuario.opcion == 'r' || usuario.opcion=='R')
         {
-            registro=registrarse(&usuario);
+            registro=registrarseUsuario(&usuario);
 
             if (registro==1)
             {
@@ -59,7 +59,7 @@ void registrarUnUsuario (stLogin* usuario)
     scanf("%s", usuario->contrasenia);
 }
 
-int registrarse (stLogin* usuario)
+int registrarseUsuario (stLogin* usuario)
 {
     printf("CREAR USUARIO\n");
 
@@ -103,13 +103,8 @@ void iniciarSesion (char archivo[])
     {
         fseek(buffer, 0, SEEK_SET);
         printf("INICIAR SESION\n");
-        printf("Ingrese su direccion de correo electronico: ");
-        scanf("%s", ingreso.email);
-        printf("Ingrese su nombre de usuario: ");
-        scanf("%s", ingreso.usuario);
-        printf("Ingrese su contrasenia: ");
-        scanf("%s", ingreso.contrasenia);
 
+        registrarUnUsuario(&ingreso);
 
         while (fread(&guardado, sizeof(stLogin), 1, buffer)==1)
         {
