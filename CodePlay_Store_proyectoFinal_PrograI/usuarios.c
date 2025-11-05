@@ -26,14 +26,23 @@ void loginUsuarios ()
         {
             registro=registrarseUsuario(&usuario);
 
-            if (registro==1)
+            if (existeUsuario(ARCHIVOS_USUARIOS, usuario))
             {
-                printf("Usuario registrado correctamente.\n");
-                guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
+                printf("Ese correo o usuario ya esta registrado.\n");
             }
             else
             {
-                printf("Error al registrarse.");
+
+                if (registro==1)
+                {
+                    printf("Usuario registrado correctamente.\n");
+                    guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
+                }
+                else
+                {
+                    printf("Error al registrarse.");
+                }
+
             }
 
         }
@@ -45,7 +54,6 @@ void loginUsuarios ()
     while (usuario.opcion!='i' && usuario.opcion!='I' && usuario.opcion!='r' && usuario.opcion!='R');
 
 }
-
 
 void registrarUnUsuario (stLogin* usuario)
 {
@@ -74,6 +82,29 @@ int registrarseUsuario (stLogin* usuario)
     {
         return 0;
     }
+}
+
+int existeUsuario (char archivo[], stLogin nuevoUsuario)
+{
+    FILE* buffer=fopen(archivo, "rb");
+
+    if (buffer!=NULL)
+    {
+        stLogin aux;
+
+        while(fread(&aux, sizeof(stLogin), 1, buffer)==1)
+        {
+            if (strcmp(nuevoUsuario.usuario, aux.usuario)==0 || strcmp(nuevoUsuario.email, aux.email)==0)
+            {
+                fclose(buffer);
+                return 1;
+            }
+        }
+
+        fclose(buffer);
+    }
+
+    return 0;
 }
 
 void guardarUsuarios (char archivo[], stLogin usuarios)
