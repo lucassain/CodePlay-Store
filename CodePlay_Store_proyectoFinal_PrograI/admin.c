@@ -15,46 +15,54 @@ void loginAdmin ()
 }
 void creacionAdmin ()
 {
-   FILE* buffer = fopen(ARCHIVOS_ADMINS, "rb");
-if(buffer == NULL) {
-
-    buffer = fopen(ARCHIVOS_ADMINS, "wb");
-    if(buffer != NULL) {
-        stAdmin admins[] = {
-            {"Lucas","lucasSain@gmail.com","lucaspro"},
-            {"Franco","francobidegain@gmail.com","bidepro"},
-            {"Santi", "santiolea@gmail.com","santipro"}
-        };
-        fwrite(admins, sizeof(stAdmin), 3, buffer);
-        fclose(buffer);
-    } else
+    FILE* buffer = fopen(ARCHIVOS_ADMINS, "rb");
+    if(buffer == NULL)
     {
-     printf("Error en el archvio\n");
+
+        buffer = fopen(ARCHIVOS_ADMINS, "wb");
+        if(buffer != NULL)
+        {
+            stAdmin admins[] =
+            {
+                {"Lucas","lucasSain@gmail.com","lucaspro"},
+                {"Franco","francobidegain@gmail.com","bidepro"},
+                {"Santi", "santiolea@gmail.com","santipro"}
+            };
+            fwrite(admins, sizeof(stAdmin), 3, buffer);
+            fclose(buffer);
+        }
+        else
+        {
+            printf("Error en el archvio\n");
+        }
     }
-} else {
-    fclose(buffer);
- }
+    else
+    {
+        fclose(buffer);
+    }
 }
 void iniciarSesionAdmin (char archivo[])
 {
- stAdmin ingreso;
- int exito = 0;
+    stAdmin ingreso;
+    int exito = 0;
 
-printf("\nINICIAR SESION\n");
+    printf("\nINICIAR SESION\n");
 
- while(!exito) {
-    printf("Ingrese su correo electronico: ");
-    scanf("%29s", ingreso.email);
-    printf("Ingrese su nombre de usuario: ");
-    scanf("%29s", ingreso.usuario);
-    printf("Ingrese su contrasenia: ");
-    scanf("%29s", ingreso.contrasenia);
+    while(!exito)
+    {
+        printf("Ingrese su correo electronico: ");
+        scanf("%29s", ingreso.email);
+        printf("Ingrese su nombre de usuario: ");
+        scanf("%29s", ingreso.usuario);
+        printf("Ingrese su contrasenia: ");
+        scanf("%29s", ingreso.contrasenia);
 
-    exito = validarInicioSesionAdmin(archivo, ingreso);
-    if(!exito) {
-        printf("Intente de nuevo.\n\n");
+        exito = validarInicioSesionAdmin(archivo, ingreso);
+        if(!exito)
+        {
+            printf("Intente de nuevo.\n\n");
+        }
     }
-}
 
 }
 int validarInicioSesionAdmin(char archivo[], stAdmin recibido)

@@ -11,35 +11,42 @@ void loginEmpresas ()
 
     mostrarEmpresas(ARCHIVO_EMPRESAS);
 
-    printf("INICIAR SESION (I) - REGISTRAR EMPRESA (R)\n");
+    printf("INICIAR SESION (I) - REGISTRAR EMPRESA (R) - SALIR (S): ");
     scanf(" %c", &empresa.opcion);
 
-    if (empresa.opcion=='i' || empresa.opcion=='I')
+    do
     {
-        iniciarSesionEmpresa(ARCHIVO_EMPRESAS);
 
-    }else if (empresa.opcion=='r' || empresa.opcion=='R')
-    {
-        int registrarse=registrarseEmpresa(&empresa);
-
-        if (registrarse)
+        if (empresa.opcion=='i' || empresa.opcion=='I')
         {
-            printf("Empresa registrada con exito!\n");
-            guardarEmpresas(ARCHIVO_EMPRESAS, empresa);
+            iniciarSesionEmpresa(ARCHIVO_EMPRESAS);
 
-        } else
-        {
-            printf("Error al registrar la empresa.\n");
         }
+        else if (empresa.opcion=='r' || empresa.opcion=='R')
+        {
+            int registrarse=registrarseEmpresa(&empresa);
 
+            if (registrarse)
+            {
+                printf("Empresa registrada con exito!\n");
+                guardarEmpresas(ARCHIVO_EMPRESAS, empresa);
+
+            }
+            else
+            {
+                printf("Error al registrar la empresa.\n");
+            }
+
+        }
+        else if (empresa.opcion=='s' || empresa.opcion=='S')
+        {
+            printf("Cerrando programa...\n");
+        }
     }
+    while (empresa.opcion!='s' && empresa.opcion!='S');
+
 }
-/*  char nombre[50];            // Nombre de la empresa
-    char email[50];             // Correo de contacto
-    char contrasenia[20];       // Contraseña
-    char pais[30];              // País de origen
-    char descripcion[150];      // Descripción breve
-    char fechaRegistro[15];     // Fecha de creación de la cuenta*/
+
 
 void registrarUnaEmpresa (stEmpresa* empresa)
 {
@@ -87,8 +94,9 @@ void guardarEmpresas (char archivo[], stEmpresa empresa)
     {
         fwrite(&empresa, sizeof(stEmpresa), 1, buffer);
 
-       fclose(buffer);
-    }else
+        fclose(buffer);
+    }
+    else
 
     {
         printf("Error al guardar la empresa en el archivo.\n");
@@ -113,11 +121,11 @@ void iniciarSesionEmpresa (char archivo[])
         while (fread(&guardado, sizeof(stEmpresa), 1, buffer)==1)
         {
             if (strcmp(ingreso.nombre, guardado.nombre)==0 &&
-                strcmp(ingreso.email, guardado.email)==0 &&
-                strcmp(ingreso.contrasenia, guardado.contrasenia)==0
-                && strcmp(ingreso.pais, guardado.pais)==0 &&
-                strcmp(ingreso.descripcion, guardado.descripcion)==0
-                && strcmp(ingreso.fechaRegistro, guardado.fechaRegistro)==0)
+                    strcmp(ingreso.email, guardado.email)==0 &&
+                    strcmp(ingreso.contrasenia, guardado.contrasenia)==0
+                    && strcmp(ingreso.pais, guardado.pais)==0 &&
+                    strcmp(ingreso.descripcion, guardado.descripcion)==0
+                    && strcmp(ingreso.fechaRegistro, guardado.fechaRegistro)==0)
             {
                 printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.nombre);
                 registroExitoso=1;

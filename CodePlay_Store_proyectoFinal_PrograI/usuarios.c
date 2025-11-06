@@ -31,7 +31,8 @@ void loginUsuarios ()
             {
                 printf("Usuario registrado correctamente.\n");
                 guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
-            }else if(registro==-1)
+            }
+            else if(registro==-1)
             {
                 printf("El usuario registrado ya existe.\n");
             }
@@ -40,7 +41,8 @@ void loginUsuarios ()
                 printf("Error al registrarse.");
             }
 
-        } else if (usuario.opcion=='s' || usuario.opcion=='S')
+        }
+        else if (usuario.opcion=='s' || usuario.opcion=='S')
         {
             printf("Cerrando programa...\n");
             break;
@@ -62,8 +64,13 @@ void registrarUnUsuario (stLogin* usuario)
     printf("Ingrese su nombre de usuario: ");
     scanf("%s", usuario->usuario);
 
-    printf("Ingrese su contrasenia: ");
-    scanf("%s", usuario->contrasenia);
+    do
+    {
+        printf("Ingrese su contrasenia: ");
+        scanf("%s", usuario->contrasenia);
+
+    }
+    while (!validarContrasenia(usuario->contrasenia));
 }
 
 int registrarseUsuario (stLogin* usuario)
@@ -90,6 +97,39 @@ int registrarseUsuario (stLogin* usuario)
         }
     }
 
+}
+
+int validarContrasenia (char contrasenia[])
+{
+    int tieneNumero=0;
+    int tieneLetra=0;
+
+    if (strlen(contrasenia)<6)
+    {
+        printf("La contrasenia es demasiado corta (minimo 6 caracteres).\n");
+        return 0;
+    }
+
+
+    for (int i=0; i<strlen(contrasenia); i++)
+    {
+        if ((contrasenia[i]>='a' && contrasenia[i]<='z') || (contrasenia[i]>='a' && contrasenia[i]<='Z'))
+        {
+            tieneLetra=1;
+        }
+
+        if (contrasenia[i]>=0 && contrasenia[i]<=9)
+        {
+            tieneNumero=1;
+        }
+    }
+
+    if (!tieneLetra || !tieneNumero)
+    {
+        printf("La contrasenia debe tener al menos una letra y numero.\n");
+    }
+
+    return 1;
 }
 
 int existeUsuario (char archivo[], stLogin nuevoUsuario)
