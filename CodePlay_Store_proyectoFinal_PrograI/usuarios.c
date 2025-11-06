@@ -14,7 +14,7 @@ void loginUsuarios ()
     do
     {
         mostrarUsuarios (ARCHIVOS_USUARIOS); //BORRAR MAS TARDE
-        printf("INICIAR SESION (I) - REGISTRARSE (R): ");
+        printf("INICIAR SESION (I) - REGISTRARSE (R) - SALIR (S): ");
         scanf(" %c", &usuario.opcion);
 
         if( usuario.opcion=='i' || usuario.opcion=='I')
@@ -40,13 +40,17 @@ void loginUsuarios ()
                 printf("Error al registrarse.");
             }
 
+        } else if (usuario.opcion=='s' || usuario.opcion=='S')
+        {
+            printf("Cerrando programa...\n");
+            break;
         }
         else
         {
             printf("Opcion invalida. Elija otra opcion\n");
         }
     }
-    while (usuario.opcion!='i' && usuario.opcion!='I' && usuario.opcion!='r' && usuario.opcion!='R');
+    while (usuario.opcion!='s' && usuario.opcion!='S');
 
 }
 
