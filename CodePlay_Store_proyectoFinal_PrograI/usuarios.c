@@ -26,23 +26,18 @@ void loginUsuarios ()
         {
             registro=registrarseUsuario(&usuario);
 
-            if (existeUsuario(ARCHIVOS_USUARIOS, usuario))
+
+            if (registro==1)
             {
-                printf("Ese correo o usuario ya esta registrado.\n");
+                printf("Usuario registrado correctamente.\n");
+                guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
+            }else if(registro==-1)
+            {
+                printf("El usuario registrado ya existe.\n");
             }
             else
             {
-
-                if (registro==1)
-                {
-                    printf("Usuario registrado correctamente.\n");
-                    guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
-                }
-                else
-                {
-                    printf("Error al registrarse.");
-                }
-
+                printf("Error al registrarse.");
             }
 
         }
@@ -73,15 +68,24 @@ int registrarseUsuario (stLogin* usuario)
 
     registrarUnUsuario(usuario);
 
-    if (strlen(usuario->usuario)>0 && strlen(usuario->email)>0 && strlen(usuario->contrasenia)>0)
+    if (existeUsuario(ARCHIVOS_USUARIOS, *usuario))
     {
-        return 1;
-
+        return -1;
     }
     else
     {
-        return 0;
+
+        if (strlen(usuario->usuario)>0 && strlen(usuario->email)>0 && strlen(usuario->contrasenia)>0)
+        {
+            return 1;
+
+        }
+        else
+        {
+            return 0;
+        }
     }
+
 }
 
 int existeUsuario (char archivo[], stLogin nuevoUsuario)
