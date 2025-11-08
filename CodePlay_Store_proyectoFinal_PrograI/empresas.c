@@ -65,7 +65,7 @@ void registrarUnaEmpresa (stEmpresa* empresa)
     printf("Fecha de registro: ");
     scanf("%s", empresa->fechaRegistro);
 
-    printf("Ingrese una breve descripcion del: ");
+    printf("Ingrese una breve descripcion de la empresa: ");
     scanf("%s", empresa->descripcion);
 }
 
@@ -75,7 +75,9 @@ int registrarseEmpresa (stEmpresa* empresa)
 
     registrarUnaEmpresa(empresa);
 
-    if (strlen(empresa->nombre)>0 && strlen(empresa->email)>0 && strlen(empresa->contrasenia)>0 && strlen(empresa->pais)>0 && strlen(empresa->descripcion)>0 && strlen(empresa->fechaRegistro)>0)
+    if (strlen(empresa->nombre)>0 && strlen(empresa->email)>0 &&
+            strlen(empresa->contrasenia)>0 && strlen(empresa->pais)>0 &&
+            strlen(empresa->descripcion)>0 && strlen(empresa->fechaRegistro)>0)
     {
         return 1;
 
@@ -116,16 +118,16 @@ void iniciarSesionEmpresa (char archivo[])
         fseek(buffer, 0, SEEK_SET);
         printf("INICIAR SESION COMO EMPRESA\n");
 
-        registrarUnaEmpresa(&ingreso);
+        printf("Mail de contacto: ");
+        scanf("%s", ingreso.email);
+
+        printf("Contrasenia: ");
+        scanf("%s", ingreso.contrasenia);
 
         while (fread(&guardado, sizeof(stEmpresa), 1, buffer)==1)
         {
-            if (strcmp(ingreso.nombre, guardado.nombre)==0 &&
-                    strcmp(ingreso.email, guardado.email)==0 &&
-                    strcmp(ingreso.contrasenia, guardado.contrasenia)==0
-                    && strcmp(ingreso.pais, guardado.pais)==0 &&
-                    strcmp(ingreso.descripcion, guardado.descripcion)==0
-                    && strcmp(ingreso.fechaRegistro, guardado.fechaRegistro)==0)
+            if (strcmp(ingreso.email, guardado.email)==0 &&
+                    strcmp(ingreso.contrasenia, guardado.contrasenia)==0)
             {
                 printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.nombre);
                 registroExitoso=1;

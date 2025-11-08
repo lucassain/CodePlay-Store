@@ -17,6 +17,8 @@ void loginUsuarios();
 void registrarUnUsuario (stLogin* usuario);
 int registrarseUsuario (stLogin* usuario);
 int existeUsuario (char archivo[], stLogin nuevoUsuario);
+int validarEmail (char email[]);
+int validarUsuario (char nombreDeUsuario[]);
 int validarContrasenia (char contrasenia[]);
 void guardarUsuarios (char archivo[], stLogin usuarios);
 void mostrarUsuarios (char archivo[]); //BORRAR MAS TARDE

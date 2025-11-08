@@ -6,13 +6,13 @@
 	"admin.h"
 	"empresas.h"
 
-1762442138 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
+1762635947 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
 	<stdio.h>
 	<stdlib.h>
 	"usuarios.h"
 	<string.h>
 
-1762443045 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.h
+1762630624 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.h
 
 1762030978 source:c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
 	<stdio.h>
@@ -53,7 +53,7 @@
 	<string.h>
 	"admin.h"
 
-1762440677 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+1762635947 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
 	<stdio.h>
 	<stdlib.h>
 	"empresas.h"

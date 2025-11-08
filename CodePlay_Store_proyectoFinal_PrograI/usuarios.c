@@ -13,7 +13,7 @@ void loginUsuarios ()
 
     do
     {
-        mostrarUsuarios (ARCHIVOS_USUARIOS); //BORRAR MAS TARDE
+        //mostrarUsuarios (ARCHIVOS_USUARIOS); //BORRAR MAS TARDE
         printf("INICIAR SESION (I) - REGISTRARSE (R) - SALIR (S): ");
         scanf(" %c", &usuario.opcion);
 
@@ -58,11 +58,20 @@ void loginUsuarios ()
 
 void registrarUnUsuario (stLogin* usuario)
 {
-    printf("Ingrese su direccion de correo electronico: ");
-    scanf("%s", usuario->email);
+    do
+    {
+        printf("Ingrese su direccion de correo electronico: ");
+        scanf("%s", usuario->email);
+    }
+    while(!validarEmail(usuario->email));
 
-    printf("Ingrese su nombre de usuario: ");
-    scanf("%s", usuario->usuario);
+
+    do
+    {
+        printf("Ingrese su nombre de usuario: ");
+        scanf("%s", usuario->usuario);
+    }
+    while(!validarUsuario(usuario->usuario));
 
     do
     {
@@ -98,6 +107,89 @@ int registrarseUsuario (stLogin* usuario)
     }
 
 }
+
+
+int validarEmail (char email[])
+{
+    int tieneArroba=0;
+    int tienePuntoDespuesDelArroba=0;
+
+    if (strlen(email)<5)
+    {
+        printf("La direccion de correo es demasiado corta.\n");
+        return 0;
+    }
+
+    for (int i=0; i<strlen(email); i++)
+    {
+
+        if (email[i]=='@')
+        {
+
+            if (tieneArroba)
+            {
+                printf("El correo solo puede contener un @.\n");
+                return 0;
+            }
+
+            tieneArroba=1;
+
+            if (i==0 || i==strlen(email)-1)
+            {
+                printf("El correo no puede empezar ni terminar con un @.\n");
+                return 0;
+            }
+        }
+        else if (tieneArroba && email[i]=='.')
+        {
+            tienePuntoDespuesDelArroba=1;
+        }
+    }
+
+    if (!tieneArroba || !tienePuntoDespuesDelArroba)
+    {
+        printf("El correo debe contener un @ y un . despues del arroba.\n");
+        return 0;
+    }
+
+    return 1;
+}
+
+int validarUsuario (char nombreDeUsuario[])
+{
+    int tieneLetraONumero=0;
+
+    for (int i=0; i<strlen(nombreDeUsuario); i++)
+    {
+        char caracter=nombreDeUsuario[i];
+
+        if ((caracter>='a' && caracter<='z') ||
+                (caracter>='A' && caracter<='Z') ||
+                (caracter>='0' && caracter<='9'))
+        {
+            tieneLetraONumero=1;
+        }
+        else if (caracter=='_' || caracter=='-')
+        {
+
+        }
+        else
+        {
+            printf("El nombre de usuario contiene simbolos invalidos. Intente de nuevo\n");
+            return 0;
+        }
+
+    }
+
+    if (!tieneLetraONumero)
+    {
+        printf("El nombre de usuario no puede estar vacio. Intente de nuevo.\n");
+        return 0;
+    }
+
+    return 1;
+}
+
 
 int validarContrasenia (char contrasenia[])
 {
@@ -183,7 +275,15 @@ void iniciarSesion (char archivo[])
         fseek(buffer, 0, SEEK_SET);
         printf("INICIAR SESION\n");
 
-        registrarUnUsuario(&ingreso);
+        printf("Ingrese su direccion de correo electronico: ");
+        scanf("%s", ingreso.email);
+
+        printf("Ingrese su nombre de usuario: ");
+        scanf("%s", ingreso.usuario);
+
+        printf("Ingrese su contrasenia: ");
+        scanf("%s", ingreso.contrasenia);
+
 
         while (fread(&guardado, sizeof(stLogin), 1, buffer)==1)
         {
