@@ -3,16 +3,44 @@
 #include <string.h>
 #include "admin.h"
 
-void loginAdmin ()
+void loginAdmin()
 {
-    printf("Bienvenido a CodePlay\n");
-    printf("Ingrese con su cuenta de admin:\n");
+    char opcion;
 
-    creacionAdmin ();
-    iniciarSesionAdmin (ARCHIVOS_ADMINS);
+    creacionAdmin();
 
+    do
+    {
+        printf("\n=== MENU ADMIN ===\n");
+        printf("Iniciar sesion (I)\n");
+        printf("Volver al menu principal (S)\n");
+        printf("Ingrese una opcion: ");
+        scanf(" %c", &opcion);
 
+        switch (opcion)
+        {
+            case 'i':
+            case 'I':
+                iniciarSesionAdmin(ARCHIVOS_ADMINS);
+
+                break;
+
+            case 's':
+            case 'S':
+                printf("Volviendo al menu principal...\n");
+                return;
+
+                break;
+
+            default:
+                printf("Opcion invalida. Intente de nuevo.\n");
+
+                break;
+        }
+
+    } while (opcion != 's' && opcion != 'S');
 }
+
 void creacionAdmin ()
 {
     FILE* buffer = fopen(ARCHIVOS_ADMINS, "rb");
