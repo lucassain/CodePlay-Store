@@ -3,50 +3,64 @@
 #include "empresas.h"
 #include <string.h>
 
-void loginEmpresas ()
+void loginEmpresas()
 {
     stEmpresa empresa;
+    char opcion;
 
-    printf("Bienvenido a CodePlay\n");
-
-    mostrarEmpresas(ARCHIVO_EMPRESAS);
-
-    printf("INICIAR SESION (I) - REGISTRAR EMPRESA (R) - SALIR (S): ");
-    scanf(" %c", &empresa.opcion);
+    printf("\nBienvenido a CodePlay!\n");
 
     do
     {
+        printf("\n===== MENU EMPRESAS =====\n");
+        printf("Iniciar sesion (I)\n");
+        printf("Registrar empresa (R)\n");
+        printf("Volver / Salir (S)\n");
+        printf("=========================\n");
+        printf("Seleccione una opcion: ");
+        scanf(" %c", &opcion);
 
-        if (empresa.opcion=='i' || empresa.opcion=='I')
+        switch (opcion)
         {
-            iniciarSesionEmpresa(ARCHIVO_EMPRESAS);
+            case 'i':
+            case 'I':
+                iniciarSesionEmpresa(ARCHIVO_EMPRESAS);
 
-        }
-        else if (empresa.opcion=='r' || empresa.opcion=='R')
-        {
-            int registrarse=registrarseEmpresa(&empresa);
+                break;
 
-            if (registrarse)
+            case 'r':
+            case 'R':
             {
-                printf("Empresa registrada con exito!\n");
-                guardarEmpresas(ARCHIVO_EMPRESAS, empresa);
+                int registrarse = registrarseEmpresa(&empresa);
 
+                if (registrarse)
+                {
+                    printf("Empresa registrada con exito!\n");
+                    guardarEmpresas(ARCHIVO_EMPRESAS, empresa);
+                }
+                else
+                {
+                    printf("Error al registrar la empresa.\n");
+                }
+
+                break;
             }
-            else
-            {
-                printf("Error al registrar la empresa.\n");
-            }
 
-        }
-        else if (empresa.opcion=='s' || empresa.opcion=='S')
-        {
-            printf("Cerrando programa...\n");
-        }
-    }
-    while (empresa.opcion!='s' && empresa.opcion!='S');
+            case 's':
+            case 'S':
+                printf("Volviendo al menu anterior...\n");
+                return;
 
+                break;
+
+            default:
+                printf("Opcion invalida. Intente nuevamente.\n");
+
+                break;
+        }
+
+    } while (opcion != '0' && opcion != 's' && opcion != 'S');
 }
-
 
 void registrarUnaEmpresa (stEmpresa* empresa)
 {

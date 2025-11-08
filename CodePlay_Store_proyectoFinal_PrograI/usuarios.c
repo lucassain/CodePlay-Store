@@ -3,58 +3,66 @@
 #include "usuarios.h"
 #include <string.h>
 
-void loginUsuarios ()
+void loginUsuarios()
 {
-    int registro=0;
-
+    int registro = 0;
+    char opcion;
     stLogin usuario;
-
-    printf("Bienvenido a CodePlay\n");
 
     do
     {
-        //mostrarUsuarios (ARCHIVOS_USUARIOS); //BORRAR MAS TARDE
-        printf("INICIAR SESION (I) - REGISTRARSE (R) - SALIR (S): ");
-        scanf(" %c", &usuario.opcion);
+        printf("\n=== MENU USUARIO ===\n");
+        printf("Iniciar sesion (I)\n");
+        printf("Registrarse (R)\n");
+        printf("Volver al menu principal (S)\n");
+        printf("Ingrese una opcion: ");
+        scanf(" %c", &opcion);
 
-        if( usuario.opcion=='i' || usuario.opcion=='I')
+        switch (opcion)
         {
-            iniciarSesion(ARCHIVOS_USUARIOS);
+            case 'i':
+            case 'I':
+                iniciarSesion(ARCHIVOS_USUARIOS);
 
+                break;
+
+            case 'r':
+            case 'R':
+                registro = registrarseUsuario(&usuario);
+
+                if (registro == 1)
+                {
+                    printf("Usuario registrado correctamente.\n");
+                    guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
+                }
+                else if (registro == -1)
+                {
+                    printf("El usuario registrado ya existe.\n");
+                }
+                else
+                {
+                    printf("Error al registrarse.\n");
+                }
+
+                break;
+
+            case 's':
+            case 'S':
+                printf("Volviendo al menu principal...\n");
+
+                return;
+
+                break;
+
+            default:
+                printf("Opcion invalida. Intente de nuevo.\n");
+
+                break;
         }
-        else if(usuario.opcion == 'r' || usuario.opcion=='R')
-        {
-            registro=registrarseUsuario(&usuario);
 
-
-            if (registro==1)
-            {
-                printf("Usuario registrado correctamente.\n");
-                guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
-            }
-            else if(registro==-1)
-            {
-                printf("El usuario registrado ya existe.\n");
-            }
-            else
-            {
-                printf("Error al registrarse.");
-            }
-
-        }
-        else if (usuario.opcion=='s' || usuario.opcion=='S')
-        {
-            printf("Cerrando programa...\n");
-            break;
-        }
-        else
-        {
-            printf("Opcion invalida. Elija otra opcion\n");
-        }
-    }
-    while (usuario.opcion!='s' && usuario.opcion!='S');
-
+    } while (opcion != 's' && opcion != 'S');
 }
+
 
 void registrarUnUsuario (stLogin* usuario)
 {
