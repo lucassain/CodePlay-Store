@@ -22,6 +22,10 @@ void catalogoJuegos();
 void inicializarCatalogo();
 void mostrarCatalogo();
 void mostrarUnJuego(stJuego juego);
+int calcularDimensionArchivo();
+stJuego* crearArregloJuegos(int dimension);
+void cargarDesdeArchivoAlArreglo(stJuego *arr, int dimension);
+int cargarJuegosDesdeArchivo(stJuego **arr);
 
 
 #endif // JUEGOS_H_INCLUDED
