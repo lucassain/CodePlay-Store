@@ -23,6 +23,7 @@ void loginAdmin()
             case 'I':
                 iniciarSesionAdmin(ARCHIVOS_ADMINS);
 
+                return;
                 break;
 
             case 's':

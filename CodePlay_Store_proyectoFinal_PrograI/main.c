@@ -3,7 +3,7 @@
 #include "usuarios.h"
 #include "admin.h"
 #include "empresas.h"
-
+#include "juegos.h"
 int main()
 {
     int opcion=0;
@@ -22,6 +22,8 @@ int main()
         {
         case 1:
             loginUsuarios();
+
+            catalogoJuegos();
 
             break;
 

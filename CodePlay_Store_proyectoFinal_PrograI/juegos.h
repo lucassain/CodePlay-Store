@@ -11,12 +11,11 @@ typedef struct {
     int idEmpresaDuena;
 } stJuego;
 
-// PROTOTIPOS
+// PROTOTIPADO
 void catalogoJuegos();
 void inicializarCatalogo();
 void mostrarCatalogo();
 void mostrarUnJuego(stJuego juego);
-int buscarJuegoPorNombre(char nombreBuscado[]);
-void mostrarJuegoPorNombre();
+
 
 #endif // JUEGOS_H_INCLUDED

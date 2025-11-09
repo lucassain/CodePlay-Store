@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1762642974 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
+1762646478 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
 	<stdio.h>
 	<stdlib.h>
 	"usuarios.h"
 	"admin.h"
 	"empresas.h"
+	"juegos.h"
 
 1762642973 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
 	<stdio.h>
@@ -53,11 +54,19 @@
 	<string.h>
 	"admin.h"
 
-1762642973 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+1762645761 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
 	<stdio.h>
 	<stdlib.h>
 	"empresas.h"
 	<string.h>
 
 1761889146 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
+
+1762646050 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.h
+
+1762646381 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"juegos.h"
 

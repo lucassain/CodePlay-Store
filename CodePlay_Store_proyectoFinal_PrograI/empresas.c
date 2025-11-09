@@ -26,6 +26,7 @@ void loginEmpresas()
             case 'I':
                 iniciarSesionEmpresa(ARCHIVO_EMPRESAS);
 
+                return;
                 break;
 
             case 'r':
@@ -43,6 +44,7 @@ void loginEmpresas()
                     printf("Error al registrar la empresa.\n");
                 }
 
+                return;
                 break;
             }
 
@@ -101,6 +103,7 @@ int registrarseEmpresa (stEmpresa* empresa)
         return 0;
     }
 }
+
 
 void guardarEmpresas (char archivo[], stEmpresa empresa)
 {

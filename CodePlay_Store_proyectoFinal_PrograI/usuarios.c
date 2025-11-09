@@ -24,6 +24,7 @@ void loginUsuarios()
             case 'I':
                 iniciarSesion(ARCHIVOS_USUARIOS);
 
+                return;
                 break;
 
             case 'r':
@@ -44,6 +45,7 @@ void loginUsuarios()
                     printf("Error al registrarse.\n");
                 }
 
+                return;
                 break;
 
             case 's':
