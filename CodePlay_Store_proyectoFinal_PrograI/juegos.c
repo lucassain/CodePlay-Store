@@ -5,7 +5,11 @@
 
 void catalogoJuegos()
 {
-    inicializarCatalogo();
+    if (!existeArchivo())
+    {
+        inicializarCatalogo();
+    }
+
     int opcion=0;
 
     do
@@ -27,7 +31,6 @@ void catalogoJuegos()
             break;
         case 1:
 
-            mostrarCatalogo();
 
             break;
 
@@ -209,9 +212,11 @@ int calcularDimensionArchivo()
     {
         fseek(buffer, 0, SEEK_END);
         int bytes = ftell(buffer);
-        fclose(buffer);
 
         cantidad = bytes / sizeof(stJuego);
+
+        fclose(buffer);
+
     }
     else
     {
@@ -230,16 +235,18 @@ stJuego* crearArregloJuegos(int dimension)
         if(arr == NULL)
         {
             printf("Error al reservar memoria.\n");
+            return 0;
         }
     }
 
     return arr;
 }
+
 void cargarDesdeArchivoAlArreglo(stJuego *arr, int dimension)
 {
     FILE *buffer = fopen(ARCHIVO_JUEGOS, "rb");
 
-    if(buffer!=NULL && arr != NULL)
+    if(buffer!=NULL)
     {
         fread(arr, sizeof(stJuego), dimension, buffer);
         fclose(buffer);
@@ -249,6 +256,7 @@ void cargarDesdeArchivoAlArreglo(stJuego *arr, int dimension)
         printf("Error al leer el archivo.\n");
     }
 }
+
 int cargarJuegosDesdeArchivo(stJuego **arr)
 {
     int validos = calcularDimensionArchivo();
@@ -261,4 +269,24 @@ int cargarJuegosDesdeArchivo(stJuego **arr)
     }
 
     return validos;
+}
+
+void mostrarArregloDeJuegos (stJuego* arregloJuegos, int validos)
+{
+    for (int i=0; i<validos; i++)
+    {
+        mostrarUnJuego(arregloJuegos[i]);
+    }
+}
+
+int existeArchivo()
+{
+    FILE* buffer=fopen(ARCHIVO_JUEGOS, "rb");
+
+    if (buffer!=NULL)
+    {
+        fclose(buffer);
+        return 1;
+    }
+    return 0;
 }
