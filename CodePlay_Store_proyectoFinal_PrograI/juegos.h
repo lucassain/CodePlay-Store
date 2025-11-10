@@ -6,16 +6,13 @@
 
 typedef struct {
     int id;
-    char nombre[30];
-    char genero[20];
+    char nombre[50];
+    char genero[30];
+    char plataforma[20];
     float precio;
     int idEmpresa;
 } stJuego;
 
-typedef struct {
-    int idJuego;
-    char nombre[20];
-} stPlataforma;
 
 // PROTOTIPADO
 void catalogoJuegos();
@@ -25,10 +22,9 @@ void mostrarCatalogo();
 void mostrarUnJuego(stJuego juego);
 int calcularDimensionArchivo();
 stJuego* crearArregloJuegos(int dimension);
-void cargarDesdeArchivoAlArreglo(stJuego *arr, int dimension);
-int cargarJuegosDesdeArchivo(stJuego **arr);
-void mostrarArregloDeJuegos (stJuego* arregloJuegos, int validos);
-
+int cargarArregloDesdeArchivo (stJuego** arregloDeJuegos, int dimension);
+int buscarJuegoPorNombre (stJuego* arregloDeJuegos, int validos, char juegoABuscar[]);
+int buscarJuegoPorId (stJuego* arregloDeJuegos, int validos, int idABuscar);
 
 
 #endif // JUEGOS_H_INCLUDED

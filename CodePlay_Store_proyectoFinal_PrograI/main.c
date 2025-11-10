@@ -4,6 +4,7 @@
 #include "admin.h"
 #include "empresas.h"
 #include "juegos.h"
+
 int main()
 {
     int opcion=0;

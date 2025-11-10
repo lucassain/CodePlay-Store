@@ -73,3 +73,43 @@
 
 1762660064 c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.h
 
+1762780770 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"admin.h"
+
+1762781810 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.h
+
+1762780770 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+	<stdio.h>
+	<stdlib.h>
+	"empresas.h"
+	<string.h>
+
+1762781796 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
+
+1762787102 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"juegos.h"
+
+1762786855 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.h
+
+1762781833 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
+	<stdio.h>
+	<stdlib.h>
+	"usuarios.h"
+	"admin.h"
+	"empresas.h"
+	"juegos.h"
+
+1762781821 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.h
+
+1762780770 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
+	<stdio.h>
+	<stdlib.h>
+	"usuarios.h"
+	<string.h>
+
