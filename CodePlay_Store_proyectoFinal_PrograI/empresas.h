@@ -14,11 +14,11 @@ typedef struct {
 } stEmpresa;
 
 //Prototipado
-void loginEmpresas ();
+int loginEmpresas ();
 void registrarUnaEmpresa (stEmpresa* empresa);
 int registrarseEmpresa (stEmpresa* empresa);
 void guardarEmpresas (char archivo[], stEmpresa empresa);
-void iniciarSesionEmpresa (char archivo[]);
+int iniciarSesionEmpresa (char archivo[]);
 void mostrarUnaEmpresa (stEmpresa empresa); //BORRAR MAS TARDE
 void mostrarEmpresas (char archivo[]); //BORRAR MAS TARDE
 

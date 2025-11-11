@@ -3,7 +3,7 @@
 #include "empresas.h"
 #include <string.h>
 
-void loginEmpresas()
+int loginEmpresas()
 {
     stEmpresa empresa;
     char opcion;
@@ -22,46 +22,48 @@ void loginEmpresas()
 
         switch (opcion)
         {
-            case 'i':
-            case 'I':
-                iniciarSesionEmpresa(ARCHIVO_EMPRESAS);
-
-                return;
-                break;
-
-            case 'r':
-            case 'R':
+        case 'i':
+        case 'I':
+            if (iniciarSesionEmpresa(ARCHIVO_EMPRESAS) == 1)
             {
-                int registrarse = registrarseEmpresa(&empresa);
-
-                if (registrarse)
-                {
-                    printf("Empresa registrada con exito!\n");
-                    guardarEmpresas(ARCHIVO_EMPRESAS, empresa);
-                }
-                else
-                {
-                    printf("Error al registrar la empresa.\n");
-                }
-
-                return;
-                break;
+                return 1;   /// inicio correcto
+            }
+            else
+            {
+                return -1;  /// error
             }
 
-            case 's':
-            case 'S':
-                printf("Volviendo al menu anterior...\n");
-                return;
+        case 'r':
+        case 'R':
+        {
+            int registrarse = registrarseEmpresa(&empresa);
 
-                break;
+            if (registrarse)
+            {
+                printf("Empresa registrada con exito!\n");
+                guardarEmpresas(ARCHIVO_EMPRESAS, empresa);
+                return 0;   /// registro correcto, volver
+            }
+            else
+            {
+                printf("Error al registrar la empresa.\n");
+                return -1;
+            }
+        }
 
-            default:
-                printf("Opcion invalida. Intente nuevamente.\n");
+        case 's':
+        case 'S':
+            printf("Volviendo al menu anterior...\n");
+            return 0;
 
-                break;
+        default:
+            printf("Opcion invalida. Intente nuevamente.\n");
+            break;
         }
 
     } while (opcion != '0' && opcion != 's' && opcion != 'S');
+
+    return 0;
 }
 
 void registrarUnaEmpresa (stEmpresa* empresa)
@@ -122,15 +124,15 @@ void guardarEmpresas (char archivo[], stEmpresa empresa)
     }
 }
 
-void iniciarSesionEmpresa (char archivo[])
+int iniciarSesionEmpresa (char archivo[])
 {
-    FILE* buffer=fopen(archivo, "rb");
+    FILE* buffer = fopen(archivo, "rb");
 
     stEmpresa guardado;
     stEmpresa ingreso;
-    int registroExitoso=0;
+    int registroExitoso = 0;
 
-    if (buffer!=NULL)
+    if (buffer != NULL)
     {
         fseek(buffer, 0, SEEK_SET);
         printf("INICIAR SESION COMO EMPRESA\n");
@@ -141,27 +143,31 @@ void iniciarSesionEmpresa (char archivo[])
         printf("Contrasenia: ");
         scanf("%s", ingreso.contrasenia);
 
-        while (fread(&guardado, sizeof(stEmpresa), 1, buffer)==1)
+        while (fread(&guardado, sizeof(stEmpresa), 1, buffer) == 1)
         {
-            if (strcmp(ingreso.email, guardado.email)==0 &&
-                    strcmp(ingreso.contrasenia, guardado.contrasenia)==0)
+            if (strcmp(ingreso.email, guardado.email) == 0 &&
+                strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
             {
                 printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.nombre);
-                registroExitoso=1;
+                registroExitoso = 1;
                 break;
             }
-
         }
-        if(registroExitoso==0)
+
+        if (registroExitoso == 0)
         {
-            printf("Correo,usuario o contrasenia incorrectas\n");
+            printf("Correo o contrasenia incorrectas\n");
+            fclose(buffer);
+            return 0;
         }
 
         fclose(buffer);
+        return 1;
     }
     else
     {
-        printf("Error en el achivo\n");
+        printf("Error en el archivo\n");
+        return -1;
     }
 }
 
