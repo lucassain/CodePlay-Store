@@ -22,9 +22,12 @@ int main()
         switch (opcion)
         {
         case 1:
-            loginUsuarios();
 
-            catalogoJuegos();
+            if (loginUsuarios()==1)
+            {
+                catalogoJuegos();
+
+            }
 
             break;
 

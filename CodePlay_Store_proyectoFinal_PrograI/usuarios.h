@@ -13,7 +13,7 @@ typedef struct
 } stLogin;
 
 // Prototipado
-void loginUsuarios();
+int loginUsuarios();
 void registrarUnUsuario (stLogin* usuario);
 int registrarseUsuario (stLogin* usuario);
 int existeUsuario (char archivo[], stLogin nuevoUsuario);
@@ -23,7 +23,7 @@ int validarContrasenia (char contrasenia[]);
 void guardarUsuarios (char archivo[], stLogin usuarios);
 void mostrarUsuarios (char archivo[]); //BORRAR MAS TARDE
 void mostrarUnUsuario (stLogin user); //BORRAR MAS TARDE
-void iniciarSesion (char archivo[]);
+int iniciarSesion (char archivo[]);
 
 
 

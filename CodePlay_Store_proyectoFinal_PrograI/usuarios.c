@@ -3,7 +3,7 @@
 #include "usuarios.h"
 #include <string.h>
 
-void loginUsuarios()
+int loginUsuarios()
 {
     int registro = 0;
     char opcion;
@@ -20,49 +20,52 @@ void loginUsuarios()
 
         switch (opcion)
         {
-            case 'i':
-            case 'I':
-                iniciarSesion(ARCHIVOS_USUARIOS);
+        case 'i':
+        case 'I':
+            if (iniciarSesion(ARCHIVOS_USUARIOS) == 1)
+            {
+                return 1;
 
-                return;
-                break;
+            }
+            else
+            {
+                return -1;
+            }
 
-            case 'r':
-            case 'R':
-                registro = registrarseUsuario(&usuario);
+        case 'r':
+        case 'R':
+            registro = registrarseUsuario(&usuario);
 
-                if (registro == 1)
-                {
-                    printf("Usuario registrado correctamente.\n");
-                    guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
-                }
-                else if (registro == -1)
-                {
-                    printf("El usuario registrado ya existe.\n");
-                }
-                else
-                {
-                    printf("Error al registrarse.\n");
-                }
+            if (registro == 1)
+            {
+                printf("Usuario registrado correctamente.\n");
+                guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
+                return 0;
+            }
+            else if (registro == -1)
+            {
+                printf("El usuario ya existe.\n");
+                return -1;
+            }
+            else
+            {
+                printf("Error al registrarse.\n");
+                return -1;
+            }
 
-                return;
-                break;
+        case 's':
+        case 'S':
+            printf("Volviendo al menu principal...\n");
+            return 0;
 
-            case 's':
-            case 'S':
-                printf("Volviendo al menu principal...\n");
-
-                return;
-
-                break;
-
-            default:
-                printf("Opcion invalida. Intente de nuevo.\n");
-
-                break;
+        default:
+            printf("Opcion invalida.\n");
         }
 
-    } while (opcion != 's' && opcion != 'S');
+    }
+    while (opcion != 's' && opcion != 'S');
+
+    return 0;
 }
 
 
@@ -229,6 +232,7 @@ int validarContrasenia (char contrasenia[])
     if (!tieneLetra || !tieneNumero)
     {
         printf("La contrasenia debe tener al menos una letra y numero.\n");
+        return 0;
     }
 
     return 1;
@@ -273,14 +277,13 @@ void guardarUsuarios (char archivo[], stLogin usuarios)
     }
 }
 
-void iniciarSesion (char archivo[])
+int iniciarSesion (char archivo[])
 {
-    FILE* buffer=fopen(archivo, "rb");
+    FILE* buffer = fopen(archivo, "rb");
     stLogin guardado;
     stLogin ingreso;
-    int registroExitoso=0;
 
-    if (buffer!=NULL)
+    if (buffer != NULL)
     {
         fseek(buffer, 0, SEEK_SET);
         printf("INICIAR SESION\n");
@@ -294,27 +297,28 @@ void iniciarSesion (char archivo[])
         printf("Ingrese su contrasenia: ");
         scanf("%s", ingreso.contrasenia);
 
-
-        while (fread(&guardado, sizeof(stLogin), 1, buffer)==1)
+        while (fread(&guardado, sizeof(stLogin), 1, buffer) == 1)
         {
-            if (strcmp(ingreso.usuario, guardado.usuario)==0 && strcmp(ingreso.email, guardado.email)==0 && strcmp(ingreso.contrasenia, guardado.contrasenia)==0)
+            if (strcmp(ingreso.usuario, guardado.usuario) == 0 &&
+                    strcmp(ingreso.email, guardado.email) == 0 &&
+                    strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
             {
                 printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.usuario);
-                registroExitoso=1;
-                break;
-            }
 
+                fclose(buffer);
+                return 1;
+            }
         }
-        if(registroExitoso==0)
-        {
-            printf("Correo,usuario o contrasenia incorrectas\n");
-        }
+
+        printf("Correo, usuario o contrasenia incorrectos\n");
 
         fclose(buffer);
+        return 0;
     }
     else
     {
-        printf("Error en el achivo\n");
+        printf("Error en el archivo\n");
+        return -1;
     }
 }
 

@@ -3,11 +3,9 @@
 #include <string.h>
 #include "admin.h"
 
-void loginAdmin()
+int loginAdmin()
 {
     char opcion;
-
-    creacionAdmin();
 
     do
     {
@@ -19,27 +17,30 @@ void loginAdmin()
 
         switch (opcion)
         {
-            case 'i':
-            case 'I':
-                iniciarSesionAdmin(ARCHIVOS_ADMINS);
+        case 'i':
+        case 'I':
+            if (iniciarSesionAdmin(ARCHIVOS_ADMINS) == 1)
+            {
+                return 1;   /// login correcto
+            }
+            else
+            {
+                return -1;  /// error
+            }
 
-                return;
-                break;
+        case 's':
+        case 'S':
+            printf("Volviendo al menu principal...\n");
+            return 0;       /// vuelve atras
 
-            case 's':
-            case 'S':
-                printf("Volviendo al menu principal...\n");
-                return;
-
-                break;
-
-            default:
-                printf("Opcion invalida. Intente de nuevo.\n");
-
-                break;
+        default:
+            printf("Opcion invalida.\n");
         }
 
-    } while (opcion != 's' && opcion != 'S');
+    }
+    while (opcion != 's' && opcion != 'S');
+
+    return 0;
 }
 
 void creacionAdmin ()
@@ -70,7 +71,7 @@ void creacionAdmin ()
         fclose(buffer);
     }
 }
-void iniciarSesionAdmin (char archivo[])
+int iniciarSesionAdmin (char archivo[])
 {
     stAdmin ingreso;
     int exito = 0;
@@ -87,13 +88,17 @@ void iniciarSesionAdmin (char archivo[])
         scanf("%29s", ingreso.contrasenia);
 
         exito = validarInicioSesionAdmin(archivo, ingreso);
+
         if(!exito)
         {
             printf("Intente de nuevo.\n\n");
+            return 0;
         }
     }
 
+    return 1;
 }
+
 int validarInicioSesionAdmin(char archivo[], stAdmin recibido)
 {
 
