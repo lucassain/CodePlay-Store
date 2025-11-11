@@ -220,7 +220,7 @@ int validarContrasenia (char contrasenia[])
             tieneLetra=1;
         }
 
-        if (contrasenia[i]>=0 && contrasenia[i]<=9)
+        if (contrasenia[i]>='0' && contrasenia[i]<='9')
         {
             tieneNumero=1;
         }
