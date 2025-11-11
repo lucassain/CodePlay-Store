@@ -215,7 +215,7 @@ int validarContrasenia (char contrasenia[])
 
     for (int i=0; i<strlen(contrasenia); i++)
     {
-        if ((contrasenia[i]>='a' && contrasenia[i]<='z') || (contrasenia[i]>='a' && contrasenia[i]<='Z'))
+        if ((contrasenia[i]>='a' && contrasenia[i]<='z') || (contrasenia[i]>='A' && contrasenia[i]<='Z'))
         {
             tieneLetra=1;
         }
