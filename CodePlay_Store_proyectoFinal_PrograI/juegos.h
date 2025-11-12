@@ -25,6 +25,7 @@ stJuego* crearArregloJuegos(int dimension);
 int cargarArregloDesdeArchivo (stJuego** arregloDeJuegos, int dimension);
 int buscarJuegoPorNombre (stJuego* arregloDeJuegos, int validos, char juegoABuscar[]);
 int buscarJuegoPorId (stJuego* arregloDeJuegos, int validos, int idABuscar);
+void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos);
 
 
 #endif // JUEGOS_H_INCLUDED

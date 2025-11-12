@@ -5,18 +5,22 @@
 
 void catalogoJuegos()
 {
-    int dimension=calcularDimensionArchivo();
-    stJuego* arregloDeJuegos=crearArregloJuegos(dimension);
-    int validos=cargarArregloDesdeArchivo(&arregloDeJuegos, dimension);
-
-    char juegoABuscar[50];
-    int indice=0;
-    int idABuscar=0;
-
     if (!existeArchivo())
     {
         inicializarCatalogo();
     }
+
+    int dimension=calcularDimensionArchivo();
+    stJuego* arregloDeJuegos=crearArregloJuegos(dimension);
+
+    if (arregloDeJuegos==NULL)
+    {
+        printf("Cerrando programa...\n");
+        return;
+    }
+
+    int validosJuegos=cargarArregloDesdeArchivo(&arregloDeJuegos, dimension);
+
 
     int opcion=0;
 
@@ -37,8 +41,6 @@ void catalogoJuegos()
             printf("Volviendo al menu principal...\n");
             return;
 
-            break;
-
         case 1:
 
             mostrarCatalogo();
@@ -47,60 +49,7 @@ void catalogoJuegos()
 
         case 2:
 
-            printf("=====BUSCAR JUEGOS=====\n");
-            int eleccion=0;
-
-            do
-            {
-                printf("Buscar por nombre (1): \n");
-                printf("Buscar por id (2): \n");
-                printf("0 PARA SALIR/VOLVER.\n");
-                printf("Ingrese una opcion: ");
-                scanf("%i", &eleccion);
-
-                switch (eleccion)
-                {
-                case 0:
-                    printf("Volviendo al menu anterior.\n");
-                    return;
-
-                    break;
-
-                case 1:
-
-                    printf("Buscador: ");
-                    fflush(stdin);
-                    fgets(juegoABuscar, 50, stdin);
-
-                    indice=buscarJuegoPorNombre(arregloDeJuegos, validos, juegoABuscar);
-
-                    mostrarUnJuego(arregloDeJuegos[indice]);
-                    printf("\n");
-
-                    break;
-
-                case 2:
-
-                    printf("Buscador: ");
-                    fflush(stdin);
-                    scanf("%i", &idABuscar);
-
-                    indice=buscarJuegoPorId(arregloDeJuegos, validos, idABuscar);
-
-                    mostrarUnJuego(arregloDeJuegos[indice]);
-
-                    break;
-
-                default:
-
-                    printf("Opcion invalida. Ingrese de nuevo.\n");
-
-                    break;
-                }
-
-            }
-            while(eleccion!=0);
-
+            menuBusquedaJuegos(arregloDeJuegos, validosJuegos);
 
             break;
 
@@ -113,6 +62,9 @@ void catalogoJuegos()
 
     }
     while (opcion!=0);
+
+    free(arregloDeJuegos);
+    arregloDeJuegos=NULL;
 
 }
 
@@ -318,3 +270,70 @@ int buscarJuegoPorId (stJuego* arregloDeJuegos, int validos, int idABuscar)
     printf("El juego ingresado no se encuentra.\n");
     return -1;
 }
+
+void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos)
+{
+    int eleccion = -1;
+    int idABuscar;
+    char juegoABuscar[50];
+    int indice;
+
+    do
+    {
+        printf("\n===== MENU BUSQUEDA DE JUEGOS =====\n");
+        printf("1. Buscar por nombre\n");
+        printf("2. Buscar por ID\n");
+        printf("0. Volver al menu anterior\n");
+        printf("===================================\n");
+        printf("Ingrese una opcion: ");
+        scanf("%i", &eleccion);
+
+        switch (eleccion)
+        {
+        case 0:
+            printf("Volviendo al menu anterior...\n\n");
+            break;
+
+        case 1:
+            printf("Buscador: ");
+            getchar();
+            scanf(" %[^\n]", juegoABuscar);
+
+            indice = buscarJuegoPorNombre(arregloDeJuegos, validos, juegoABuscar);
+
+            if (indice != -1)
+            {
+                mostrarUnJuego(arregloDeJuegos[indice]);
+                printf("\n");
+            }
+            else
+            {
+                printf("Juego no encontrado.\n");
+            }
+            break;
+
+        case 2:
+            printf("Ingrese el ID del juego: ");
+            scanf("%i", &idABuscar);
+
+            indice = buscarJuegoPorId(arregloDeJuegos, validos, idABuscar);
+
+            if (indice != -1)
+            {
+                mostrarUnJuego(arregloDeJuegos[indice]);
+            }
+            else
+            {
+                printf("Juego no encontrado.\n");
+            }
+            break;
+
+        default:
+            printf("Opcion invalida. Intente nuevamente.\n");
+            break;
+        }
+
+    }
+    while (eleccion != 0);
+}
+

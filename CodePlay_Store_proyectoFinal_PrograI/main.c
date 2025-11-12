@@ -11,7 +11,7 @@ int main()
 
     do
     {
-        printf("\nBienvenido a CodePlay!\n");
+        printf("=====Bienvenido a CodePlay!=====\n");
         printf("USUARIO (1)\n");
         printf("ADMIN (2)\n");
         printf("EMPRESA(3)\n");
