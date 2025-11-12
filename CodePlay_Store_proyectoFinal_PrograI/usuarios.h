@@ -25,8 +25,11 @@ int validarDni (char DNI[]);
 void guardarUsuarios (char archivo[], stLogin usuarios);
 void mostrarUsuarios (char archivo[]); //BORRAR MAS TARDE
 void mostrarUnUsuario (stLogin user); //BORRAR MAS TARDE
-int iniciarSesion (char archivo[]);
-void menuUsuario();
+int iniciarSesion(char archivo[], stLogin *usuarioActual);
+void configuracion(stLogin usuarioActual);
+void editarDatosPerfil(stLogin usuarioActual);
+void modificarPerfil (char DniABuscar[], stLogin usuarioModificado);
+void menuUsuario(stLogin usuarioActual);
 
 
 

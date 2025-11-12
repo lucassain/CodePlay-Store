@@ -25,7 +25,7 @@ int loginUsuarios()
         {
         case 'i':
         case 'I':
-            if (iniciarSesion(ARCHIVOS_USUARIOS) == 1)
+            if (iniciarSesion(ARCHIVOS_USUARIOS, &usuario) == 1)
             {
                 return 1;
 
@@ -329,49 +329,46 @@ void guardarUsuarios (char archivo[], stLogin usuarios)
     }
 }
 
-int iniciarSesion (char archivo[])
+int iniciarSesion(char archivo[], stLogin *usuarioActual)
 {
-    FILE* buffer = fopen(archivo, "rb");
-    stLogin guardado;
     stLogin ingreso;
+    stLogin guardado;
+    int encontrado = 0;
 
-    if (buffer != NULL)
+    FILE* buffer = fopen(archivo, "rb");
+    if(buffer == NULL)
     {
-        fseek(buffer, 0, SEEK_SET);
-        printf("INICIAR SESION\n");
-
-        printf("Ingrese su direccion de correo electronico: ");
-        scanf("%s", ingreso.email);
-
-        printf("Ingrese su nombre de usuario: ");
-        scanf("%s", ingreso.usuario);
-
-        printf("Ingrese su contrasenia: ");
-        scanf("%s", ingreso.contrasenia);
-
-        while (fread(&guardado, sizeof(stLogin), 1, buffer) == 1)
-        {
-            if (strcmp(ingreso.usuario, guardado.usuario) == 0 &&
-                    strcmp(ingreso.email, guardado.email) == 0 &&
-                    strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
-            {
-                printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.usuario);
-
-                fclose(buffer);
-                return 1;
-            }
-        }
-
-        printf("Correo, usuario o contrasenia incorrectos\n");
-
-        fclose(buffer);
+        printf("Error al abrir el archivo de usuarios.\n");
         return 0;
     }
-    else
+
+    printf("\nINICIAR SESION\n");
+
+    printf("Usuario: ");
+    scanf("%s", ingreso.usuario);
+    printf("Contrasenia: ");
+    scanf("%s", ingreso.contrasenia);
+
+    while(fread(&guardado, sizeof(stLogin), 1, buffer) == 1)
     {
-        printf("Error en el archivo\n");
-        return -1;
+        if(strcmp(ingreso.usuario, guardado.usuario) == 0 &&
+           strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
+        {
+            printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.usuario);
+            *usuarioActual = guardado;
+            encontrado = 1;
+            break;
+        }
     }
+
+    fclose(buffer);
+
+    if(!encontrado)
+    {
+        printf("Usuario o contrasenia incorrectos.\n");
+    }
+
+    return encontrado;
 }
 
 
@@ -398,43 +395,79 @@ void mostrarUsuarios (char archivo[]) //BORRAR MAS TARDE
     }
 }
 
-void editarPerfil ()
+void configuracion(stLogin usuario)
 {
     int opcion;
 
     do
     {
-        printf("=====EDITAR PERFIL=====\n");
-        printf("Modificar perfil (1)\n");
-        printf("Cambiar de cuenta (2).\n");
-        printf("Volver al menu anterior (0).\n");
-        printf("Seleccione una opcion: ");
-        scanf("%i", &opcion);
+        printf("\n===== CONFIGURACION =====\n");
+        printf("1. Modificar perfil\n");
+        printf("2. Cambiar de cuenta\n");
+        printf("0. Volver al menú anterior\n");
+        printf("Seleccione una opción: ");
+        scanf("%d", &opcion);
 
         switch (opcion)
         {
         case 1:
+            editarDatosPerfil(usuario);
+            break;
 
-            stLogin usuarioAModificar;
-
+        case 2:
+            printf("Cerrando sesión actual...\n");
+            // Simplemente salimos al login de nuevo
+            loginUsuarios();
+            // O si querés volver al main, podés usar return;
+            return;
             break;
 
         case 0:
-
-            printf("Volviendo al menu anterior...\n");
-
+            printf("Volviendo al menú anterior...\n");
             break;
 
         default:
-
-            printf("Opcion invalida. Ingrese de nuevo.\n");
-
+            printf("Opción inválida. Intente de nuevo.\n");
         }
 
-    }
-    while(opcion!='s' && opcion!='S');
+    } while (opcion != 0);
+}
 
-    return;
+
+void editarDatosPerfil(stLogin usuarioActual)
+{
+    stLogin modificado = usuarioActual;
+    char opcion;
+
+    printf("\n=== EDITAR DATOS DEL PERFIL ===\n");
+
+    printf("¿Desea cambiar el email? (s/n): ");
+    scanf(" %c", &opcion);
+    if (opcion == 's' || opcion == 'S')
+    {
+        printf("Ingrese el nuevo email: ");
+        scanf("%s", modificado.email);
+    }
+
+    printf("¿Desea cambiar el nombre de usuario? (s/n): ");
+    scanf(" %c", &opcion);
+    if (opcion == 's' || opcion == 'S')
+    {
+        printf("Ingrese el nuevo nombre de usuario: ");
+        scanf("%s", modificado.usuario);
+    }
+
+    printf("¿Desea cambiar la contraseña? (s/n): ");
+    scanf(" %c", &opcion);
+    if (opcion == 's' || opcion == 'S')
+    {
+        printf("Ingrese la nueva contraseña: ");
+        scanf("%s", modificado.contrasenia);
+    }
+
+    modificarPerfil(usuarioActual.DNI, modificado);
+
+    printf("\nPerfil actualizado correctamente.\n");
 }
 
 void modificarPerfil (char DniABuscar[], stLogin usuarioModificado)
@@ -465,44 +498,36 @@ void modificarPerfil (char DniABuscar[], stLogin usuarioModificado)
 }
 
 
-void menuUsuario()
+void menuUsuario(stLogin usuarioActual)
 {
     int opcion;
-
     do
     {
         printf("\n===== MENU USUARIO =====\n");
         printf("Ver catalogo de juegos (1)\n");
         printf("Ver mis compras (2)\n");
-        printf("Editar perfil (3)\n");
-        printf("Cerrar sesion (S)\n");
+        printf("Configuracion (3)\n");
+        printf("Cerrar sesion (0)\n");
         printf("Seleccione una opcion: ");
         scanf("%i", &opcion);
 
         switch(opcion)
         {
         case 1:
-            printf("Mostrando catalogo...\n");
-
             catalogoJuegos();
             break;
-
         case 2:
             printf("Mostrando compras...\n");
             break;
-
         case 3:
-            printf("Editando perfil...\n");
+            configuracion(usuarioActual);
             break;
-
         case 0:
             printf("Sesion cerrada.\n");
             break;
-
         default:
             printf("Opcion invalida.\n");
         }
 
-    }
-    while (opcion !=0);
+    } while (opcion != 0);
 }
