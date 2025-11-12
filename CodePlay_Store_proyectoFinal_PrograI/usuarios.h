@@ -9,6 +9,7 @@ typedef struct
     char usuario[DIMENSION_LOGIN];
     char email[DIMENSION_LOGIN];
     char contrasenia[DIMENSION_LOGIN];
+    char DNI[DIMENSION_LOGIN];
     char opcion;
 } stLogin;
 
@@ -20,10 +21,12 @@ int existeUsuario (char archivo[], stLogin nuevoUsuario);
 int validarEmail (char email[]);
 int validarUsuario (char nombreDeUsuario[]);
 int validarContrasenia (char contrasenia[]);
+int validarDni (char DNI[]);
 void guardarUsuarios (char archivo[], stLogin usuarios);
 void mostrarUsuarios (char archivo[]); //BORRAR MAS TARDE
 void mostrarUnUsuario (stLogin user); //BORRAR MAS TARDE
 int iniciarSesion (char archivo[]);
+void menuUsuario();
 
 
 

@@ -21,7 +21,6 @@ void catalogoJuegos()
 
     int validosJuegos=cargarArregloDesdeArchivo(&arregloDeJuegos, dimension);
 
-
     int opcion=0;
 
     do
@@ -281,9 +280,9 @@ void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos)
     do
     {
         printf("\n===== MENU BUSQUEDA DE JUEGOS =====\n");
-        printf("1. Buscar por nombre\n");
-        printf("2. Buscar por ID\n");
-        printf("0. Volver al menu anterior\n");
+        printf("Buscar por nombre (1)\n");
+        printf("Buscar por ID (2)\n");
+        printf("Volver al menu anterior (0)\n");
         printf("===================================\n");
         printf("Ingrese una opcion: ");
         scanf("%i", &eleccion);
@@ -332,8 +331,8 @@ void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos)
             printf("Opcion invalida. Intente nuevamente.\n");
             break;
         }
-
     }
     while (eleccion != 0);
 }
+
 

@@ -2,12 +2,15 @@
 #include <stdlib.h>
 #include "usuarios.h"
 #include <string.h>
+#include "juegos.h"
 
 int loginUsuarios()
 {
     int registro = 0;
     char opcion;
     stLogin usuario;
+
+    mostrarUsuarios(ARCHIVOS_USUARIOS);
 
     do
     {
@@ -93,6 +96,14 @@ void registrarUnUsuario (stLogin* usuario)
 
     }
     while (!validarContrasenia(usuario->contrasenia));
+
+    do
+    {
+        printf("Ingrese su DNI: ");
+        scanf("%s", usuario->DNI);
+
+    }
+    while(!validarDni(usuario->DNI));
 }
 
 int registrarseUsuario (stLogin* usuario)
@@ -238,6 +249,47 @@ int validarContrasenia (char contrasenia[])
     return 1;
 }
 
+int validarDni(char DNI[])
+{
+    int tieneSoloNumeros = 1;
+    int rangoValido = 0;
+    int len = strlen(DNI);
+
+    if (len >= 7 && len <= 8)
+    {
+        rangoValido = 1;
+    }
+    else
+    {
+        rangoValido = 0;
+    }
+
+    for (int i = 0; i < len; i++)
+    {
+        if (DNI[i] < '0' || DNI[i] > '9')
+        {
+            tieneSoloNumeros = 0;
+            break;
+        }
+    }
+
+    if (!rangoValido)
+    {
+        printf("DNI invalido. Debe tener entre 7 y 8 digitos.\n");
+        return 0;
+    }
+
+    if (!tieneSoloNumeros)
+    {
+        printf("El DNI no puede contener letras ni caracteres especiales.\n");
+        return 0;
+    }
+
+    return 1;
+}
+
+
+
 int existeUsuario (char archivo[], stLogin nuevoUsuario)
 {
     FILE* buffer=fopen(archivo, "rb");
@@ -328,6 +380,7 @@ void mostrarUnUsuario (stLogin user) //BORRAR MAS TARDE
     printf("Nombre de usuario: %s\n", user.usuario);
     printf("Direccion de correo electronico: %s\n", user.email);
     printf("Contrasenia: %s\n", user.contrasenia);
+    printf("DNI: %s\n", user.DNI);
 }
 
 void mostrarUsuarios (char archivo[]) //BORRAR MAS TARDE
@@ -343,4 +396,113 @@ void mostrarUsuarios (char archivo[]) //BORRAR MAS TARDE
         }
         fclose(usuarios);
     }
+}
+
+void editarPerfil ()
+{
+    int opcion;
+
+    do
+    {
+        printf("=====EDITAR PERFIL=====\n");
+        printf("Modificar perfil (1)\n");
+        printf("Cambiar de cuenta (2).\n");
+        printf("Volver al menu anterior (0).\n");
+        printf("Seleccione una opcion: ");
+        scanf("%i", &opcion);
+
+        switch (opcion)
+        {
+        case 1:
+
+            stLogin usuarioAModificar;
+
+            break;
+
+        case 0:
+
+            printf("Volviendo al menu anterior...\n");
+
+            break;
+
+        default:
+
+            printf("Opcion invalida. Ingrese de nuevo.\n");
+
+        }
+
+    }
+    while(opcion!='s' && opcion!='S');
+
+    return;
+}
+
+void modificarPerfil (char DniABuscar[], stLogin usuarioModificado)
+{
+    FILE* buffer = fopen(ARCHIVOS_USUARIOS, "r+b");
+
+    if (buffer != NULL)
+    {
+        stLogin aux;
+
+        while (fread(&aux, sizeof(stLogin), 1, buffer) == 1)
+        {
+            if (strcmp(aux.DNI, DniABuscar) == 0)
+            {
+                fseek(buffer, -(long)sizeof(stLogin), SEEK_CUR);
+                fwrite(&usuarioModificado, sizeof(stLogin), 1, buffer);
+                printf("Perfil actualizado correctamente.\n");
+                break;
+            }
+        }
+
+        fclose(buffer);
+    }
+    else
+    {
+        printf("Error al acceder al archivo de usuarios.\n");
+    }
+}
+
+
+void menuUsuario()
+{
+    int opcion;
+
+    do
+    {
+        printf("\n===== MENU USUARIO =====\n");
+        printf("Ver catalogo de juegos (1)\n");
+        printf("Ver mis compras (2)\n");
+        printf("Editar perfil (3)\n");
+        printf("Cerrar sesion (S)\n");
+        printf("Seleccione una opcion: ");
+        scanf("%i", &opcion);
+
+        switch(opcion)
+        {
+        case 1:
+            printf("Mostrando catalogo...\n");
+
+            catalogoJuegos();
+            break;
+
+        case 2:
+            printf("Mostrando compras...\n");
+            break;
+
+        case 3:
+            printf("Editando perfil...\n");
+            break;
+
+        case 0:
+            printf("Sesion cerrada.\n");
+            break;
+
+        default:
+            printf("Opcion invalida.\n");
+        }
+
+    }
+    while (opcion !=0);
 }

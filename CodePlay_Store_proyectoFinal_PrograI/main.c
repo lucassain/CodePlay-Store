@@ -25,7 +25,7 @@ int main()
 
             if (loginUsuarios()==1)
             {
-                catalogoJuegos();
+                menuUsuario();
 
             }
 
