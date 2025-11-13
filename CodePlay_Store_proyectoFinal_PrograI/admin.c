@@ -21,17 +21,17 @@ int loginAdmin()
         case 'I':
             if (iniciarSesionAdmin(ARCHIVOS_ADMINS) == 1)
             {
-                return 1;   /// login correcto
+                return 1;
             }
             else
             {
-                return -1;  /// error
+                return -1;
             }
 
         case 's':
         case 'S':
             printf("Volviendo al menu principal...\n");
-            return 0;       /// vuelve atras
+            return 0;
 
         default:
             printf("Opcion invalida.\n");

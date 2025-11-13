@@ -26,11 +26,11 @@ int loginEmpresas()
         case 'I':
             if (iniciarSesionEmpresa(ARCHIVO_EMPRESAS) == 1)
             {
-                return 1;   /// inicio correcto
+                return 1;
             }
             else
             {
-                return -1;  /// error
+                return -1;
             }
 
         case 'r':
@@ -42,7 +42,7 @@ int loginEmpresas()
             {
                 printf("Empresa registrada con exito!\n");
                 guardarEmpresas(ARCHIVO_EMPRESAS, empresa);
-                return 0;   /// registro correcto, volver
+                return 0;
             }
             else
             {

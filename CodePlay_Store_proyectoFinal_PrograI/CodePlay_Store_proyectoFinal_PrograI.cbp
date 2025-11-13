@@ -46,6 +46,13 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="transacciones.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="transacciones.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="usuarios.c">
 			<Option compilerVar="CC" />
 		</Unit>

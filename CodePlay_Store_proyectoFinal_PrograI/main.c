@@ -7,7 +7,7 @@
 
 int main()
 {
-    int opcion = 0;
+    char opcion;
 
     do
     {
@@ -17,17 +17,16 @@ int main()
         printf("EMPRESA (3)\n");
         printf("0 PARA SALIR\n");
         printf("Como desea ingresar? (Ingrese una opcion): ");
-        scanf("%i", &opcion);
+        scanf(" %c", &opcion);
 
         switch (opcion)
         {
-        case 1:
+        case '1':
         {
             stLogin usuarioActual;
 
             if (loginUsuarios() == 1)
             {
-                iniciarSesion(ARCHIVOS_USUARIOS, &usuarioActual);
                 menuUsuario(usuarioActual);
             }
             else
@@ -37,15 +36,15 @@ int main()
             break;
         }
 
-        case 2:
+        case '2':
             loginAdmin();
             break;
 
-        case 3:
+        case '3':
             loginEmpresas();
             break;
 
-        case 0:
+        case '0':
             printf("Cerrando programa...\n");
             break;
 
@@ -54,7 +53,7 @@ int main()
             break;
         }
 
-    } while (opcion != 0);
+    } while (opcion != '0');
 
     printf("Programa cerrado con exito.\n");
 

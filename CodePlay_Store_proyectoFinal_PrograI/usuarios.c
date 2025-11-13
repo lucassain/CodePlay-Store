@@ -25,6 +25,8 @@ int loginUsuarios()
         {
         case 'i':
         case 'I':
+
+
             if (iniciarSesion(ARCHIVOS_USUARIOS, &usuario) == 1)
             {
                 return 1;
@@ -352,7 +354,7 @@ int iniciarSesion(char archivo[], stLogin *usuarioActual)
     while(fread(&guardado, sizeof(stLogin), 1, buffer) == 1)
     {
         if(strcmp(ingreso.usuario, guardado.usuario) == 0 &&
-           strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
+                strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
         {
             printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.usuario);
             *usuarioActual = guardado;
@@ -430,7 +432,8 @@ void configuracion(stLogin usuario)
             printf("Opción inválida. Intente de nuevo.\n");
         }
 
-    } while (opcion != 0);
+    }
+    while (opcion != 0);
 }
 
 
@@ -500,34 +503,38 @@ void modificarPerfil (char DniABuscar[], stLogin usuarioModificado)
 
 void menuUsuario(stLogin usuarioActual)
 {
-    int opcion;
+    char opcion;
+
     do
     {
+
         printf("\n===== MENU USUARIO =====\n");
-        printf("Ver catalogo de juegos (1)\n");
+        printf("Explorar catalogo de juegos(1)\n");
         printf("Ver mis compras (2)\n");
         printf("Configuracion (3)\n");
         printf("Cerrar sesion (0)\n");
         printf("Seleccione una opcion: ");
-        scanf("%i", &opcion);
+        scanf(" %c", &opcion);
 
         switch(opcion)
         {
-        case 1:
+        case '1':
             catalogoJuegos();
             break;
-        case 2:
+        case '2':
             printf("Mostrando compras...\n");
             break;
-        case 3:
+        case '3':
             configuracion(usuarioActual);
             break;
-        case 0:
+        case '0':
             printf("Sesion cerrada.\n");
             break;
         default:
             printf("Opcion invalida.\n");
         }
 
-    } while (opcion != 0);
+    }
+    while (opcion != '0');
+
 }

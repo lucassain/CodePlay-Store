@@ -4,13 +4,13 @@
 #define ARCHIVO_EMPRESAS "empresas.dat"
 
 typedef struct {
-    char nombre[50];            // Nombre de la empresa
-    char email[50];             // Correo de contacto
-    char contrasenia[20];       // Contraseña
-    char pais[30];              // País de origen
-    char descripcion[150];      // Descripción breve
-    char fechaRegistro[15];     // Fecha de creación de la cuenta
-    char opcion;                //iniciar sesion o registrarse
+    char nombre[50];
+    char email[50];
+    char contrasenia[20];
+    char pais[30];
+    char descripcion[150];
+    char fechaRegistro[15];
+    char opcion;
 } stEmpresa;
 
 //Prototipado

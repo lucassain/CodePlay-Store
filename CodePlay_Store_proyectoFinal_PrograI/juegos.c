@@ -26,7 +26,7 @@ void catalogoJuegos()
     do
     {
         printf("\n=====CATALOGO DE JUEGOS=====\n");
-        printf("Ver catalogo (1)\n");
+        printf("Ver catalogo(1)\n");
         printf("Buscar un juego (2)\n");
         printf("0 PARA SALIR \n");
         printf("Ingrese una opcion: ");
