@@ -26,6 +26,7 @@ int cargarArregloDesdeArchivo (stJuego** arregloDeJuegos, int dimension);
 int buscarJuegoPorNombre (stJuego* arregloDeJuegos, int validos, char juegoABuscar[]);
 int buscarJuegoPorId (stJuego* arregloDeJuegos, int validos, int idABuscar);
 void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos);
+void buscarJuegosPorPlataforma(stJuego* arregloDeJuegos, int validos, char plataformaABuscar[]);
 
 
 #endif // JUEGOS_H_INCLUDED

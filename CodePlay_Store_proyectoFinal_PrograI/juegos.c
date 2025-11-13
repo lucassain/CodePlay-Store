@@ -275,6 +275,7 @@ void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos)
     int eleccion = -1;
     int idABuscar;
     char juegoABuscar[50];
+    char plataformaABuscar[50];
     int indice;
 
     do
@@ -282,6 +283,7 @@ void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos)
         printf("\n===== MENU BUSQUEDA DE JUEGOS =====\n");
         printf("Buscar por nombre (1)\n");
         printf("Buscar por ID (2)\n");
+        printf("Buscar por plataforma (3)\n");
         printf("Volver al menu anterior (0)\n");
         printf("===================================\n");
         printf("Ingrese una opcion: ");
@@ -327,6 +329,14 @@ void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos)
             }
             break;
 
+        case 3:
+            printf("Buscador (plataforma): ");
+            getchar();
+            scanf(" %[^\n]", plataformaABuscar);
+
+            buscarJuegosPorPlataforma(arregloDeJuegos, validos, plataformaABuscar);
+            break;
+
         default:
             printf("Opcion invalida. Intente nuevamente.\n");
             break;
@@ -335,4 +345,23 @@ void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos)
     while (eleccion != 0);
 }
 
+void buscarJuegosPorPlataforma(stJuego* arregloDeJuegos, int validos, char plataformaABuscar[])
+{
+    plataformaABuscar[strcspn(plataformaABuscar, "\n")] = 0;
+    int encontrados = 0;
 
+    for (int i = 0; i < validos; i++)
+    {
+        if (strcmpi(arregloDeJuegos[i].plataforma, plataformaABuscar) == 0)
+        {
+            mostrarUnJuego(arregloDeJuegos[i]);
+            printf("\n");
+            encontrados++;
+        }
+    }
+
+    if (encontrados == 0)
+    {
+        printf("No se encontraron juegos para la plataforma ingresada.\n");
+    }
+}
