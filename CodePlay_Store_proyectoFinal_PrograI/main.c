@@ -7,6 +7,8 @@
 
 int main()
 {
+    inicializarArchivoUsuarios();
+
     char opcion;
 
     do
@@ -25,9 +27,9 @@ int main()
         {
             stLogin usuarioActual;
 
-            if (loginUsuarios() == 1)
+            if (loginUsuarios(&usuarioActual) == 1)
             {
-                menuUsuario(usuarioActual);
+                menuUsuario(&usuarioActual);
             }
             else
             {

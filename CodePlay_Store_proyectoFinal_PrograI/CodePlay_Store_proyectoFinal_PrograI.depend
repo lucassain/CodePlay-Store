@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1763008309 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
+1763074521 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
 	<stdio.h>
 	<stdlib.h>
 	"usuarios.h"
@@ -7,14 +7,14 @@
 	"empresas.h"
 	"juegos.h"
 
-1763008554 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
+1763074798 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
 	<stdio.h>
 	<stdlib.h>
 	"usuarios.h"
 	<string.h>
 	"juegos.h"
 
-1762988257 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.h
+1763074510 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.h
 
 1763060674 source:c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
 	<stdio.h>
@@ -51,13 +51,13 @@
 
 1763060674 c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
 
-1762894201 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.c
+1763009399 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"admin.h"
 
-1762894537 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+1763009399 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
 	<stdio.h>
 	<stdlib.h>
 	"empresas.h"
@@ -65,9 +65,9 @@
 
 1763009399 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
 
-1762978045 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.h
+1763069623 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.h
 
-1763007108 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
+1763065628 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

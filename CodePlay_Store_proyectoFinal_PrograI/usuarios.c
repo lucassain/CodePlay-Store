@@ -4,16 +4,17 @@
 #include <string.h>
 #include "juegos.h"
 
-int loginUsuarios()
+int loginUsuarios(stLogin *usuarioActual)
 {
+
     int registro = 0;
     char opcion;
     stLogin usuario;
 
-    mostrarUsuarios(ARCHIVOS_USUARIOS);
-
     do
     {
+        mostrarUsuarios(ARCHIVOS_USUARIOS);
+
         printf("\n=== MENU USUARIO ===\n");
         printf("Iniciar sesion (I)\n");
         printf("Registrarse (R)\n");
@@ -26,16 +27,15 @@ int loginUsuarios()
         case 'i':
         case 'I':
 
-
-            if (iniciarSesion(ARCHIVOS_USUARIOS, &usuario) == 1)
+            if (iniciarSesion(ARCHIVOS_USUARIOS, usuarioActual) == 1)
             {
                 return 1;
-
             }
             else
             {
-                return -1;
+                printf("Credenciales incorrectas.\n");
             }
+            break;
 
         case 'r':
         case 'R':
@@ -45,18 +45,16 @@ int loginUsuarios()
             {
                 printf("Usuario registrado correctamente.\n");
                 guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
-                return 0;
             }
             else if (registro == -1)
             {
                 printf("El usuario ya existe.\n");
-                return -1;
             }
             else
             {
                 printf("Error al registrarse.\n");
-                return -1;
             }
+            break;
 
         case 's':
         case 'S':
@@ -72,6 +70,7 @@ int loginUsuarios()
 
     return 0;
 }
+
 
 
 void registrarUnUsuario (stLogin* usuario)
@@ -397,80 +396,117 @@ void mostrarUsuarios (char archivo[]) //BORRAR MAS TARDE
     }
 }
 
-void configuracion(stLogin usuario)
+void configuracion(stLogin* usuario)
 {
-    int opcion;
+    char opcion;
 
     do
     {
         printf("\n===== CONFIGURACION =====\n");
-        printf("1. Modificar perfil\n");
-        printf("2. Cambiar de cuenta\n");
-        printf("0. Volver al menú anterior\n");
+        printf("Modificar perfil (1)\n");
+        printf("Cambiar de cuenta (2)\n");
+        printf("Volver al menu anterior (0)\n");
         printf("Seleccione una opción: ");
-        scanf("%d", &opcion);
+        scanf(" %c", &opcion);
 
         switch (opcion)
         {
-        case 1:
+        case '1':
             editarDatosPerfil(usuario);
             break;
 
-        case 2:
-            printf("Cerrando sesión actual...\n");
-            // Simplemente salimos al login de nuevo
-            loginUsuarios();
-            // O si querés volver al main, podés usar return;
-            return;
+        case '2':
+
+            stLogin nuevaCuenta;
+
+            printf("\nIngrese los datos de la nueva cuenta:\n");
+
+            int resultado = loginUsuarios(&nuevaCuenta);
+
+            if (resultado == 1)
+            {
+                printf("\nInicio de sesion exitoso!.\n");
+                *usuario=nuevaCuenta;
+                return;
+            }
+            else
+            {
+                printf("\nError al iniciar sesión. Se mantiene la sesión actual.\n");
+                return;
+            }
+
             break;
 
-        case 0:
+        case '0':
             printf("Volviendo al menú anterior...\n");
             break;
 
         default:
             printf("Opción inválida. Intente de nuevo.\n");
+            break;
         }
 
     }
-    while (opcion != 0);
+    while (opcion != '0');
 }
 
 
-void editarDatosPerfil(stLogin usuarioActual)
+void editarDatosPerfil(stLogin* usuarioActual)
 {
-    stLogin modificado = usuarioActual;
+    stLogin modificado = *usuarioActual;
     char opcion;
 
     printf("\n=== EDITAR DATOS DEL PERFIL ===\n");
 
+
     printf("¿Desea cambiar el email? (s/n): ");
     scanf(" %c", &opcion);
+
     if (opcion == 's' || opcion == 'S')
     {
-        printf("Ingrese el nuevo email: ");
-        scanf("%s", modificado.email);
+        do
+        {
+            printf("Ingrese el nuevo email: ");
+            scanf("%s", modificado.email);
+        }
+        while(!validarEmail(modificado.email));
+
     }
 
     printf("¿Desea cambiar el nombre de usuario? (s/n): ");
     scanf(" %c", &opcion);
+
     if (opcion == 's' || opcion == 'S')
     {
-        printf("Ingrese el nuevo nombre de usuario: ");
-        scanf("%s", modificado.usuario);
+        do
+        {
+            printf("Ingrese el nuevo nombre de usuario: ");
+            scanf("%s", modificado.usuario);
+        }
+        while(!validarUsuario(modificado.usuario));
+
     }
 
-    printf("¿Desea cambiar la contraseña? (s/n): ");
+    printf("¿Desea cambiar la contrasenia? (s/n): ");
     scanf(" %c", &opcion);
+
     if (opcion == 's' || opcion == 'S')
     {
-        printf("Ingrese la nueva contraseña: ");
-        scanf("%s", modificado.contrasenia);
+        do
+        {
+            printf("Ingrese la nueva contrasenia: ");
+            scanf("%s", modificado.contrasenia);
+
+        }
+        while(!validarContrasenia(modificado.contrasenia));
+
     }
 
-    modificarPerfil(usuarioActual.DNI, modificado);
+    modificarPerfil(usuarioActual->DNI, modificado);
 
     printf("\nPerfil actualizado correctamente.\n");
+    *usuarioActual = modificado;
+
 }
 
 void modificarPerfil (char DniABuscar[], stLogin usuarioModificado)
@@ -487,7 +523,7 @@ void modificarPerfil (char DniABuscar[], stLogin usuarioModificado)
             {
                 fseek(buffer, -(long)sizeof(stLogin), SEEK_CUR);
                 fwrite(&usuarioModificado, sizeof(stLogin), 1, buffer);
-                printf("Perfil actualizado correctamente.\n");
+
                 break;
             }
         }
@@ -501,7 +537,7 @@ void modificarPerfil (char DniABuscar[], stLogin usuarioModificado)
 }
 
 
-void menuUsuario(stLogin usuarioActual)
+void menuUsuario(stLogin* usuarioActual)
 {
     char opcion;
 
@@ -537,4 +573,13 @@ void menuUsuario(stLogin usuarioActual)
     }
     while (opcion != '0');
 
+}
+
+void inicializarArchivoUsuarios()
+{
+    FILE* buffer = fopen(ARCHIVOS_USUARIOS, "ab");
+    if (buffer!= NULL)
+    {
+        fclose(buffer);
+    }
 }

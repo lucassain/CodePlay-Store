@@ -13,7 +13,6 @@ typedef struct {
     int idEmpresa;
 } stJuego;
 
-
 // PROTOTIPADO
 void catalogoJuegos();
 int existeArchivo ();

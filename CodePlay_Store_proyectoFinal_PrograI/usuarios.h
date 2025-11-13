@@ -10,11 +10,10 @@ typedef struct
     char email[DIMENSION_LOGIN];
     char contrasenia[DIMENSION_LOGIN];
     char DNI[DIMENSION_LOGIN];
-    char opcion;
 } stLogin;
 
 // Prototipado
-int loginUsuarios();
+int loginUsuarios(stLogin *usuarioActual);
 void registrarUnUsuario (stLogin* usuario);
 int registrarseUsuario (stLogin* usuario);
 int existeUsuario (char archivo[], stLogin nuevoUsuario);
@@ -26,10 +25,11 @@ void guardarUsuarios (char archivo[], stLogin usuarios);
 void mostrarUsuarios (char archivo[]); //BORRAR MAS TARDE
 void mostrarUnUsuario (stLogin user); //BORRAR MAS TARDE
 int iniciarSesion(char archivo[], stLogin *usuarioActual);
-void configuracion(stLogin usuarioActual);
-void editarDatosPerfil(stLogin usuarioActual);
+void configuracion(stLogin* usuarioActual);
+void editarDatosPerfil(stLogin* usuarioActual);
 void modificarPerfil (char DniABuscar[], stLogin usuarioModificado);
-void menuUsuario(stLogin usuarioActual);
+void menuUsuario(stLogin* usuarioActual);
+void inicializarArchivoUsuarios();
 
 
 
