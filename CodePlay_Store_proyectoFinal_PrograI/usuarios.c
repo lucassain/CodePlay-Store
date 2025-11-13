@@ -6,7 +6,6 @@
 
 int loginUsuarios(stLogin *usuarioActual)
 {
-
     int registro = 0;
     char opcion;
     stLogin usuario;
