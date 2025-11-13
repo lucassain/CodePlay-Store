@@ -18,5 +18,7 @@ int loginAdmin ();
 void creacionAdmin ();
 int iniciarSesionAdmin (char archivo[]);
 int validarInicioSesionAdmin(char archivo[], stAdmin recibido);
+void mostrarUsuariosRec(FILE *buffer);
+void mostrarUsuariosAdmin();
 
 #endif // ADMIN_H_INCLUDED

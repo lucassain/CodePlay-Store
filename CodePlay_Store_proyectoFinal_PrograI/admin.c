@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "admin.h"
+#include "usuarios.h"
 
 int loginAdmin()
 {
@@ -130,4 +131,34 @@ int validarInicioSesionAdmin(char archivo[], stAdmin recibido)
     }
 
     return registroExitoso;
+}
+void mostrarUsuariosRec(FILE *buffer)
+{
+    stLogin aux;
+
+    if (fread(&aux, sizeof(stLogin), 1, buffer) != 1)
+        return;
+
+
+    mostrarUnUsuario(aux);
+
+    mostrarUsuariosRec(buffer);
+}
+
+
+void mostrarUsuariosAdmin()
+{
+    FILE *buffer = fopen(ARCHIVOS_USUARIOS, "rb");
+
+    if (buffer == NULL)
+    {
+        printf("No se pudo abrir el archivo de usuarios.\n");
+        return;
+    }
+
+    printf("\Lista de usuarios \n");
+
+    mostrarUsuariosRec(buffer);
+
+    fclose(buffer);
 }
