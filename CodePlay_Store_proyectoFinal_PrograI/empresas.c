@@ -226,3 +226,4 @@ void menuEmpresa(stEmpresa* empresaActual)
 
     } while (opcion != '0');
 }
+
