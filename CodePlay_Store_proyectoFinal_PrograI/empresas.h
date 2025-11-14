@@ -1,6 +1,8 @@
 #ifndef EMPRESAS_H_INCLUDED
 #define EMPRESAS_H_INCLUDED
 
+#include "juegos.h"
+
 #define ARCHIVO_EMPRESAS "empresas.dat"
 
 typedef struct {
@@ -23,6 +25,8 @@ void mostrarUnaEmpresa (stEmpresa empresa); //BORRAR MAS TARDE
 void mostrarEmpresas (char archivo[]); //BORRAR MAS TARDE
 void menuEmpresa(stEmpresa* empresaActual);
 int generarIdUnicoEmpresa ();
+void crearArchivoDeEmpresa(stEmpresa empresa);
+void guardarJuegoEnArchivoEmpresa(stEmpresa empresa, stJuego juego);
 
 
 #endif // EMPRESAS_H_INCLUDED

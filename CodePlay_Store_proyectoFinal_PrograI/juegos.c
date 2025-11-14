@@ -393,4 +393,68 @@ int generarIdUnicoJuego ()
     return idMax+1;
 }
 
+void cargarUnJuego(stJuego* juego)
+{
+    printf("Nombre del juego: ");
+    scanf("%s", juego->nombre);
 
+    printf("Genero: ");
+    scanf("%s", juego->genero);
+
+    printf("Plataforma: ");
+    scanf("%s", juego->plataforma);
+
+    printf("Precio: ");
+    scanf("%f", &juego->precio);
+}
+
+void agregarJuegoAlCatalogo(stJuego juego)
+{
+    FILE* buffer = fopen(ARCHIVO_JUEGOS, "ab");
+    if(buffer != NULL)
+    {
+        fwrite(&juego, sizeof(stJuego), 1, buffer);
+        fclose(buffer);
+    }
+    else
+    {
+        printf("Error al agregar el juego al catalogo.\n");
+    }
+}
+
+int redimensionarArreglo (stJuego** arregloJuegos, int* dimension, int adicional)
+{
+    int nuevaDim=*dimension+adicional;
+
+    stJuego* aux=(stJuego*)realloc(*arregloJuegos, nuevaDim*sizeof(stJuego));
+
+    if (aux!=NULL)
+    {
+        (*arregloJuegos)=aux;
+
+        *dimension=nuevaDim;
+
+        return 1;
+    }
+
+    return 0;
+}
+
+int agregarJuegoAlArreglo (stJuego** arregloJuegos, int* dimension, int* validos, stJuego juegoNuevo)
+{
+    if (*validos==*dimension)
+    {
+        int redimensionado=redimensionarArreglo(arregloJuegos, dimension, 1);
+
+        if (!redimensionado)
+        {
+            printf("Error al cargar el juego en el catalogo.\n");
+            return 0;
+        }
+    }
+
+    (*arregloJuegos)[*validos]=juegoNuevo;
+    (*validos)++;
+
+    return 1;
+}

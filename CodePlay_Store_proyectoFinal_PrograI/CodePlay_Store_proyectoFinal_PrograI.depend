@@ -59,17 +59,19 @@
 	"admin.h"
 	"usuarios.h"
 
-1763141703 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+1763150414 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
 	<stdio.h>
 	<stdlib.h>
 	"empresas.h"
 	<string.h>
+	"juegos.h"
 
-1763142747 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
+1763150211 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
+	"juegos.h"
 
-1763142747 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.h
+1763151793 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.h
 
-1763142747 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
+1763151509 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

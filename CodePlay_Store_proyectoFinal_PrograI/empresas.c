@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "empresas.h"
 #include <string.h>
+#include "juegos.h"
 
 int loginEmpresas(stEmpresa *empresaActual)
 {
@@ -42,6 +43,8 @@ int loginEmpresas(stEmpresa *empresaActual)
             {
                 printf("Empresa registrada correctamente.\n");
                 guardarEmpresas(ARCHIVO_EMPRESAS, empresa);
+
+                crearArchivoDeEmpresa(empresa);
             }
             else if (registro == -1)
             {
@@ -62,7 +65,8 @@ int loginEmpresas(stEmpresa *empresaActual)
             printf("Opcion invalida.\n");
         }
 
-    } while (opcion != 's' && opcion != 'S');
+    }
+    while (opcion != 's' && opcion != 'S');
 
     return 0;
 }
@@ -88,6 +92,8 @@ void registrarUnaEmpresa (stEmpresa* empresa)
 
     printf("Ingrese una breve descripcion de la empresa: ");
     fgets(empresa->descripcion, 150, stdin);
+
+    empresa->idEmpresa=generarIdUnicoEmpresa();
 }
 
 int registrarseEmpresa (stEmpresa* empresa)
@@ -150,7 +156,7 @@ int iniciarSesionEmpresa(char archivo[], stEmpresa *empresaActual)
     while(fread(&guardado, sizeof(stEmpresa), 1, buffer) == 1)
     {
         if(strcmp(ingreso.email, guardado.email) == 0 &&
-           strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
+                strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
         {
             printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.nombre);
             *empresaActual = guardado;
@@ -177,6 +183,7 @@ void mostrarUnaEmpresa (stEmpresa empresa) //BORRAR MAS TARDE
     printf("Pais: %s\n", empresa.pais);
     printf("Descripcion: %s\n", empresa.descripcion);
     printf("Fecha de registro: %s\n", empresa.fechaRegistro);
+    printf("Id empresa: %i\n", empresa.idEmpresa);
 
 }
 
@@ -197,6 +204,19 @@ void mostrarEmpresas (char archivo[]) //BORRAR MAS TARDE
 
 void menuEmpresa(stEmpresa* empresaActual)
 {
+    int dimension = calcularDimensionArchivo();
+
+    stJuego* arregloDeJuegos = crearArregloJuegos(dimension);
+
+    if (arregloDeJuegos==NULL)
+    {
+        printf("Error. Volviendo al menu anterior...\n");
+
+        return;
+    }
+
+    int validos = cargarArregloDesdeArchivo(&arregloDeJuegos, dimension);
+
     char opcion;
 
     do
@@ -207,16 +227,46 @@ void menuEmpresa(stEmpresa* empresaActual)
         printf("Cerrar sesion (0)\n");
         printf("Seleccione una opcion: ");
         scanf(" %c", &opcion);
+        getchar();
 
         switch (opcion)
         {
         case '1':
-            printf("Funcionalidad para publicar juegos (proximamente).\n");
+        {
+            stJuego juegoNuevo;
+
+            printf("Ingrese los datos del nuevo juego:\n");
+
+            cargarUnJuego(&juegoNuevo);
+            getchar();
+
+            juegoNuevo.id = generarIdUnicoJuego();
+            juegoNuevo.idEmpresa = empresaActual->idEmpresa;
+
+            // Guardar en archivo de la empresa
+            guardarJuegoEnArchivoEmpresa(*empresaActual, juegoNuevo);
+
+            // Agregar al arreglo dinámico del catálogo
+            if (agregarJuegoAlArreglo(&arregloDeJuegos, &dimension, &validos, juegoNuevo)==1)
+            {
+                printf("Juego agregado al catálogo correctamente.\n");
+
+                // Guardar en el archivo general del catálogo
+                agregarJuegoAlCatalogo(juegoNuevo);
+            }
+            else
+            {
+                printf("Error al agregar el juego al catálogo.\n");
+            }
+
             break;
+        }
 
         case '2':
-            printf("Listado de juegos de la empresa (proximamente).\n");
+        {
+
             break;
+        }
 
         case '0':
             printf("Sesion cerrada.\n");
@@ -226,7 +276,10 @@ void menuEmpresa(stEmpresa* empresaActual)
             printf("Opcion invalida.\n");
         }
 
-    } while (opcion != '0');
+    }
+    while (opcion != '0');
+
+    free(arregloDeJuegos);
 }
 
 int generarIdUnicoEmpresa()
@@ -247,11 +300,45 @@ int generarIdUnicoEmpresa()
         }
 
         fclose(buffer);
-    }else
+    }
+    else
     {
         printf("Error al generar id.\n");
         return 0;
     }
 
     return idMax+1;
+}
+
+void crearArchivoDeEmpresa(stEmpresa empresa)
+{
+    char nombreArchivo[100];
+    sprintf(nombreArchivo, "juegos_%s.dat", empresa.email);
+
+    FILE* buffer = fopen(nombreArchivo, "ab");  // si no existe, lo crea
+    if(buffer != NULL)
+    {
+        fclose(buffer);
+    }
+    else
+    {
+        printf("Error al crear el archivo del empresa.\n");
+    }
+}
+
+void guardarJuegoEnArchivoEmpresa(stEmpresa empresa, stJuego juego)
+{
+    char nombreArchivo[100];
+    sprintf(nombreArchivo, "juegos_%s.dat", empresa.email);
+
+    FILE* buffer = fopen(nombreArchivo, "ab");
+    if(buffer != NULL)
+    {
+        fwrite(&juego, sizeof(stJuego), 1, buffer);
+        fclose(buffer);
+    }
+    else
+    {
+        printf("Error al guardar el juego en el archivo de la empresa.\n");
+    }
 }

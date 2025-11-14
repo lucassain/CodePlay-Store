@@ -27,6 +27,10 @@ int buscarJuegoPorId (stJuego* arregloDeJuegos, int validos, int idABuscar);
 void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos);
 void buscarJuegosPorPlataforma(stJuego* arregloDeJuegos, int validos, char plataformaABuscar[]);
 int generarIdUnicoJuego ();
+void cargarUnJuego(stJuego* juego);
+void agregarJuegoAlCatalogo(stJuego juego);
+int agregarJuegoAlArreglo (stJuego** arregloJuegos, int* dimension, int* validos, stJuego juegoNuevo);
+int redimensionarArreglo (stJuego** arregloJuegos, int* dimension, int adicional);
 
 
 #endif // JUEGOS_H_INCLUDED
