@@ -13,6 +13,8 @@ int loginAdmin()
         printf("\n=== MENU ADMIN ===\n");
         printf("Iniciar sesion (I)\n");
         printf("Volver al menu principal (S)\n");
+        printf("Ver usuarios (V)\n");
+        printf("Buscar usuario por dni (B)\n");
         printf("Ingrese una opcion: ");
         scanf(" %c", &opcion);
 
@@ -28,6 +30,18 @@ int loginAdmin()
             {
                 return -1;
             }
+          break;
+
+        case 'v':
+        case 'V':
+            mostrarUsuariosAdmin();
+
+            break;
+
+        case 'b':
+        case 'B':
+             verUsuarioPorDni();
+            break;
 
         case 's':
         case 'S':
@@ -156,9 +170,44 @@ void mostrarUsuariosAdmin()
         return;
     }
 
-    printf("\Lista de usuarios \n");
+    printf("\n Lista de usuarios \n");
 
     mostrarUsuariosRec(buffer);
 
     fclose(buffer);
+}
+int buscarUsuarioPorDni(char dniBuscado[])
+{
+    FILE *arch = fopen("usuarios.dat", "rb");
+    if (!arch)
+    {
+        printf("Error al abrir archivo de usuarios.\n");
+        return -1;
+    }
+
+    stLogin aux;
+
+    while (fread(&aux, sizeof(stLogin), 1, arch) == 1)
+    {
+        if (strcmp(aux.DNI, dniBuscado) == 0)
+        {
+            printf("\nUsuario encontrado:\n");
+            mostrarUnUsuario(aux);
+            fclose(arch);
+            return 1;
+        }
+    }
+
+    fclose(arch);
+    printf("No se encontro un usuario con ese DNI.\n");
+    return 0;
+}
+void verUsuarioPorDni()
+{
+    char dniBuscado[20];
+
+    printf("Ingrese DNI del usuario: ");
+    scanf("%s", dniBuscado);
+
+    buscarUsuarioPorDni(dniBuscado);
 }
