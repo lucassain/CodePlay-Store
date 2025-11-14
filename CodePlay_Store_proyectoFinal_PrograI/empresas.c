@@ -3,65 +3,66 @@
 #include "empresas.h"
 #include <string.h>
 
-int loginEmpresas()
+int loginEmpresas(stEmpresa *empresaActual)
 {
-    stEmpresa empresa;
+    int registro = 0;
     char opcion;
-
-    printf("\nBienvenido a CodePlay!\n");
+    stEmpresa empresa;
 
     do
     {
-        printf("\n===== MENU EMPRESAS =====\n");
+        mostrarEmpresas(ARCHIVO_EMPRESAS);
+
+        printf("\n=== MENU EMPRESA ===\n");
         printf("Iniciar sesion (I)\n");
-        printf("Registrar empresa (R)\n");
-        printf("Volver / Salir (S)\n");
-        printf("=========================\n");
-        printf("Seleccione una opcion: ");
+        printf("Registrarse (R)\n");
+        printf("Volver al menu principal (S)\n");
+        printf("Ingrese una opcion: ");
         scanf(" %c", &opcion);
 
         switch (opcion)
         {
         case 'i':
         case 'I':
-            if (iniciarSesionEmpresa(ARCHIVO_EMPRESAS) == 1)
+            if (iniciarSesionEmpresa(ARCHIVO_EMPRESAS, empresaActual) == 1)
             {
                 return 1;
             }
             else
             {
-                return -1;
+                printf("Credenciales incorrectas.\n");
             }
+            break;
 
         case 'r':
         case 'R':
-        {
-            int registrarse = registrarseEmpresa(&empresa);
+            registro = registrarseEmpresa(&empresa);
 
-            if (registrarse)
+            if (registro == 1)
             {
-                printf("Empresa registrada con exito!\n");
+                printf("Empresa registrada correctamente.\n");
                 guardarEmpresas(ARCHIVO_EMPRESAS, empresa);
-                return 0;
+            }
+            else if (registro == -1)
+            {
+                printf("La empresa ya existe.\n");
             }
             else
             {
-                printf("Error al registrar la empresa.\n");
-                return -1;
+                printf("Error al registrarse.\n");
             }
-        }
+            break;
 
         case 's':
         case 'S':
-            printf("Volviendo al menu anterior...\n");
+            printf("Volviendo al menu principal...\n");
             return 0;
 
         default:
-            printf("Opcion invalida. Intente nuevamente.\n");
-            break;
+            printf("Opcion invalida.\n");
         }
 
-    } while (opcion != '0' && opcion != 's' && opcion != 'S');
+    } while (opcion != 's' && opcion != 'S');
 
     return 0;
 }
@@ -124,51 +125,46 @@ void guardarEmpresas (char archivo[], stEmpresa empresa)
     }
 }
 
-int iniciarSesionEmpresa (char archivo[])
+int iniciarSesionEmpresa(char archivo[], stEmpresa *empresaActual)
 {
-    FILE* buffer = fopen(archivo, "rb");
-
-    stEmpresa guardado;
     stEmpresa ingreso;
-    int registroExitoso = 0;
+    stEmpresa guardado;
+    int encontrado = 0;
 
-    if (buffer != NULL)
+    FILE* buffer = fopen(archivo, "rb");
+    if(buffer == NULL)
     {
-        fseek(buffer, 0, SEEK_SET);
-        printf("INICIAR SESION COMO EMPRESA\n");
-
-        printf("Mail de contacto: ");
-        scanf("%s", ingreso.email);
-
-        printf("Contrasenia: ");
-        scanf("%s", ingreso.contrasenia);
-
-        while (fread(&guardado, sizeof(stEmpresa), 1, buffer) == 1)
-        {
-            if (strcmp(ingreso.email, guardado.email) == 0 &&
-                strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
-            {
-                printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.nombre);
-                registroExitoso = 1;
-                break;
-            }
-        }
-
-        if (registroExitoso == 0)
-        {
-            printf("Correo o contrasenia incorrectas\n");
-            fclose(buffer);
-            return 0;
-        }
-
-        fclose(buffer);
-        return 1;
+        printf("Error al abrir el archivo de empresas.\n");
+        return 0;
     }
-    else
+
+    printf("\nINICIAR SESION EMPRESA\n");
+
+    printf("Email: ");
+    scanf("%s", ingreso.email);
+    printf("Contrasenia: ");
+    scanf("%s", ingreso.contrasenia);
+
+    while(fread(&guardado, sizeof(stEmpresa), 1, buffer) == 1)
     {
-        printf("Error en el archivo\n");
-        return -1;
+        if(strcmp(ingreso.email, guardado.email) == 0 &&
+           strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
+        {
+            printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.nombre);
+            *empresaActual = guardado;
+            encontrado = 1;
+            break;
+        }
     }
+
+    fclose(buffer);
+
+    if(!encontrado)
+    {
+        printf("Email o contrasenia incorrectos.\n");
+    }
+
+    return encontrado;
 }
 
 void mostrarUnaEmpresa (stEmpresa empresa) //BORRAR MAS TARDE
@@ -195,4 +191,38 @@ void mostrarEmpresas (char archivo[]) //BORRAR MAS TARDE
         }
         fclose(buffer);
     }
+}
+
+void menuEmpresa(stEmpresa* empresaActual)
+{
+    char opcion;
+
+    do
+    {
+        printf("\n===== MENU EMPRESA =====\n");
+        printf("Publicar nuevo juego (1)\n");
+        printf("Ver mis juegos (2)\n");
+        printf("Cerrar sesion (0)\n");
+        printf("Seleccione una opcion: ");
+        scanf(" %c", &opcion);
+
+        switch (opcion)
+        {
+        case '1':
+            printf("Funcionalidad para publicar juegos (proximamente).\n");
+            break;
+
+        case '2':
+            printf("Listado de juegos de la empresa (proximamente).\n");
+            break;
+
+        case '0':
+            printf("Sesion cerrada.\n");
+            break;
+
+        default:
+            printf("Opcion invalida.\n");
+        }
+
+    } while (opcion != '0');
 }

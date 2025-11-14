@@ -14,13 +14,14 @@ typedef struct {
 } stEmpresa;
 
 //Prototipado
-int loginEmpresas ();
+int loginEmpresas(stEmpresa *empresaActual);
 void registrarUnaEmpresa (stEmpresa* empresa);
 int registrarseEmpresa (stEmpresa* empresa);
 void guardarEmpresas (char archivo[], stEmpresa empresa);
-int iniciarSesionEmpresa (char archivo[]);
+int iniciarSesionEmpresa(char archivo[], stEmpresa *empresaActual);
 void mostrarUnaEmpresa (stEmpresa empresa); //BORRAR MAS TARDE
 void mostrarEmpresas (char archivo[]); //BORRAR MAS TARDE
+void menuEmpresa(stEmpresa* empresaActual);
 
 
 #endif // EMPRESAS_H_INCLUDED

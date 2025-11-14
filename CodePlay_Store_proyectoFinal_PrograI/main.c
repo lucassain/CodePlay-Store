@@ -40,11 +40,22 @@ int main()
 
         case '2':
             loginAdmin();
+
             break;
 
         case '3':
-            loginEmpresas();
+        {
+            stEmpresa empresaActual;
+            if (loginEmpresas(&empresaActual) == 1)
+            {
+                menuEmpresa(&empresaActual);
+            }
+            else
+            {
+                printf("No se pudo iniciar sesion de empresa o registro cancelado.\n");
+            }
             break;
+        }
 
         case '0':
             printf("Cerrando programa...\n");
@@ -55,7 +66,8 @@ int main()
             break;
         }
 
-    } while (opcion != '0');
+    }
+    while (opcion != '0');
 
     printf("Programa cerrado con exito.\n");
 
