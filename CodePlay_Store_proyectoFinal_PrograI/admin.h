@@ -16,13 +16,14 @@ typedef struct
 
 
 // Prototipo
-int loginAdmin ();
+int loginAdmin(stAdmin *adminActual);
 void creacionAdmin ();
-int iniciarSesionAdmin (char archivo[]);
+int iniciarSesionAdmin(char archivo[], stAdmin *adminActual);
 int validarInicioSesionAdmin(char archivo[], stAdmin recibido);
 void mostrarUsuariosRec(FILE *buffer);
 void mostrarUsuariosAdmin();
 int buscarUsuarioPorDni(char dniBuscado[]);
 void verUsuarioPorDni();
+void menuAdmin(stAdmin* adminActual);
 
 #endif // ADMIN_H_INCLUDED

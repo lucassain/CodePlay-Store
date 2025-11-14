@@ -4,43 +4,25 @@
 #include "admin.h"
 #include "usuarios.h"
 
-int loginAdmin()
+int loginAdmin(stAdmin *adminActual)
 {
     char opcion;
 
-    do
-    {
+    do {
         printf("\n=== MENU ADMIN ===\n");
         printf("Iniciar sesion (I)\n");
         printf("Volver al menu principal (S)\n");
-        printf("Ver usuarios (V)\n");
-        printf("Buscar usuario por dni (B)\n");
         printf("Ingrese una opcion: ");
         scanf(" %c", &opcion);
 
-        switch (opcion)
-        {
+        switch (opcion) {
         case 'i':
         case 'I':
-            if (iniciarSesionAdmin(ARCHIVOS_ADMINS) == 1)
-            {
-                return 1;
+            if (iniciarSesionAdmin(ARCHIVOS_ADMINS, adminActual) == 1) {
+                return 1;   // INICIA SESIÓN
+            } else {
+                printf("Credenciales incorrectas.\n");
             }
-            else
-            {
-                return -1;
-            }
-          break;
-
-        case 'v':
-        case 'V':
-            mostrarUsuariosAdmin();
-
-            break;
-
-        case 'b':
-        case 'B':
-             verUsuarioPorDni();
             break;
 
         case 's':
@@ -51,9 +33,7 @@ int loginAdmin()
         default:
             printf("Opcion invalida.\n");
         }
-
-    }
-    while (opcion != 's' && opcion != 'S');
+    } while(opcion != 's' && opcion != 'S');
 
     return 0;
 }
@@ -86,32 +66,45 @@ void creacionAdmin ()
         fclose(buffer);
     }
 }
-int iniciarSesionAdmin (char archivo[])
+
+int iniciarSesionAdmin(char archivo[], stAdmin *adminActual)
 {
-    stAdmin ingreso;
-    int exito = 0;
+    stAdmin ingreso, guardado;
+    int encontrado = 0;
 
-    printf("\nINICIAR SESION\n");
+    FILE* buffer = fopen(archivo, "rb");
+    if(buffer == NULL) {
+        printf("Error al abrir el archivo de admins.\n");
+        return 0;
+    }
 
-    while(!exito)
-    {
-        printf("Ingrese su correo electronico: ");
-        scanf("%29s", ingreso.email);
-        printf("Ingrese su nombre de usuario: ");
-        scanf("%29s", ingreso.usuario);
-        printf("Ingrese su contrasenia: ");
-        scanf("%29s", ingreso.contrasenia);
+    printf("\nINICIAR SESION ADMIN\n");
+    printf("Usuario: ");
+    scanf("%s", ingreso.usuario);
+    printf("Email: ");
+    scanf("%s", ingreso.email);
+    printf("Contrasenia: ");
+    scanf("%s", ingreso.contrasenia);
 
-        exito = validarInicioSesionAdmin(archivo, ingreso);
-
-        if(!exito)
+    while(fread(&guardado, sizeof(stAdmin), 1, buffer) == 1) {
+        if( strcmp(ingreso.usuario, guardado.usuario) == 0 &&
+            strcmp(ingreso.email, guardado.email) == 0 &&
+            strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
         {
-            printf("Intente de nuevo.\n\n");
-            return 0;
+            printf("Inicio de sesion exitoso. Bienvenido admin %s!\n", guardado.usuario);
+            *adminActual = guardado;
+            encontrado = 1;
+            break;
         }
     }
 
-    return 1;
+    fclose(buffer);
+
+    if(!encontrado) {
+        printf("Usuario, email o contrasenia incorrectos.\n");
+    }
+
+    return encontrado;
 }
 
 int validarInicioSesionAdmin(char archivo[], stAdmin recibido)
@@ -210,4 +203,36 @@ void verUsuarioPorDni()
     scanf("%s", dniBuscado);
 
     buscarUsuarioPorDni(dniBuscado);
+}
+
+void menuAdmin(stAdmin* adminActual)
+{
+    char opcion;
+
+    do {
+        printf("\n===== MENU ADMIN =====\n");
+        printf("Ver usuarios (1)\n");
+        printf("Buscar usuario por DNI (2)\n");
+        printf("Cerrar sesion (0)\n");
+        printf("Seleccione una opcion: ");
+        scanf(" %c", &opcion);
+
+        switch(opcion) {
+        case '1':
+            mostrarUsuariosAdmin();
+            break;
+
+        case '2':
+            verUsuarioPorDni();
+            break;
+
+        case '0':
+            printf("Sesion de admin cerrada.\n");
+            break;
+
+        default:
+            printf("Opcion invalida.\n");
+        }
+
+    } while(opcion != '0');
 }

@@ -39,9 +39,18 @@ int main()
         }
 
         case '2':
-            loginAdmin();
-
+        {
+            stAdmin adminActual;
+            if (loginAdmin(&adminActual) == 1)
+            {
+                menuAdmin(&adminActual);
+            }
+            else
+            {
+                printf("No se pudo iniciar sesion de admin.\n");
+            }
             break;
+        }
 
         case '3':
         {
