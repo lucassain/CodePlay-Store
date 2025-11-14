@@ -22,6 +22,7 @@ int iniciarSesionEmpresa(char archivo[], stEmpresa *empresaActual);
 void mostrarUnaEmpresa (stEmpresa empresa); //BORRAR MAS TARDE
 void mostrarEmpresas (char archivo[]); //BORRAR MAS TARDE
 void menuEmpresa(stEmpresa* empresaActual);
+int generarIdUnicoEmpresa ();
 
 
 #endif // EMPRESAS_H_INCLUDED

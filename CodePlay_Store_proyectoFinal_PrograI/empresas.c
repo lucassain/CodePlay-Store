@@ -229,3 +229,29 @@ void menuEmpresa(stEmpresa* empresaActual)
     } while (opcion != '0');
 }
 
+int generarIdUnicoEmpresa()
+{
+    FILE* buffer=fopen(ARCHIVO_EMPRESAS, "rb");
+    int idMax=0;
+
+    if (buffer!=NULL)
+    {
+        stEmpresa aux;
+
+        while(fread(&aux, sizeof(stEmpresa), 1, buffer)==1)
+        {
+            if (aux.idEmpresa>idMax)
+            {
+                idMax=aux.idEmpresa;
+            }
+        }
+
+        fclose(buffer);
+    }else
+    {
+        printf("Error al generar id.\n");
+        return 0;
+    }
+
+    return idMax+1;
+}

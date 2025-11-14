@@ -26,7 +26,7 @@ int buscarJuegoPorNombre (stJuego* arregloDeJuegos, int validos, char juegoABusc
 int buscarJuegoPorId (stJuego* arregloDeJuegos, int validos, int idABuscar);
 void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos);
 void buscarJuegosPorPlataforma(stJuego* arregloDeJuegos, int validos, char plataformaABuscar[]);
-int generarIdUnico ();
+int generarIdUnicoJuego ();
 
 
 #endif // JUEGOS_H_INCLUDED

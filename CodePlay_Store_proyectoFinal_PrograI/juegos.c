@@ -366,7 +366,7 @@ void buscarJuegosPorPlataforma(stJuego* arregloDeJuegos, int validos, char plata
     }
 }
 
-int generarIdUnico ()
+int generarIdUnicoJuego ()
 {
     FILE* buffer=fopen(ARCHIVO_JUEGOS, "rb");
     int idMax=0;
