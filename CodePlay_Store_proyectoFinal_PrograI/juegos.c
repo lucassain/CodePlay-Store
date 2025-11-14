@@ -365,3 +365,32 @@ void buscarJuegosPorPlataforma(stJuego* arregloDeJuegos, int validos, char plata
         printf("No se encontraron juegos para la plataforma ingresada.\n");
     }
 }
+
+int generarIdUnico ()
+{
+    FILE* buffer=fopen(ARCHIVO_JUEGOS, "rb");
+    int idMax=0;
+
+    if (buffer!=NULL)
+    {
+        stJuego aux;
+
+        while(fread(&aux, sizeof(stJuego), 1, buffer)==1)
+        {
+            if (aux.id>idMax)
+            {
+                idMax=aux.id;
+            }
+        }
+
+        fclose(buffer);
+    }else
+    {
+        printf("Error al generar id.\n");
+        return 0;
+    }
+
+    return idMax+1;
+}
+
+

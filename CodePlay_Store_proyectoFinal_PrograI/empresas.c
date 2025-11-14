@@ -84,8 +84,10 @@ void registrarUnaEmpresa (stEmpresa* empresa)
     printf("Fecha de registro: ");
     scanf("%s", empresa->fechaRegistro);
 
+    fflush(stdin);
+
     printf("Ingrese una breve descripcion de la empresa: ");
-    scanf("%s", empresa->descripcion);
+    fgets(empresa->descripcion, 150, stdin);
 }
 
 int registrarseEmpresa (stEmpresa* empresa)

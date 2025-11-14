@@ -10,7 +10,7 @@ typedef struct {
     char pais[30];
     char descripcion[150];
     char fechaRegistro[15];
-    char opcion;
+    int idEmpresa;
 } stEmpresa;
 
 //Prototipado
