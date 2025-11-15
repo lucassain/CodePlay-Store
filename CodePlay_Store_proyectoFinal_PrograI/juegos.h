@@ -33,4 +33,6 @@ int agregarJuegoAlArreglo (stJuego** arregloJuegos, int* dimension, int* validos
 int redimensionarArreglo (stJuego** arregloJuegos, int* dimension, int adicional);
 
 
+int buscarJuegoEnArchivoPorId(int idBuscado, stJuego *out);
+
 #endif // JUEGOS_H_INCLUDED

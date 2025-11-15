@@ -458,3 +458,31 @@ int agregarJuegoAlArreglo (stJuego** arregloJuegos, int* dimension, int* validos
 
     return 1;
 }
+
+
+
+
+
+int buscarJuegoEnArchivoPorId(int idBuscado, stJuego *out)
+{
+    FILE *f = fopen(ARCHIVO_JUEGOS, "rb");
+    if (!f) return 0;
+
+    stJuego j;
+    int encontrado = 0;
+
+    while (fread(&j, sizeof(stJuego), 1, f) == 1)
+    {
+        if (j.id == idBuscado)
+        {
+            if (out != NULL) {
+                *out = j;   // Copia el juego encontrado
+            }
+            encontrado = 1;
+            break;
+        }
+    }
+    fclose(f);
+    return encontrado;  // 1 si lo encontró, 0 si no
+}
+
