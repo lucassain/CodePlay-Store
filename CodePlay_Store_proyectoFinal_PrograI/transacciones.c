@@ -5,8 +5,6 @@
 #include "juegos.h"
 #include "usuarios.h"
 
-
-
 int generarIdTransaccion(void)
 {
     FILE* buffer = fopen(ARCHIVO_TRANSACCIONES, "rb");

@@ -22,6 +22,8 @@ typedef struct {
     char dniCliente[15];
 } Transaccion;
 
+//Prototipado
+
 int generarIdTransaccion();
 Fecha cargarFechaManual();
 void registrarTransaccion(const Transaccion *t);
