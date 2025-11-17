@@ -75,7 +75,6 @@ int main()
             printf("Opcion invalida. Intente nuevamente.\n");
             break;
         }
-
     }
     while (opcion != '0');
 

@@ -47,6 +47,5 @@ int validarNombreEmpresa (char nombreDeEmpresa[]);
 int validarContraseniaEmpresa (char contrasenia[]);
 int validarPais (char pais[]);
 Fecha cargarFechaManualEmpresa();
-void reiniciarArchivoEmpresas();
 
 #endif // EMPRESAS_H_INCLUDED

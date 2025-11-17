@@ -90,14 +90,14 @@
 
 1763384726 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.h
 
-1763387570 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+1763388814 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
 	<stdio.h>
 	<stdlib.h>
 	"empresas.h"
 	<string.h>
 	"juegos.h"
 
-1763387395 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
+1763388731 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
 	"juegos.h"
 
 1763384726 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
@@ -117,9 +117,9 @@
 	"juegos.h"
 	"transacciones.h"
 
-1763384726 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.h
+1763389396 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.h
 
-1763387355 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
+1763389330 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
 	<stdio.h>
 	<stdlib.h>
 	"usuarios.h"
@@ -132,7 +132,7 @@
 	<string.h>
 	"juegos.h"
 
-1763384792 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\transacciones.c
+1763388296 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\transacciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

@@ -245,8 +245,7 @@ void mostrarTransaccionPorId(int id)
 
             printf("\n=== DETALLE DE TRANSACCIÓN ===\n");
             printf("ID: %d\n", t.idTransaccion);
-            printf("Fecha: %02d/%02d/%d\n",
-                   t.fecha.dia, t.fecha.mes, t.fecha.anio);
+            printf("Fecha: %02d/%02d/%d\n", t.fecha.dia, t.fecha.mes, t.fecha.anio);
             printf("Juego ID: %d\n", t.idJuegoVendido);
             printf("Precio Venta: %.2f\n", t.precioUnitarioVenta);
             printf("Ganancia: %.2f\n", t.gananciaTotal);

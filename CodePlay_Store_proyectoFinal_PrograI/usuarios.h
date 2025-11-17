@@ -30,7 +30,6 @@ void editarDatosPerfil(stLogin* usuarioActual);
 void modificarPerfil (char DniABuscar[], stLogin usuarioModificado);
 void menuUsuario(stLogin* usuarioActual);
 void inicializarArchivoUsuarios();
-
-
+void crearArchivoDeUnUsuario(stLogin usuario);
 
 #endif

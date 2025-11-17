@@ -839,7 +839,7 @@ Fecha cargarFechaManualEmpresa()
     do {
         printf("Ingrese anio (ej. 2025): ");
         scanf("%d", &fecha.anio);
-    } while (fecha.anio < 2000);
+    } while (fecha.anio!=2025);
 
     return fecha;
 }

@@ -44,6 +44,8 @@ int loginUsuarios(stLogin *usuarioActual)
             {
                 printf("Usuario registrado correctamente.\n");
                 guardarUsuarios(ARCHIVOS_USUARIOS, usuario);
+
+                crearArchivoDeUnUsuario(usuario);
             }
             else if (registro == -1)
             {
@@ -582,3 +584,29 @@ void inicializarArchivoUsuarios()
     }
 }
 
+void crearArchivoDeUnUsuario(stLogin usuario)
+{
+    char archivoUsuario[200];
+    sprintf(archivoUsuario, "usuario_%s.dat", usuario.email);
+
+    FILE* buffer = fopen(archivoUsuario, "ab");
+    if (buffer != NULL)
+    {
+        fclose(buffer);
+    }
+    else
+    {
+        printf("No se pudo crear el archivo %s\n", archivoUsuario);
+    }
+}
+
+void reiniciarArchivoEmpresas()
+{
+    FILE* archivo = fopen(ARCHIVOS_USUARIOS, "wb"); // "wb" crea un archivo vacío o sobrescribe
+    if (archivo == NULL) {
+        printf("Error al intentar reiniciar el archivo de empresas.\n");
+        return;
+    }
+    fclose(archivo);
+    printf("Archivo de empresas reiniciado correctamente.\n");
+}
