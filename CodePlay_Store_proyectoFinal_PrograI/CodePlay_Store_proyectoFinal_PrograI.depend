@@ -90,14 +90,14 @@
 
 1763384726 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.h
 
-1763386874 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+1763387570 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
 	<stdio.h>
 	<stdlib.h>
 	"empresas.h"
 	<string.h>
 	"juegos.h"
 
-1763386874 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
+1763387395 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
 	"juegos.h"
 
 1763384726 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
@@ -119,7 +119,7 @@
 
 1763384726 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.h
 
-1763387139 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
+1763387355 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
 	<stdio.h>
 	<stdlib.h>
 	"usuarios.h"

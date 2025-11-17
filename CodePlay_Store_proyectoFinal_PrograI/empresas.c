@@ -183,7 +183,7 @@ void mostrarUnaEmpresa (stEmpresa empresa) //BORRAR MAS TARDE
     printf("Contrasenia: %s\n", empresa.contrasenia);
     printf("Pais: %s\n", empresa.pais);
     printf("Descripcion: %s\n", empresa.descripcion);
-    printf("Fecha de registro: %i\%i\%i\n", empresa.fechaRegistro.dia, empresa.fechaRegistro.mes, empresa.fechaRegistro.anio);
+    printf("Fecha de registro: %i/%i/%i\n", empresa.fechaRegistro.dia, empresa.fechaRegistro.mes, empresa.fechaRegistro.anio);
     printf("Id empresa: %i\n", empresa.idEmpresa);
 
 }

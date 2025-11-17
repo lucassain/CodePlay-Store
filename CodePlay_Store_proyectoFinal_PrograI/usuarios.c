@@ -581,3 +581,4 @@ void inicializarArchivoUsuarios()
         fclose(buffer);
     }
 }
+

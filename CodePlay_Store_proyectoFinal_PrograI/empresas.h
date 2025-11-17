@@ -42,11 +42,11 @@ int borrarJuego(stJuego* arreglo, int* validos);
 void guardarArregloEnArchivoEmpresa(char nombreArchivo[], stJuego* arreglo, int validos);
 void modificarDatosEmpresa(stEmpresa* empresaActual);
 void actualizarEmpresaEnArchivo(stEmpresa empresa);
-
 int validarEmailEmpresa (char email[]);
 int validarNombreEmpresa (char nombreDeEmpresa[]);
 int validarContraseniaEmpresa (char contrasenia[]);
 int validarPais (char pais[]);
 Fecha cargarFechaManualEmpresa();
+void reiniciarArchivoEmpresas();
 
 #endif // EMPRESAS_H_INCLUDED
