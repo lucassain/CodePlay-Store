@@ -93,10 +93,9 @@ void registrarUnaEmpresa (stEmpresa* empresa)
     scanf("%s", empresa->contrasenia);
    }while(!validarContrasenia(empresa->contrasenia));
 
-   do{
+
     printf("Fecha de registro: ");
-    scanf("%i", empresa->fechaRegistro);
-   } while(!cargarFechaManual(empresa->fechaRegistro));
+    empresa->fechaRegistro=cargarFechaManual();
 
 
     fflush(stdin);
@@ -833,8 +832,9 @@ int validarPais (char pais[])
     return 1;
 }
 
-Fecha cargarFechaManual(int fecha)
+Fecha cargarFechaManual()
 {
+    Fecha fecha;
     do {
         printf("Ingrese dia (1-31): ");
         scanf("%d", &fecha.dia);
