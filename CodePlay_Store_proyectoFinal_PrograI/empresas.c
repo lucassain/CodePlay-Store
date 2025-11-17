@@ -81,7 +81,7 @@ void registrarUnaEmpresa (stEmpresa* empresa)
     do{
     printf("Mail de contacto: ");
     scanf("%s", empresa->email);
-   } while(!validarEmail(empresa->email));
+   } while(!validarEmailEmpresa(empresa->email));
 
    do{
     printf("Pais: ");
@@ -91,11 +91,11 @@ void registrarUnaEmpresa (stEmpresa* empresa)
    do{
     printf("Contrasenia: ");
     scanf("%s", empresa->contrasenia);
-   }while(!validarContrasenia(empresa->contrasenia));
+   }while(!validarContraseniaEmpresa(empresa->contrasenia));
 
 
     printf("Fecha de registro: ");
-    empresa->fechaRegistro=cargarFechaManual();
+    empresa->fechaRegistro=cargarFechaManualEmpresa();
 
 
     fflush(stdin);
@@ -111,18 +111,9 @@ int registrarseEmpresa (stEmpresa* empresa)
     printf("REGISTRARSE COMO EMPRESA\n");
 
     registrarUnaEmpresa(empresa);
+    return 1;
 
-    if (strlen(empresa->nombre)>0 && strlen(empresa->email)>0 &&
-            strlen(empresa->contrasenia)>0 && strlen(empresa->pais)>0 &&
-            strlen(empresa->descripcion)>0 && strlen(empresa->fechaRegistro)>0)
-    {
-        return 1;
 
-    }
-    else
-    {
-        return 0;
-    }
 }
 
 
@@ -192,7 +183,7 @@ void mostrarUnaEmpresa (stEmpresa empresa) //BORRAR MAS TARDE
     printf("Contrasenia: %s\n", empresa.contrasenia);
     printf("Pais: %s\n", empresa.pais);
     printf("Descripcion: %s\n", empresa.descripcion);
-    printf("Fecha de registro: %s\n", empresa.fechaRegistro);
+    printf("Fecha de registro: %i\%i\%i\n", empresa.fechaRegistro.dia, empresa.fechaRegistro.mes, empresa.fechaRegistro.anio);
     printf("Id empresa: %i\n", empresa.idEmpresa);
 
 }
@@ -682,7 +673,7 @@ void actualizarEmpresaEnArchivo(stEmpresa empresa)
     else
         printf("No se encontró la empresa en el archivo.\n");
 }
-int validarEmail (char email[])
+int validarEmailEmpresa (char email[])
 {
     int tieneArroba=0;
     int tienePuntoDespuesDelArroba=0;
@@ -764,7 +755,7 @@ int validarNombreEmpresa (char nombreDeEmpresa[])
 }
 
 
-int validarContrasenia (char contrasenia[])
+int validarContraseniaEmpresa (char contrasenia[])
 {
     int tieneNumero=0;
     int tieneLetra=0;
@@ -809,7 +800,7 @@ int validarPais (char pais[])
                 (caracter>='A' && caracter<='Z') ||
                 (caracter>='0' && caracter<='9'))
         {
-            tieneLetraONumero=1;
+            tieneLetra=1;
         }
         else if (caracter=='_' || caracter=='-')
         {
@@ -832,7 +823,7 @@ int validarPais (char pais[])
     return 1;
 }
 
-Fecha cargarFechaManual()
+Fecha cargarFechaManualEmpresa()
 {
     Fecha fecha;
     do {

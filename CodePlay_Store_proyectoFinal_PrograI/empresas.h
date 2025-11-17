@@ -43,10 +43,10 @@ void guardarArregloEnArchivoEmpresa(char nombreArchivo[], stJuego* arreglo, int 
 void modificarDatosEmpresa(stEmpresa* empresaActual);
 void actualizarEmpresaEnArchivo(stEmpresa empresa);
 
-int validarEmail (char email[]);
+int validarEmailEmpresa (char email[]);
 int validarNombreEmpresa (char nombreDeEmpresa[]);
-int validarContrasenia (char contrasenia[]);
+int validarContraseniaEmpresa (char contrasenia[]);
 int validarPais (char pais[]);
-Fecha cargarFechaManual();
+Fecha cargarFechaManualEmpresa();
 
 #endif // EMPRESAS_H_INCLUDED

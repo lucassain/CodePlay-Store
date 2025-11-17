@@ -90,14 +90,14 @@
 
 1763380854 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.h
 
-1763380854 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+1763385514 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
 	<stdio.h>
 	<stdlib.h>
 	"empresas.h"
 	<string.h>
 	"juegos.h"
 
-1763384551 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
+1763385402 c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
 	"juegos.h"
 
 1763380854 source:c:\users\usuario\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
