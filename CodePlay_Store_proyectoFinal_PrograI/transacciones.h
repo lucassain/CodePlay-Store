@@ -3,14 +3,9 @@
 
 #include "juegos.h"
 #include "usuarios.h"
-
+#include "empresas.h"
 #define ARCHIVO_TRANSACCIONES "transacciones.dat"
 
-typedef struct {
-    int dia;
-    int mes;
-    int anio;
-} Fecha;
 
 typedef struct {
     int idTransaccion;

@@ -4,6 +4,7 @@
 #include "admin.h"
 #include "empresas.h"
 #include "juegos.h"
+#include "transacciones.h"
 
 int main()
 {

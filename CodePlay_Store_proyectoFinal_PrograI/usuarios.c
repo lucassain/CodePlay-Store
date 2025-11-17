@@ -398,6 +398,7 @@ void mostrarUsuarios (char archivo[]) //BORRAR MAS TARDE
 void configuracion(stLogin* usuario)
 {
     char opcion;
+    stLogin nuevaCuenta;
 
     do
     {
@@ -415,8 +416,6 @@ void configuracion(stLogin* usuario)
             break;
 
         case '2':
-
-            stLogin nuevaCuenta;
 
             printf("\nIngrese los datos de la nueva cuenta:\n");
 
