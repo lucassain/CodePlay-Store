@@ -6,12 +6,18 @@
 #define ARCHIVO_EMPRESAS "empresas.dat"
 
 typedef struct {
+    int dia;
+    int mes;
+    int anio;
+} Fecha;
+
+typedef struct {
     char nombre[50];
     char email[50];
     char contrasenia[20];
     char pais[30];
     char descripcion[150];
-    char fechaRegistro[15];
+    Fecha fechaRegistro;
     int idEmpresa;
 } stEmpresa;
 
@@ -37,5 +43,10 @@ void guardarArregloEnArchivoEmpresa(char nombreArchivo[], stJuego* arreglo, int 
 void modificarDatosEmpresa(stEmpresa* empresaActual);
 void actualizarEmpresaEnArchivo(stEmpresa empresa);
 
+int validarEmail (char email[]);
+int validarNombreEmpresa (char nombreDeEmpresa[]);
+int validarContrasenia (char contrasenia[]);
+int validarPais (char pais[]);
+Fecha cargarFechaManual();
 
 #endif // EMPRESAS_H_INCLUDED

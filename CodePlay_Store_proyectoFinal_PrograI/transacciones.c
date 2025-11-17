@@ -5,7 +5,7 @@
 #include "juegos.h"
 #include "usuarios.h"
 
-int generarIdTransaccion(void)
+int generarIdTransaccion()
 {
     FILE* buffer = fopen(ARCHIVO_TRANSACCIONES, "rb");
     int idMax = 0;
@@ -29,7 +29,7 @@ int generarIdTransaccion(void)
     return idMax + 1;
 }
 
-Fecha cargarFechaManual(void)
+Fecha cargarFechaManual()
 {
     Fecha f;
     do {
@@ -183,7 +183,7 @@ void reporteRecaudacionMensual(int mes, int anio)
     printf("\n Recaudación de %02d/%04d: $%.2f\n", mes, anio, total);
 }
 
-void reporteMayorGanancia(void)
+void reporteMayorGanancia()
 {
     FILE *f = fopen(ARCHIVO_TRANSACCIONES, "rb");
     if (!f)

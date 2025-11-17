@@ -73,20 +73,31 @@ int loginEmpresas(stEmpresa *empresaActual)
 
 void registrarUnaEmpresa (stEmpresa* empresa)
 {
+    do{
     printf("Nombre de la empresa: ");
     scanf("%s", empresa->nombre);
+      } while(!validarNombreEmpresa(empresa->nombre));
 
+    do{
     printf("Mail de contacto: ");
     scanf("%s", empresa->email);
+   } while(!validarEmail(empresa->email));
 
+   do{
     printf("Pais: ");
     scanf("%s", empresa->pais);
+   } while(!validarPais(empresa->pais));
 
+   do{
     printf("Contrasenia: ");
     scanf("%s", empresa->contrasenia);
+   }while(!validarContrasenia(empresa->contrasenia));
 
+   do{
     printf("Fecha de registro: ");
-    scanf("%s", empresa->fechaRegistro);
+    scanf("%i", empresa->fechaRegistro);
+   } while(!cargarFechaManual(empresa->fechaRegistro));
+
 
     fflush(stdin);
 
@@ -671,4 +682,173 @@ void actualizarEmpresaEnArchivo(stEmpresa empresa)
         printf("Datos de la empresa actualizados en el archivo.\n");
     else
         printf("No se encontró la empresa en el archivo.\n");
+}
+int validarEmail (char email[])
+{
+    int tieneArroba=0;
+    int tienePuntoDespuesDelArroba=0;
+
+    if (strlen(email)<5)
+    {
+        printf("La direccion de correo es demasiado corta.\n");
+        return 0;
+    }
+
+    for (int i=0; i<strlen(email); i++)
+    {
+
+        if (email[i]=='@')
+        {
+
+            if (tieneArroba)
+            {
+                printf("El correo solo puede contener un @.\n");
+                return 0;
+            }
+
+            tieneArroba=1;
+
+            if (i==0 || i==strlen(email)-1)
+            {
+                printf("El correo no puede empezar ni terminar con un @.\n");
+                return 0;
+            }
+        }
+        else if (tieneArroba && email[i]=='.')
+        {
+            tienePuntoDespuesDelArroba=1;
+        }
+    }
+
+    if (!tieneArroba || !tienePuntoDespuesDelArroba)
+    {
+        printf("El correo debe contener un @ y un . despues del arroba.\n");
+        return 0;
+    }
+
+    return 1;
+}
+
+int validarNombreEmpresa (char nombreDeEmpresa[])
+{
+    int tieneLetraONumero=0;
+
+    for (int i=0; i<strlen(nombreDeEmpresa); i++)
+    {
+        char caracter=nombreDeEmpresa[i];
+
+        if ((caracter>='a' && caracter<='z') ||
+                (caracter>='A' && caracter<='Z') ||
+                (caracter>='0' && caracter<='9'))
+        {
+            tieneLetraONumero=1;
+        }
+        else if (caracter=='_' || caracter=='-')
+        {
+
+        }
+        else
+        {
+            printf("El nombre de la empresa contiene simbolos invalidos. Intente de nuevo\n");
+            return 0;
+        }
+
+    }
+
+    if (!tieneLetraONumero)
+    {
+        printf("El nombre de la empresa no puede estar vacio. Intente de nuevo.\n");
+        return 0;
+    }
+
+    return 1;
+}
+
+
+int validarContrasenia (char contrasenia[])
+{
+    int tieneNumero=0;
+    int tieneLetra=0;
+
+    if (strlen(contrasenia)<6)
+    {
+        printf("La contrasenia es demasiado corta (minimo 6 caracteres).\n");
+        return 0;
+    }
+
+
+    for (int i=0; i<strlen(contrasenia); i++)
+    {
+        if ((contrasenia[i]>='a' && contrasenia[i]<='z') || (contrasenia[i]>='A' && contrasenia[i]<='Z'))
+        {
+            tieneLetra=1;
+        }
+
+        if (contrasenia[i]>='0' && contrasenia[i]<='9')
+        {
+            tieneNumero=1;
+        }
+    }
+
+    if (!tieneLetra || !tieneNumero)
+    {
+        printf("La contrasenia debe tener al menos una letra y numero.\n");
+        return 0;
+    }
+
+    return 1;
+}
+int validarPais (char pais[])
+{
+    int tieneLetra=0;
+
+    for (int i=0; i<strlen(pais); i++)
+    {
+        char caracter=pais[i];
+
+        if ((caracter>='a' && caracter<='z') ||
+                (caracter>='A' && caracter<='Z') ||
+                (caracter>='0' && caracter<='9'))
+        {
+            tieneLetraONumero=1;
+        }
+        else if (caracter=='_' || caracter=='-')
+        {
+
+        }
+        else
+        {
+            printf("El nombre del pais contiene simbolos invalidos. Intente de nuevo\n");
+            return 0;
+        }
+
+    }
+
+    if (!tieneLetra)
+    {
+        printf("El nombre del pais no puede estar vacio. Intente de nuevo.\n");
+        return 0;
+    }
+
+    return 1;
+}
+
+Fecha cargarFechaManual(int fecha)
+{
+    do {
+        printf("Ingrese dia (1-31): ");
+        scanf("%d", &fecha.dia);
+    } while (fecha.dia < 1 || fecha.dia > 31);
+
+    do {
+        printf("Ingrese mes (1-12): ");
+        scanf("%d", &fecha.mes);
+    } while (fecha.mes < 1 || fecha.mes > 12);
+
+    do {
+        printf("Ingrese anio (ej. 2025): ");
+        scanf("%d", &fecha.anio);
+    } while (fecha.anio < 2000);
+
+    return fecha;
 }
