@@ -31,8 +31,6 @@ void cargarUnJuego(stJuego* juego);
 void agregarJuegoAlCatalogo(stJuego juego);
 int agregarJuegoAlArreglo (stJuego** arregloJuegos, int* dimension, int* validos, stJuego juegoNuevo);
 int redimensionarArreglo (stJuego** arregloJuegos, int* dimension, int adicional);
-
-//lucas gays
 int buscarJuegoEnArchivoPorId(int idBuscado, stJuego *out);
 
 #endif // JUEGOS_H_INCLUDED

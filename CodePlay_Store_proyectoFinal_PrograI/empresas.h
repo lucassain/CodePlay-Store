@@ -27,6 +27,15 @@ void menuEmpresa(stEmpresa* empresaActual);
 int generarIdUnicoEmpresa ();
 void crearArchivoDeEmpresa(stEmpresa empresa);
 void guardarJuegoEnArchivoEmpresa(stEmpresa empresa, stJuego juego);
+void mostrarJuegosEmpresa(stJuego* arreglo, int validos);
+int calcularDimensionArchivoEmpresa(char nombreArchivo[]);
+int cargarArregloDesdeArchivoEmpresa (char nombreArchivo[], stJuego** arregloJuegos, int* dimension);
+int buscarJuegoPorIdEmpresa(stJuego* arreglo, int validos, int idBuscado);
+void modificarJuego(stJuego* arreglo, int validos);
+int borrarJuego(stJuego* arreglo, int* validos);
+void guardarArregloEnArchivoEmpresa(char nombreArchivo[], stJuego* arreglo, int validos);
+void modificarDatosEmpresa(stEmpresa* empresaActual);
+void actualizarEmpresaEnArchivo(stEmpresa empresa);
 
 
 #endif // EMPRESAS_H_INCLUDED

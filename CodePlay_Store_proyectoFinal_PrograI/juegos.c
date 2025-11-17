@@ -148,6 +148,7 @@ void mostrarUnJuego(stJuego juego)
            juego.id, juego.nombre, juego.genero, juego.plataforma, juego.precio, juego.idEmpresa);
 }
 
+
 void mostrarCatalogo()
 {
     FILE *buffer = fopen(ARCHIVO_JUEGOS, "rb");
@@ -192,19 +193,12 @@ int calcularDimensionArchivo()
 
 stJuego* crearArregloJuegos(int dimension)
 {
-    stJuego *arr = NULL;
+    if (dimension <= 0)
+        dimension = 1; // evita malloc(0)
 
-    if(dimension > 0)
-    {
-        arr = (stJuego*) malloc(sizeof(stJuego) * dimension);
-        if(arr == NULL)
-        {
-            printf("Error al reservar memoria.\n");
-            return 0;
-        }
-    }
+    stJuego* arreglo = (stJuego*) malloc(sizeof(stJuego) * dimension);
 
-    return arr;
+    return arreglo; // si falla, SÍ será NULL
 }
 
 int cargarArregloDesdeArchivo (stJuego** arregloDeJuegos, int dimension)
@@ -459,10 +453,6 @@ int agregarJuegoAlArreglo (stJuego** arregloJuegos, int* dimension, int* validos
     return 1;
 }
 
-
-
-
-
 int buscarJuegoEnArchivoPorId(int idBuscado, stJuego *out)
 {
     FILE *f = fopen(ARCHIVO_JUEGOS, "rb");
@@ -485,4 +475,3 @@ int buscarJuegoEnArchivoPorId(int idBuscado, stJuego *out)
     fclose(f);
     return encontrado;  // 1 si lo encontró, 0 si no
 }
-
