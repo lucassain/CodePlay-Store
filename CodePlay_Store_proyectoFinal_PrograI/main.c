@@ -10,6 +10,7 @@ int main()
 {
     inicializarArchivoUsuarios();
 
+    char opcionStr[10];
     char opcion;
 
     do
@@ -20,7 +21,15 @@ int main()
         printf("EMPRESA (3)\n");
         printf("0 PARA SALIR\n");
         printf("Como desea ingresar? (Ingrese una opcion): ");
-        scanf(" %c", &opcion);
+
+        scanf("%9s", opcionStr);
+        opcion = opcionStr[0];
+
+        if (opcion != '0' && opcion != '1' && opcion != '2' && opcion != '3')
+        {
+            printf("Opcion invalida. Intente nuevamente.\n");
+        }
+
 
         switch (opcion)
         {
@@ -34,7 +43,7 @@ int main()
             }
             else
             {
-                printf("No se pudo iniciar sesion o registro cancelado.\n");
+                printf("No se pudo iniciar sesion o registro cancelado.\n\n");
             }
             break;
         }
@@ -71,9 +80,6 @@ int main()
             printf("Cerrando programa...\n");
             break;
 
-        default:
-            printf("Opcion invalida. Intente nuevamente.\n");
-            break;
         }
     }
     while (opcion != '0');

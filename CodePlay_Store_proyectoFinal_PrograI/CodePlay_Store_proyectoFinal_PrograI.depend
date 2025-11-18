@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1763436950 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
+1763499388 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
 	<stdio.h>
 	<stdlib.h>
 	"usuarios.h"
@@ -8,7 +8,7 @@
 	"juegos.h"
 	"transacciones.h"
 
-1763437910 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
+1763499578 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
 	<stdio.h>
 	<stdlib.h>
 	"usuarios.h"
@@ -56,7 +56,7 @@
 1763152414 c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
 	"juegos.h"
 
-1763439004 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.c
+1763500019 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

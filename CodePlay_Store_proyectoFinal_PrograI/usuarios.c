@@ -60,7 +60,7 @@ int loginUsuarios(stLogin *usuarioActual)
 
         case 's':
         case 'S':
-            printf("Volviendo al menu principal...\n");
+            printf("Volviendo al menu principal...\n\n");
             return 0;
 
         default:
@@ -87,7 +87,7 @@ void registrarUnUsuario (stLogin* usuario)
 
     do
     {
-        printf("Ingrese su nombre de usuario: ");
+        printf("Ingrese su nombre de usuario (sin espacios): ");
         scanf("%s", usuario->usuario);
     }
     while(!validarUsuario(usuario->usuario));
