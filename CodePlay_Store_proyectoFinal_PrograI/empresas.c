@@ -3,6 +3,7 @@
 #include "empresas.h"
 #include <string.h>
 #include "juegos.h"
+#include "transacciones.h"
 
 int loginEmpresas(stEmpresa *empresaActual)
 {

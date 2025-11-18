@@ -107,6 +107,8 @@ void procesarCompra(stLogin usuario)
 
     registrarTransaccion(&t);
 
+    guardarTransaccionEnArchivoUsuario(&t, usuario);
+
     printf("\n Compra registrada. ID Transaccion: %d\n", t.idTransaccion);
 }
 
@@ -259,4 +261,48 @@ void mostrarTransaccionPorId(int id)
 
     if (!encontrado)
         printf(" Transacción no encontrada.\n");
+}
+
+void guardarTransaccionEnArchivoUsuario(const Transaccion *t, stLogin usuario)
+{
+    char archivoUsuario[200];
+    sprintf(archivoUsuario, "usuario_%s.dat", usuario.email);
+
+    FILE *f = fopen(archivoUsuario, "ab");
+    if (!f) {
+        printf("No se pudo abrir el archivo personal del usuario.\n");
+        return;
+    }
+
+    fwrite(t, sizeof(Transaccion), 1, f);
+    fclose(f);
+}
+
+void verTransaccionesDeUsuario(stLogin usuario)
+{
+    char archivoUsuario[200];
+    sprintf(archivoUsuario, "usuario_%s.dat", usuario.email);
+
+    FILE *f = fopen(archivoUsuario, "rb");
+    if (!f) {
+        printf("No tienes compras registradas.\n");
+        return;
+    }
+
+    Transaccion t;
+    printf("\n=== MIS COMPRAS ===\n");
+
+    int encontrado = 0;
+
+    while (fread(&t, sizeof(Transaccion), 1, f) == 1) {
+        encontrado = 1;
+        printf("ID %d | %02d/%02d/%04d | Juego ID %d | $%.2f\n",
+               t.idTransaccion, t.fecha.dia, t.fecha.mes, t.fecha.anio,
+               t.idJuegoVendido, t.precioUnitarioVenta);
+    }
+
+    if (!encontrado)
+        printf("No tienes compras.\n");
+
+    fclose(f);
 }

@@ -3,6 +3,7 @@
 #include <string.h>
 #include "admin.h"
 #include "usuarios.h"
+#include "transacciones.h"
 
 int loginAdmin(stAdmin *adminActual)
 {

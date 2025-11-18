@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "juegos.h"
+#include "transacciones.h"
+#include "usuarios.h"
 
-void catalogoJuegos()
+void catalogoJuegos(stLogin usuarioActual)
 {
     if (!existeArchivo())
     {
@@ -21,34 +23,41 @@ void catalogoJuegos()
 
     int validosJuegos=cargarArregloDesdeArchivo(&arregloDeJuegos, dimension);
 
-    int opcion=0;
+    char opcion=0;
 
     do
     {
         printf("\n=====CATALOGO DE JUEGOS=====\n");
         printf("Ver catalogo(1)\n");
         printf("Buscar un juego (2)\n");
+        printf("Comprar un juego (3)\n");
         printf("0 PARA SALIR \n");
         printf("Ingrese una opcion: ");
-        scanf("%i", &opcion);
+        scanf(" %c", &opcion);
 
         switch (opcion)
         {
 
-        case 0:
+        case '0':
 
             printf("Volviendo al menu principal...\n");
             return;
 
-        case 1:
+        case '1':
 
             mostrarCatalogo();
 
             break;
 
-        case 2:
+        case '2':
 
             menuBusquedaJuegos(arregloDeJuegos, validosJuegos);
+
+            break;
+
+        case '3':
+
+            procesarCompra(usuarioActual);
 
             break;
 
@@ -60,7 +69,7 @@ void catalogoJuegos()
         }
 
     }
-    while (opcion!=0);
+    while (opcion!='0');
 
     free(arregloDeJuegos);
     arregloDeJuegos=NULL;
@@ -378,7 +387,8 @@ int generarIdUnicoJuego ()
         }
 
         fclose(buffer);
-    }else
+    }
+    else
     {
         printf("Error al generar id.\n");
         return 0;
@@ -465,7 +475,8 @@ int buscarJuegoEnArchivoPorId(int idBuscado, stJuego *out)
     {
         if (j.id == idBuscado)
         {
-            if (out != NULL) {
+            if (out != NULL)
+            {
                 *out = j;   // Copia el juego encontrado
             }
             encontrado = 1;

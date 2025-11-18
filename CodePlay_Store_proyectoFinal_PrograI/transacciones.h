@@ -29,6 +29,9 @@ void reporteRecaudacionMensual(int mes, int anio);
 void reporteMayorGanancia();
 void buscarYMostrarTransaccion();
 void mostrarTransaccionPorId(int id);
+void guardarTransaccionEnArchivoUsuario(const Transaccion *t, stLogin usuario);
+void verTransaccionesDeUsuario(stLogin usuario);
+
 
 #endif // TRANSACCIONES_H_INCLUDED
 

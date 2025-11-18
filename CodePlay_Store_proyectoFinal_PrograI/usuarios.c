@@ -3,6 +3,7 @@
 #include "usuarios.h"
 #include <string.h>
 #include "juegos.h"
+#include "transacciones.h"
 
 int loginUsuarios(stLogin *usuarioActual)
 {
@@ -555,19 +556,34 @@ void menuUsuario(stLogin* usuarioActual)
         switch(opcion)
         {
         case '1':
-            catalogoJuegos();
+
+            catalogoJuegos(*usuarioActual);
+
             break;
+
         case '2':
-            printf("Mostrando compras...\n");
+
+            verTransaccionesDeUsuario(*usuarioActual);
+
             break;
+
         case '3':
+
             configuracion(usuarioActual);
+
             break;
+
         case '0':
+
             printf("Sesion cerrada.\n");
+
             break;
+
         default:
+
             printf("Opcion invalida.\n");
+
+            break;
         }
 
     }
@@ -600,13 +616,3 @@ void crearArchivoDeUnUsuario(stLogin usuario)
     }
 }
 
-void reiniciarArchivoEmpresas()
-{
-    FILE* archivo = fopen(ARCHIVOS_USUARIOS, "wb"); // "wb" crea un archivo vacío o sobrescribe
-    if (archivo == NULL) {
-        printf("Error al intentar reiniciar el archivo de empresas.\n");
-        return;
-    }
-    fclose(archivo);
-    printf("Archivo de empresas reiniciado correctamente.\n");
-}

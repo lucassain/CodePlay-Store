@@ -4,6 +4,8 @@
 #define ARCHIVO_JUEGOS "catalogo.dat"
 #define ARCHIVO_PLATAFORMAS "plataformas.dat"
 
+#include "usuarios.h"
+
 typedef struct {
     int id;
     char nombre[50];
@@ -14,7 +16,7 @@ typedef struct {
 } stJuego;
 
 // PROTOTIPADO
-void catalogoJuegos();
+void catalogoJuegos(stLogin usuarioActual);
 int existeArchivo ();
 void inicializarCatalogo();
 void mostrarCatalogo();
