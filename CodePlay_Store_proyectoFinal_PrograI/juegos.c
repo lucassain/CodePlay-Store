@@ -486,3 +486,106 @@ int buscarJuegoEnArchivoPorId(int idBuscado, stJuego *out)
     fclose(f);
     return encontrado;  // 1 si lo encontró, 0 si no
 }
+
+int validarNombreJuego(char nombre[])
+{
+    if (strlen(nombre) < 2)
+    {
+        printf("El nombre del juego es demasiado corto.\n");
+        return 0;
+    }
+
+    for (int i = 0; i < strlen(nombre); i++)
+    {
+        char c = nombre[i];
+
+        if ((c >= 'A' && c <= 'Z') ||
+            (c >= 'a' && c <= 'z') ||
+            (c >= '0' && c <= '9') ||
+            c == ' ' || c == '-' || c == '\'')
+        {
+            // válido
+        }
+        else
+        {
+            printf("El nombre contiene caracteres invalidos.\n");
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int validarGenero(char genero[])
+{
+    char generosValidos[][20] =
+    {
+        "Accion",
+        "Aventura",
+        "RPG",
+        "Shooter",
+        "Deportes",
+        "Carreras",
+        "Puzzle",
+        "Plataformas",
+        "Lucha",
+        "Terror"
+    };
+
+    int cantidad = 10;
+
+    for (int i = 0; i < cantidad; i++)
+    {
+        if (strcmp(genero, generosValidos[i]) == 0)
+        {
+            return 1;
+        }
+    }
+
+    printf("Genero invalido. Intente con un genero existente.\n");
+    return 0;
+}
+
+int validarPlataforma(char plataforma[])
+{
+    char plataformasValidas[][10] =
+    {
+        "PC",
+        "PS4",
+        "PS5",
+        "XBOX",
+        "Switch"
+    };
+
+    int cantidad = 5;
+
+    for (int i = 0; i < cantidad; i++)
+    {
+        if (strcmp(plataforma, plataformasValidas[i]) == 0)
+        {
+            return 1;
+        }
+    }
+
+    printf("Plataforma invalida. Opciones: PC, PS4, PS5, XBOX, Switch.\n");
+    return 0;
+}
+
+int validarPrecio(float precio)
+{
+    if (precio <= 0)
+    {
+        printf("El precio debe ser mayor que 0.\n");
+        return 0;
+    }
+
+    if (precio > 200000)
+    {
+        printf("Precio demasiado alto. Revise el valor.\n");
+        return 0;
+    }
+
+    return 1;
+}
+
+

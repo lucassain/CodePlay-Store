@@ -153,7 +153,6 @@ void mostrarUsuariosRec(FILE *buffer)
     mostrarUsuariosRec(buffer);
 }
 
-
 void mostrarUsuariosAdmin()
 {
     FILE *buffer = fopen(ARCHIVOS_USUARIOS, "rb");

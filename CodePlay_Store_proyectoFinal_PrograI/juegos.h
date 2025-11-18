@@ -34,5 +34,10 @@ void agregarJuegoAlCatalogo(stJuego juego);
 int agregarJuegoAlArreglo (stJuego** arregloJuegos, int* dimension, int* validos, stJuego juegoNuevo);
 int redimensionarArreglo (stJuego** arregloJuegos, int* dimension, int adicional);
 int buscarJuegoEnArchivoPorId(int idBuscado, stJuego *out);
+int validarNombreJuego(char nombre[]);
+int validarGenero(char genero[]);
+int validarPlataforma(char plataforma[]);
+int validarPrecio(float precio);
+
 
 #endif // JUEGOS_H_INCLUDED
