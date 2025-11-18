@@ -51,12 +51,12 @@
 
 1763145055 c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\admin.h
 
-1763332435 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.h
+1763438955 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.h
 
 1763152414 c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
 	"juegos.h"
 
-1763436669 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.c
+1763439004 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -78,7 +78,7 @@
 1763437901 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.h
 	"usuarios.h"
 
-1763437889 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
+1763438093 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

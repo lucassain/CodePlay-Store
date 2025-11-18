@@ -25,5 +25,6 @@ void mostrarUsuariosAdmin();
 int buscarUsuarioPorDni(char dniBuscado[]);
 void verUsuarioPorDni();
 void menuAdmin(stAdmin* adminActual);
+void menuTransaccionesAdmin();
 
 #endif // ADMIN_H_INCLUDED

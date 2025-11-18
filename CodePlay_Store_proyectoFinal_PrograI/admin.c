@@ -214,17 +214,23 @@ void menuAdmin(stAdmin* adminActual)
         printf("\n===== MENU ADMIN =====\n");
         printf("Ver usuarios (1)\n");
         printf("Buscar usuario por DNI (2)\n");
+        printf("Ver transacciones (3)\n");      // <-- AGREGADO
         printf("Cerrar sesion (0)\n");
         printf("Seleccione una opcion: ");
         scanf(" %c", &opcion);
 
         switch(opcion) {
+
         case '1':
             mostrarUsuariosAdmin();
             break;
 
         case '2':
             verUsuarioPorDni();
+            break;
+
+        case '3':                               // <-- AGREGADO
+            menuTransaccionesAdmin();
             break;
 
         case '0':
@@ -237,3 +243,56 @@ void menuAdmin(stAdmin* adminActual)
 
     } while(opcion != '0');
 }
+
+
+void menuTransaccionesAdmin()
+{
+    char opcion;
+
+    do {
+        printf("\n====== MENU TRANSACCIONES (ADMIN) ======\n");
+        printf("1) Ver listado completo de transacciones\n");
+        printf("2) Buscar transaccion por ID\n");
+        printf("3) Mostrar transaccion de mayor ganancia\n");
+        printf("4) Recaudacion mensual\n");
+        printf("0) Volver al menu anterior\n");
+        printf("Seleccione una opcion: ");
+        scanf(" %c", &opcion);
+
+        switch(opcion)
+        {
+        case '1':
+            verTransaccionesResumen();
+            break;
+
+        case '2':
+            buscarYMostrarTransaccion();
+            break;
+
+        case '3':
+            reporteMayorGanancia();
+            break;
+
+        case '4':
+            {
+                int mes, anio;
+                printf("Ingrese mes: ");
+                scanf("%d", &mes);
+                printf("Ingrese anio: ");
+                scanf("%d", &anio);
+
+                reporteRecaudacionMensual(mes, anio);
+            }
+            break;
+
+        case '0':
+            printf("Volviendo...\n");
+            break;
+
+        default:
+            printf("Opcion invalida.\n");
+        }
+
+    } while(opcion != '0');
+}
+
