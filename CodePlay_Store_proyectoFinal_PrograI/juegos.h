@@ -38,6 +38,8 @@ int validarNombreJuego(char nombre[]);
 int validarGenero(char genero[]);
 int validarPlataforma(char plataforma[]);
 int validarPrecio(float precio);
+int juegoExisteEnArchivo(char nombre[], char plataforma[]);
+void aMinusculas(char s[]);
 
 
 #endif // JUEGOS_H_INCLUDED

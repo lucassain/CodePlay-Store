@@ -255,6 +255,12 @@ void menuEmpresa(stEmpresa* empresaActual)
             cargarUnJuego(&juegoNuevo);
             getchar();
 
+            if (juegoExisteEnArchivo(juegoNuevo.nombre, juegoNuevo.plataforma))
+            {
+                printf("El juego publicado ya existe.\n");
+                return;
+            }
+
             juegoNuevo.id = generarIdUnicoJuego();
             juegoNuevo.idEmpresa = empresaActual->idEmpresa;
 

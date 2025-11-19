@@ -64,7 +64,7 @@
 	"usuarios.h"
 	"transacciones.h"
 
-1763436669 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+1763509885 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
 	<stdio.h>
 	<stdlib.h>
 	"empresas.h"
@@ -75,16 +75,17 @@
 1763428574 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
 	"juegos.h"
 
-1763508050 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.h
+1763510291 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.h
 	"usuarios.h"
 
-1763508050 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
+1763511171 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"juegos.h"
 	"transacciones.h"
 	"usuarios.h"
+	<ctype.h>
 
 1763336080 c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.h
 

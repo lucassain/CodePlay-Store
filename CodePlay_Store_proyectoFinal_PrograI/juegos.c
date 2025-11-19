@@ -4,6 +4,7 @@
 #include "juegos.h"
 #include "transacciones.h"
 #include "usuarios.h"
+#include <ctype.h>
 
 void catalogoJuegos(stLogin usuarioActual)
 {
@@ -399,18 +400,38 @@ int generarIdUnicoJuego ()
 
 void cargarUnJuego(stJuego* juego)
 {
-    printf("Nombre del juego: ");
-    scanf("%s", juego->nombre);
+    do
+    {
+        printf("Nombre del juego: ");
+        fgets(juego->nombre, sizeof(juego->nombre), stdin);
+        juego->nombre[strcspn(juego->nombre, "\n")] = 0; // Saca el \n
+    }
+    while(!validarNombreJuego(juego->nombre));
 
-    printf("Genero: ");
-    scanf("%s", juego->genero);
+    do
+    {
+        printf("Genero: ");
+        fgets(juego->genero, sizeof(juego->genero), stdin);
+        juego->genero[strcspn(juego->genero, "\n")] = 0;
+    }
+    while (!validarGenero(juego->genero));
 
-    printf("Plataforma: ");
-    scanf("%s", juego->plataforma);
+    do
+    {
+        printf("Plataforma: ");
+        fgets(juego->plataforma, sizeof(juego->plataforma), stdin);
+        juego->plataforma[strcspn(juego->plataforma, "\n")] = 0;
+    }
+    while(!validarPlataforma(juego->plataforma));
 
-    printf("Precio: ");
-    scanf("%f", &juego->precio);
+    do
+    {
+        printf("Precio: ");
+        scanf("%f", &juego->precio);
+    }
+    while(!validarPrecio(juego->precio));
 }
+
 
 void agregarJuegoAlCatalogo(stJuego juego)
 {
@@ -487,6 +508,14 @@ int buscarJuegoEnArchivoPorId(int idBuscado, stJuego *out)
     return encontrado;  // 1 si lo encontró, 0 si no
 }
 
+void aMinusculas(char s[])
+{
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        s[i] = tolower(s[i]);
+    }
+}
+
 int validarNombreJuego(char nombre[])
 {
     if (strlen(nombre) < 2)
@@ -500,9 +529,9 @@ int validarNombreJuego(char nombre[])
         char c = nombre[i];
 
         if ((c >= 'A' && c <= 'Z') ||
-            (c >= 'a' && c <= 'z') ||
-            (c >= '0' && c <= '9') ||
-            c == ' ' || c == '-' || c == '\'')
+                (c >= 'a' && c <= 'z') ||
+                (c >= '0' && c <= '9') ||
+                c == ' ' || c == '-' || c == '\'')
         {
             // válido
         }
@@ -518,56 +547,60 @@ int validarNombreJuego(char nombre[])
 
 int validarGenero(char genero[])
 {
+    char copia[50];
+    strcpy(copia, genero);
+    aMinusculas(copia);
+
     char generosValidos[][20] =
     {
-        "Accion",
-        "Aventura",
-        "RPG",
-        "Shooter",
-        "Deportes",
-        "Carreras",
-        "Puzzle",
-        "Plataformas",
-        "Lucha",
-        "Terror"
+        "accion",
+        "aventura",
+        "rpg",
+        "shooter",
+        "deportes",
+        "carreras",
+        "puzzle",
+        "plataformas",
+        "lucha",
+        "terror"
     };
 
     int cantidad = 10;
 
     for (int i = 0; i < cantidad; i++)
     {
-        if (strcmp(genero, generosValidos[i]) == 0)
-        {
+        if (strcmp(copia, generosValidos[i]) == 0)
             return 1;
-        }
     }
 
-    printf("Genero invalido. Intente con un genero existente.\n");
+    printf("Genero invalido. Intente nuevamente.\n");
     return 0;
 }
 
 int validarPlataforma(char plataforma[])
 {
+    char copia[20];
+    strcpy(copia, plataforma);
+    aMinusculas(copia);
+
     char plataformasValidas[][10] =
     {
-        "PC",
-        "PS4",
-        "PS5",
-        "XBOX",
-        "Switch"
+        "pc",
+        "ps4",
+        "ps5",
+        "xbox",
+        "switch"
     };
 
     int cantidad = 5;
 
     for (int i = 0; i < cantidad; i++)
     {
-        if (strcmp(plataforma, plataformasValidas[i]) == 0)
-        {
+        if (strcmp(copia, plataformasValidas[i]) == 0)
             return 1;
-        }
     }
 
-    printf("Plataforma invalida. Opciones: PC, PS4, PS5, XBOX, Switch.\n");
+    printf("Plataforma invalida. Use PC, PS4, PS5, XBOX o Switch.\n");
     return 0;
 }
 
@@ -588,4 +621,41 @@ int validarPrecio(float precio)
     return 1;
 }
 
+int juegoExisteEnArchivo(char nombre[], char plataforma[])
+{
+    FILE *pArch = fopen(ARCHIVO_JUEGOS, "rb");
+    if (!pArch)
+        return 0;
 
+    char nomBuscado[50];
+    char platBuscada[20];
+
+    strcpy(nomBuscado, nombre);
+    strcpy(platBuscada, plataforma);
+
+    aMinusculas(nomBuscado);
+    aMinusculas(platBuscada);
+
+    stJuego aux;
+    while (fread(&aux, sizeof(stJuego), 1, pArch) == 1)
+    {
+        char nomAux[50];
+        char platAux[20];
+
+        strcpy(nomAux, aux.nombre);
+        strcpy(platAux, aux.plataforma);
+
+        aMinusculas(nomAux);
+        aMinusculas(platAux);
+
+        if (strcmp(nomAux, nomBuscado) == 0 ||
+            strcmp(platAux, platBuscada) == 0)
+        {
+            fclose(pArch);
+            return 1;
+        }
+    }
+
+    fclose(pArch);
+    return 0;
+}
