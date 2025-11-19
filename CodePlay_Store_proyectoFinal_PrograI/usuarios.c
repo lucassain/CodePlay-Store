@@ -7,14 +7,13 @@
 
 int loginUsuarios(stLogin *usuarioActual)
 {
+    system("cls");
     int registro = 0;
     char opcion;
     stLogin usuario;
 
     do
     {
-        mostrarUsuarios(ARCHIVOS_USUARIOS);
-
         printf("\n=== MENU USUARIO ===\n");
         printf("Iniciar sesion (I)\n");
         printf("Registrarse (R)\n");
@@ -111,6 +110,7 @@ void registrarUnUsuario (stLogin* usuario)
 
 int registrarseUsuario (stLogin* usuario)
 {
+    system("cls");
     printf("CREAR USUARIO\n");
 
     registrarUnUsuario(usuario);
@@ -334,6 +334,7 @@ void guardarUsuarios (char archivo[], stLogin usuarios)
 
 int iniciarSesion(char archivo[], stLogin *usuarioActual)
 {
+    system("cls");
     stLogin ingreso;
     stLogin guardado;
     int encontrado = 0;
@@ -409,7 +410,7 @@ void configuracion(stLogin* usuario)
         printf("Modificar perfil (1)\n");
         printf("Cambiar de cuenta (2)\n");
         printf("Volver al menu anterior (0)\n");
-        printf("Seleccione una opción: ");
+        printf("Seleccione una opcion: ");
         scanf(" %c", &opcion);
 
         switch (opcion)
@@ -432,18 +433,18 @@ void configuracion(stLogin* usuario)
             }
             else
             {
-                printf("\nError al iniciar sesión. Se mantiene la sesión actual.\n");
+                printf("\nError al iniciar sesion. Se mantiene la sesion actual.\n");
                 return;
             }
 
             break;
 
         case '0':
-            printf("Volviendo al menú anterior...\n");
+            printf("Volviendo al menu anterior...\n");
             break;
 
         default:
-            printf("Opción inválida. Intente de nuevo.\n");
+            printf("Opción invalida. Intente de nuevo.\n");
             break;
         }
 
@@ -556,18 +557,22 @@ void menuUsuario(stLogin* usuarioActual)
         switch(opcion)
         {
         case '1':
+            system("cls");
 
             catalogoJuegos(*usuarioActual);
 
             break;
 
         case '2':
+            system("cls");
 
             verTransaccionesDeUsuario(*usuarioActual);
 
             break;
 
         case '3':
+
+            system("cls");
 
             configuracion(usuarioActual);
 
@@ -614,5 +619,51 @@ void crearArchivoDeUnUsuario(stLogin usuario)
     {
         printf("No se pudo crear el archivo %s\n", archivoUsuario);
     }
+}
+
+void mostrarAyuda()
+{
+    system("cls");
+
+    printf("=============================================\n");
+    printf("                 AYUDA - CODEPLAY\n");
+    printf("=============================================\n\n");
+
+    printf(">> ¿QUE ES CODEPLAY?\n");
+    printf("CodePlay es una tienda digital de videojuegos. Permite comprar\n");
+    printf("juegos, administrar catálogos, registrar empresas creadoras,\n");
+    printf("y gestionar ventas mediante transacciones.\n\n");
+
+    printf(">> ¿COMO FUNCIONA PARA LOS USUARIOS?\n");
+    printf("- Crear cuenta o iniciar sesion.\n");
+    printf("- Explorar el catalogo de juegos.\n");
+    printf("- Ver los detalles de cada juego.\n");
+    printf("- Realizar compras y ver el historial personal.\n\n");
+
+    printf(">> ¿COMO FUNCIONA PARA LOS ADMINISTRADORES?\n");
+    printf("- Gestionar el catalogo completo.\n");
+    printf("- Ver todas las transacciones de la tienda.\n");
+    printf("- Consultar reportes y ventas.\n");
+    printf("- Administrar usuarios y empresas.\n\n");
+
+    printf(">> ¿COMO FUNCIONA PARA LAS EMPRESAS?\n");
+    printf("- Iniciar sesion como desarrolladora.\n");
+    printf("- Ver los juegos propios.\n");
+    printf("- Administrar el catalogo de sus productos.\n");
+    printf("- Revisar las ventas de la empresa.\n\n");
+
+    printf(">> PREGUNTAS FRECUENTES\n");
+    printf(" - ¿Necesito cuenta para comprar?\n");
+    printf("   Si, es necesario iniciar sesion para registrar transacciones.\n\n");
+
+    printf(" - ¿Las compras se guardan por usuario?\n");
+    printf("   Si, cada usuario tiene su propio archivo de historial.\n\n");
+
+    printf(" - ¿Puedo borrar mis compras?\n");
+    printf("   No, por motivos de registro interno.\n\n");
+
+
+    return;
+
 }
 

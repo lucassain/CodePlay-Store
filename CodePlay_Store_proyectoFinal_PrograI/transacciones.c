@@ -42,10 +42,7 @@ Fecha cargarFechaManual()
         scanf("%d", &f.mes);
     } while (f.mes < 1 || f.mes > 12);
 
-    do {
-        printf("Ingrese anio (ej. 2025): ");
-        scanf("%d", &f.anio);
-    } while (f.anio < 2000);
+    f.anio=2025;
 
     return f;
 }

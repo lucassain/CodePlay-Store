@@ -46,20 +46,23 @@ void catalogoJuegos(stLogin usuarioActual)
 
         case '1':
 
-            mostrarCatalogo();
+            system("cls");
 
+            mostrarCatalogo();
             break;
 
         case '2':
 
-            menuBusquedaJuegos(arregloDeJuegos, validosJuegos);
+            system("cls");
 
+            menuBusquedaJuegos(arregloDeJuegos, validosJuegos);
             break;
 
         case '3':
 
-            procesarCompra(usuarioActual);
+            system("cls");
 
+            procesarCompra(usuarioActual);
             break;
 
         default:
@@ -276,6 +279,8 @@ int buscarJuegoPorId (stJuego* arregloDeJuegos, int validos, int idABuscar)
 
 void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos)
 {
+    system("cls");
+
     int eleccion = -1;
     int idABuscar;
     char juegoABuscar[50];
@@ -648,7 +653,7 @@ int juegoExisteEnArchivo(char nombre[], char plataforma[])
         aMinusculas(nomAux);
         aMinusculas(platAux);
 
-        if (strcmp(nomAux, nomBuscado) == 0 ||
+        if (strcmp(nomAux, nomBuscado) == 0 &&
             strcmp(platAux, platBuscada) == 0)
         {
             fclose(pArch);

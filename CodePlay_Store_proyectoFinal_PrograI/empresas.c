@@ -109,6 +109,7 @@ void registrarUnaEmpresa (stEmpresa* empresa)
 
 int registrarseEmpresa (stEmpresa* empresa)
 {
+    system("cls");
     printf("REGISTRARSE COMO EMPRESA\n");
 
     registrarUnaEmpresa(empresa);
@@ -137,6 +138,7 @@ void guardarEmpresas (char archivo[], stEmpresa empresa)
 
 int iniciarSesionEmpresa(char archivo[], stEmpresa *empresaActual)
 {
+    system("cls");
     stEmpresa ingreso;
     stEmpresa guardado;
     int encontrado = 0;
@@ -234,6 +236,7 @@ void menuEmpresa(stEmpresa* empresaActual)
 
     do
     {
+        system("cls");
         printf("\n===== MENU EMPRESA =====\n");
         printf("1 - Publicar nuevo juego\n");
         printf("2 - Ver mis juegos\n");

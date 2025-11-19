@@ -207,6 +207,7 @@ void verUsuarioPorDni()
 
 void menuAdmin(stAdmin* adminActual)
 {
+    system("cls");
     char opcion;
 
     do {
@@ -246,6 +247,7 @@ void menuAdmin(stAdmin* adminActual)
 
 void menuTransaccionesAdmin()
 {
+
     char opcion;
 
     do {
