@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "usuarios.h"
 #include <string.h>
 #include "juegos.h"
@@ -30,10 +31,7 @@ int loginUsuarios(stLogin *usuarioActual)
             {
                 return 1;
             }
-            else
-            {
-                printf("Credenciales incorrectas.\n");
-            }
+
             break;
 
         case 'r':
@@ -359,6 +357,7 @@ int iniciarSesion(char archivo[], stLogin *usuarioActual)
                 strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
         {
             printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.usuario);
+            Sleep(800);
             *usuarioActual = guardado;
             encontrado = 1;
             break;
@@ -406,12 +405,16 @@ void configuracion(stLogin* usuario)
 
     do
     {
+        system("cls");
+
         printf("\n===== CONFIGURACION =====\n");
         printf("Modificar perfil (1)\n");
         printf("Cambiar de cuenta (2)\n");
         printf("Volver al menu anterior (0)\n");
         printf("Seleccione una opcion: ");
         scanf(" %c", &opcion);
+
+        system("cls");
 
         switch (opcion)
         {
@@ -508,6 +511,8 @@ void editarDatosPerfil(stLogin* usuarioActual)
 
     printf("\nPerfil actualizado correctamente.\n");
     *usuarioActual = modificado;
+        Sleep(800);
+
 
 }
 
@@ -566,12 +571,12 @@ void menuUsuario(stLogin* usuarioActual)
         case '2':
             system("cls");
 
+
             verTransaccionesDeUsuario(*usuarioActual);
 
             break;
 
         case '3':
-
             system("cls");
 
             configuracion(usuarioActual);
@@ -623,7 +628,6 @@ void crearArchivoDeUnUsuario(stLogin usuario)
 
 void mostrarAyuda()
 {
-    system("cls");
 
     printf("=============================================\n");
     printf("                 AYUDA - CODEPLAY\n");

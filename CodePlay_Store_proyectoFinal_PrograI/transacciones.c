@@ -158,7 +158,7 @@ void verTransaccionDetalle(int idBuscado)
     }
     fclose(f);
     if (!encontrado)
-        printf(" No existe una transacción con ID %d.\n", idBuscado);
+        printf(" No existe una transaccion con ID %d.\n", idBuscado);
 }
 
 void reporteRecaudacionMensual(int mes, int anio)
@@ -179,7 +179,7 @@ void reporteRecaudacionMensual(int mes, int anio)
     }
     fclose(f);
 
-    printf("\n Recaudación de %02d/%04d: $%.2f\n", mes, anio, total);
+    printf("\n Recaudacion de %02d/%04d: $%.2f\n", mes, anio, total);
 }
 
 void reporteMayorGanancia()
@@ -220,7 +220,7 @@ void buscarYMostrarTransaccion()
 {
     int id;
 
-    printf("Ingrese ID de la transacción a buscar: ");
+    printf("Ingrese ID de la transaccion a buscar: ");
     scanf("%d", &id);
 
     mostrarTransaccionPorId(id);
@@ -242,7 +242,7 @@ void mostrarTransaccionPorId(int id)
         {
             encontrado = 1;
 
-            printf("\n=== DETALLE DE TRANSACCIÓN ===\n");
+            printf("\n=== DETALLE DE TRANSACCION ===\n");
             printf("ID: %d\n", t.idTransaccion);
             printf("Fecha: %02d/%02d/%d\n", t.fecha.dia, t.fecha.mes, t.fecha.anio);
             printf("Juego ID: %d\n", t.idJuegoVendido);
@@ -257,7 +257,7 @@ void mostrarTransaccionPorId(int id)
     fclose(f);
 
     if (!encontrado)
-        printf(" Transacción no encontrada.\n");
+        printf(" Transaccion no encontrada.\n");
 }
 
 void guardarTransaccionEnArchivoUsuario(const Transaccion *t, stLogin usuario)

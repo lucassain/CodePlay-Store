@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "empresas.h"
 #include <string.h>
 #include "juegos.h"
@@ -13,8 +14,6 @@ int loginEmpresas(stEmpresa *empresaActual)
 
     do
     {
-        mostrarEmpresas(ARCHIVO_EMPRESAS);
-
         printf("\n=== MENU EMPRESA ===\n");
         printf("Iniciar sesion (I)\n");
         printf("Registrarse (R)\n");
@@ -60,6 +59,7 @@ int loginEmpresas(stEmpresa *empresaActual)
         case 's':
         case 'S':
             printf("Volviendo al menu principal...\n");
+            Sleep(800);
             return 0;
 
         default:
@@ -163,6 +163,7 @@ int iniciarSesionEmpresa(char archivo[], stEmpresa *empresaActual)
                 strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
         {
             printf("Inicio de sesion exitoso. Bienvenido %s!\n", guardado.nombre);
+            Sleep(800);
             *empresaActual = guardado;
             encontrado = 1;
             break;
@@ -311,6 +312,7 @@ void menuEmpresa(stEmpresa* empresaActual)
 
         case '0':
             printf("Sesion cerrada.\n");
+            Sleep(800);
             break;
 
         default:

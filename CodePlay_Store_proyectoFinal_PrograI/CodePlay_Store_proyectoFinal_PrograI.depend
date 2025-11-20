@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1763591117 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
+1763597304 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\main.c
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
@@ -9,9 +9,10 @@
 	"juegos.h"
 	"transacciones.h"
 
-1763591117 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
+1763595603 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
 	<stdio.h>
 	<stdlib.h>
+	<windows.h>
 	"usuarios.h"
 	<string.h>
 	"juegos.h"
@@ -57,17 +58,19 @@
 1763152414 c:\users\win10\documents\github\codeplay-store\codeplay_store_proyectofinal_progi\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.h
 	"juegos.h"
 
-1763586609 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.c
+1763597141 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\admin.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<windows.h>
 	"admin.h"
 	"usuarios.h"
 	"transacciones.h"
 
-1763586406 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+1763597575 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
 	<stdio.h>
 	<stdlib.h>
+	<windows.h>
 	"empresas.h"
 	<string.h>
 	"juegos.h"
@@ -79,7 +82,7 @@
 1763510291 c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.h
 	"usuarios.h"
 
-1763592446 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
+1763594956 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\juegos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -159,7 +162,7 @@
 	"usuarios.h"
 	"empresas.h"
 
-1763590032 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\transacciones.c
+1763596835 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\transacciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

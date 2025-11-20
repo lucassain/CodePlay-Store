@@ -8,6 +8,8 @@
 
 void catalogoJuegos(stLogin usuarioActual)
 {
+    system("cls");
+
     if (!existeArchivo())
     {
         inicializarCatalogo();
@@ -36,6 +38,8 @@ void catalogoJuegos(stLogin usuarioActual)
         printf("Ingrese una opcion: ");
         scanf(" %c", &opcion);
 
+        system("cls");
+
         switch (opcion)
         {
 
@@ -46,21 +50,15 @@ void catalogoJuegos(stLogin usuarioActual)
 
         case '1':
 
-            system("cls");
-
             mostrarCatalogo();
             break;
 
         case '2':
 
-            system("cls");
-
             menuBusquedaJuegos(arregloDeJuegos, validosJuegos);
             break;
 
         case '3':
-
-            system("cls");
 
             procesarCompra(usuarioActual);
             break;
@@ -279,80 +277,73 @@ int buscarJuegoPorId (stJuego* arregloDeJuegos, int validos, int idABuscar)
 
 void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos)
 {
-    system("cls");
-
-    int eleccion = -1;
-    int idABuscar;
-    char juegoABuscar[50];
-    char plataformaABuscar[50];
-    int indice;
+    char eleccion = -1;
 
     do
     {
+        system("cls");
+
         printf("\n===== MENU BUSQUEDA DE JUEGOS =====\n");
         printf("Buscar por nombre (1)\n");
         printf("Buscar por ID (2)\n");
         printf("Buscar por plataforma (3)\n");
         printf("Volver al menu anterior (0)\n");
-        printf("===================================\n");
         printf("Ingrese una opcion: ");
-        scanf("%i", &eleccion);
+        scanf(" %c", &eleccion);
+
+        int indice;
+        char busqueda[50];
 
         switch (eleccion)
         {
-        case 0:
-            printf("Volviendo al menu anterior...\n\n");
+        case '0':
+            printf("Volviendo...\n");
             break;
 
-        case 1:
-            printf("Buscador: ");
-            getchar();
-            scanf(" %[^\n]", juegoABuscar);
+        case '1':
+            printf("Ingresar nombre: ");
+            scanf(" %[^\n]", busqueda);
 
-            indice = buscarJuegoPorNombre(arregloDeJuegos, validos, juegoABuscar);
+            indice = buscarJuegoPorNombre(arregloDeJuegos, validos, busqueda);
 
             if (indice != -1)
-            {
                 mostrarUnJuego(arregloDeJuegos[indice]);
-                printf("\n");
-            }
             else
-            {
                 printf("Juego no encontrado.\n");
-            }
+
             break;
 
-        case 2:
-            printf("Ingrese el ID del juego: ");
-            scanf("%i", &idABuscar);
+        case '2':
+            printf("Ingresar ID: ");
+            int id;
+            scanf("%d", &id);
 
-            indice = buscarJuegoPorId(arregloDeJuegos, validos, idABuscar);
+            indice = buscarJuegoPorId(arregloDeJuegos, validos, id);
 
             if (indice != -1)
-            {
                 mostrarUnJuego(arregloDeJuegos[indice]);
-            }
             else
-            {
                 printf("Juego no encontrado.\n");
-            }
+
             break;
 
-        case 3:
-            printf("Buscador (plataforma): ");
-            getchar();
-            scanf(" %[^\n]", plataformaABuscar);
+        case '3':
+            printf("Ingresar plataforma: ");
+            scanf(" %[^\n]", busqueda);
 
-            buscarJuegosPorPlataforma(arregloDeJuegos, validos, plataformaABuscar);
+            buscarJuegosPorPlataforma(arregloDeJuegos, validos, busqueda);
             break;
 
         default:
-            printf("Opcion invalida. Intente nuevamente.\n");
+            printf("Opcion invalida.\n");
             break;
         }
-    }
-    while (eleccion != 0);
+
+        system("pause");
+
+    } while (eleccion != '0');
 }
+
 
 void buscarJuegosPorPlataforma(stJuego* arregloDeJuegos, int validos, char plataformaABuscar[])
 {

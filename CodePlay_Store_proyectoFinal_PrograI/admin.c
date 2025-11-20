@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 #include "admin.h"
 #include "usuarios.h"
 #include "transacciones.h"
@@ -9,19 +10,24 @@ int loginAdmin(stAdmin *adminActual)
 {
     char opcion;
 
-    do {
+    do
+    {
         printf("\n=== MENU ADMIN ===\n");
         printf("Iniciar sesion (I)\n");
         printf("Volver al menu principal (S)\n");
         printf("Ingrese una opcion: ");
         scanf(" %c", &opcion);
 
-        switch (opcion) {
+        switch (opcion)
+        {
         case 'i':
         case 'I':
-            if (iniciarSesionAdmin(ARCHIVOS_ADMINS, adminActual) == 1) {
-                return 1;   // INICIA SESIÓN
-            } else {
+            if (iniciarSesionAdmin(ARCHIVOS_ADMINS, adminActual) == 1)
+            {
+                return 1;
+            }
+            else
+            {
                 printf("Credenciales incorrectas.\n");
             }
             break;
@@ -29,12 +35,14 @@ int loginAdmin(stAdmin *adminActual)
         case 's':
         case 'S':
             printf("Volviendo al menu principal...\n");
+            Sleep(800);
             return 0;
 
         default:
             printf("Opcion invalida.\n");
         }
-    } while(opcion != 's' && opcion != 'S');
+    }
+    while(opcion != 's' && opcion != 'S');
 
     return 0;
 }
@@ -74,7 +82,8 @@ int iniciarSesionAdmin(char archivo[], stAdmin *adminActual)
     int encontrado = 0;
 
     FILE* buffer = fopen(archivo, "rb");
-    if(buffer == NULL) {
+    if(buffer == NULL)
+    {
         printf("Error al abrir el archivo de admins.\n");
         return 0;
     }
@@ -87,10 +96,11 @@ int iniciarSesionAdmin(char archivo[], stAdmin *adminActual)
     printf("Contrasenia: ");
     scanf("%s", ingreso.contrasenia);
 
-    while(fread(&guardado, sizeof(stAdmin), 1, buffer) == 1) {
+    while(fread(&guardado, sizeof(stAdmin), 1, buffer) == 1)
+    {
         if( strcmp(ingreso.usuario, guardado.usuario) == 0 &&
-            strcmp(ingreso.email, guardado.email) == 0 &&
-            strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
+                strcmp(ingreso.email, guardado.email) == 0 &&
+                strcmp(ingreso.contrasenia, guardado.contrasenia) == 0)
         {
             printf("Inicio de sesion exitoso. Bienvenido admin %s!\n", guardado.usuario);
             *adminActual = guardado;
@@ -101,7 +111,8 @@ int iniciarSesionAdmin(char archivo[], stAdmin *adminActual)
 
     fclose(buffer);
 
-    if(!encontrado) {
+    if(!encontrado)
+    {
         printf("Usuario, email o contrasenia incorrectos.\n");
     }
 
@@ -207,19 +218,22 @@ void verUsuarioPorDni()
 
 void menuAdmin(stAdmin* adminActual)
 {
-    system("cls");
     char opcion;
 
-    do {
+    do
+    {
         printf("\n===== MENU ADMIN =====\n");
         printf("Ver usuarios (1)\n");
         printf("Buscar usuario por DNI (2)\n");
-        printf("Ver transacciones (3)\n");      // <-- AGREGADO
+        printf("Ver transacciones (3)\n");
         printf("Cerrar sesion (0)\n");
         printf("Seleccione una opcion: ");
         scanf(" %c", &opcion);
 
-        switch(opcion) {
+        system("cls");
+
+        switch(opcion)
+        {
 
         case '1':
             mostrarUsuariosAdmin();
@@ -229,19 +243,21 @@ void menuAdmin(stAdmin* adminActual)
             verUsuarioPorDni();
             break;
 
-        case '3':                               // <-- AGREGADO
+        case '3':
             menuTransaccionesAdmin();
             break;
 
         case '0':
             printf("Sesion de admin cerrada.\n");
+            Sleep(800);
             break;
 
         default:
             printf("Opcion invalida.\n");
         }
 
-    } while(opcion != '0');
+    }
+    while(opcion != '0');
 }
 
 
@@ -250,7 +266,8 @@ void menuTransaccionesAdmin()
 
     char opcion;
 
-    do {
+    do
+    {
         printf("\n====== MENU TRANSACCIONES (ADMIN) ======\n");
         printf("1) Ver listado completo de transacciones\n");
         printf("2) Buscar transaccion por ID\n");
@@ -263,37 +280,49 @@ void menuTransaccionesAdmin()
         switch(opcion)
         {
         case '1':
+            system("cls");
+
             verTransaccionesResumen();
             break;
 
         case '2':
+            system("cls");
+
             buscarYMostrarTransaccion();
             break;
 
         case '3':
+            system("cls");
+
             reporteMayorGanancia();
             break;
 
         case '4':
-            {
-                int mes, anio;
-                printf("Ingrese mes: ");
-                scanf("%d", &mes);
-                printf("Ingrese anio: ");
-                scanf("%d", &anio);
 
-                reporteRecaudacionMensual(mes, anio);
-            }
+            system("cls");
+
+
+            int mes, anio;
+            printf("Ingrese mes: ");
+            scanf("%d", &mes);
+            printf("Ingrese anio: ");
+            scanf("%d", &anio);
+
+            reporteRecaudacionMensual(mes, anio);
+
             break;
 
         case '0':
             printf("Volviendo...\n");
+
+            Sleep(800);
             break;
 
         default:
             printf("Opcion invalida.\n");
         }
 
-    } while(opcion != '0');
+    }
+    while(opcion != '0');
 }
 

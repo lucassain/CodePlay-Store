@@ -15,6 +15,7 @@ int main()
 
     do
     {
+        system("cls");
         printf("===== Bienvenido a CodePlay! =====\n");
         printf("USUARIO (1)\n");
         printf("ADMIN (2)\n");
@@ -30,7 +31,7 @@ int main()
         {
             printf("Opcion invalida. Intente nuevamente.\n");
             Sleep(1000);
-            system("cls");
+            continue;
         }
 
 
@@ -51,8 +52,8 @@ int main()
             break;
 
         case '2':
-            system("cls");
 
+            system("cls");
             stAdmin adminActual;
             if (loginAdmin(&adminActual) == 1)
             {
@@ -65,8 +66,8 @@ int main()
             break;
 
         case '3':
-            system("cls");
 
+            system("cls");
             stEmpresa empresaActual;
             if (loginEmpresas(&empresaActual) == 1)
             {
@@ -81,13 +82,14 @@ int main()
         case '4':
 
             system("cls");
-
             mostrarAyuda();
+            system("pause");
 
             break;
 
         case '0':
             printf("Cerrando programa...\n");
+            Sleep(800);
             break;
 
         }
