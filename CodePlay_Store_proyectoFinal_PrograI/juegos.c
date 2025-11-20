@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 #include "juegos.h"
 #include "transacciones.h"
 #include "usuarios.h"
@@ -10,7 +11,7 @@ void catalogoJuegos(stLogin usuarioActual)
 {
     system("cls");
 
-    if (!existeArchivo())
+    if (!existeArchivo() || calcularDimensionArchivo() == 0)
     {
         inicializarCatalogo();
     }
@@ -26,6 +27,7 @@ void catalogoJuegos(stLogin usuarioActual)
 
     int validosJuegos=cargarArregloDesdeArchivo(&arregloDeJuegos, dimension);
 
+    char opcionStr[10];
     char opcion=0;
 
     do
@@ -36,7 +38,17 @@ void catalogoJuegos(stLogin usuarioActual)
         printf("Comprar un juego (3)\n");
         printf("0 PARA SALIR \n");
         printf("Ingrese una opcion: ");
-        scanf(" %c", &opcion);
+
+        scanf("%9s", opcionStr);
+        opcion = opcionStr[0];
+
+        if (opcion != '0' && opcion != '1' && opcion != '2' && opcion != '3')
+        {
+            printf("Opcion invalida. Intente nuevamente.\n");
+            Sleep(1000);
+            system("cls");
+            continue;
+        }
 
         system("cls");
 
@@ -50,6 +62,7 @@ void catalogoJuegos(stLogin usuarioActual)
 
         case '1':
 
+            system("cls");
             mostrarCatalogo();
             break;
 
@@ -65,8 +78,6 @@ void catalogoJuegos(stLogin usuarioActual)
 
         default:
 
-            printf("Opcion invalida. Ingrese otra opcion.\n");
-
             break;
         }
 
@@ -75,7 +86,6 @@ void catalogoJuegos(stLogin usuarioActual)
 
     free(arregloDeJuegos);
     arregloDeJuegos=NULL;
-
 }
 
 void inicializarCatalogo()
@@ -205,11 +215,11 @@ int calcularDimensionArchivo()
 stJuego* crearArregloJuegos(int dimension)
 {
     if (dimension <= 0)
-        dimension = 1; // evita malloc(0)
+        dimension = 1;
 
     stJuego* arreglo = (stJuego*) malloc(sizeof(stJuego) * dimension);
 
-    return arreglo; // si falla, SÍ será NULL
+    return arreglo;
 }
 
 int cargarArregloDesdeArchivo (stJuego** arregloDeJuegos, int dimension)
@@ -277,6 +287,7 @@ int buscarJuegoPorId (stJuego* arregloDeJuegos, int validos, int idABuscar)
 
 void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos)
 {
+    char opcionStr[10];
     char eleccion = -1;
 
     do
@@ -289,8 +300,17 @@ void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos)
         printf("Buscar por plataforma (3)\n");
         printf("Volver al menu anterior (0)\n");
         printf("Ingrese una opcion: ");
-        scanf(" %c", &eleccion);
 
+        scanf("%9s", opcionStr);
+        eleccion = opcionStr[0];
+
+        if (eleccion != '0' && eleccion != '1' && eleccion != '2' && eleccion != '3')
+        {
+            printf("Opcion invalida. Intente nuevamente.\n");
+            Sleep(1000);
+            system("cls");
+            continue;
+        }
         int indice;
         char busqueda[50];
 
@@ -335,13 +355,13 @@ void menuBusquedaJuegos(stJuego* arregloDeJuegos, int validos)
             break;
 
         default:
-            printf("Opcion invalida.\n");
             break;
         }
 
         system("pause");
 
-    } while (eleccion != '0');
+    }
+    while (eleccion != '0');
 }
 
 
@@ -400,7 +420,7 @@ void cargarUnJuego(stJuego* juego)
     {
         printf("Nombre del juego: ");
         fgets(juego->nombre, sizeof(juego->nombre), stdin);
-        juego->nombre[strcspn(juego->nombre, "\n")] = 0; // Saca el \n
+        juego->nombre[strcspn(juego->nombre, "\n")] = 0;
     }
     while(!validarNombreJuego(juego->nombre));
 
@@ -494,14 +514,14 @@ int buscarJuegoEnArchivoPorId(int idBuscado, stJuego *out)
         {
             if (out != NULL)
             {
-                *out = j;   // Copia el juego encontrado
+                *out = j;
             }
             encontrado = 1;
             break;
         }
     }
     fclose(f);
-    return encontrado;  // 1 si lo encontró, 0 si no
+    return encontrado;
 }
 
 void aMinusculas(char s[])
@@ -529,7 +549,6 @@ int validarNombreJuego(char nombre[])
                 (c >= '0' && c <= '9') ||
                 c == ' ' || c == '-' || c == '\'')
         {
-            // válido
         }
         else
         {
@@ -645,7 +664,7 @@ int juegoExisteEnArchivo(char nombre[], char plataforma[])
         aMinusculas(platAux);
 
         if (strcmp(nomAux, nomBuscado) == 0 &&
-            strcmp(platAux, platBuscada) == 0)
+                strcmp(platAux, platBuscada) == 0)
         {
             fclose(pArch);
             return 1;

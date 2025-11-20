@@ -98,11 +98,7 @@ void registrarUnaEmpresa (stEmpresa* empresa)
     printf("Fecha de registro: ");
     empresa->fechaRegistro=cargarFechaManualEmpresa();
 
-
     fflush(stdin);
-
-    printf("Ingrese una breve descripcion de la empresa: ");
-    fgets(empresa->descripcion, 150, stdin);
 
     empresa->idEmpresa=generarIdUnicoEmpresa();
 }
@@ -180,7 +176,7 @@ int iniciarSesionEmpresa(char archivo[], stEmpresa *empresaActual)
     return encontrado;
 }
 
-void mostrarUnaEmpresa (stEmpresa empresa) //BORRAR MAS TARDE
+void mostrarUnaEmpresa (stEmpresa empresa)
 {
     printf("Nombre de empresa: %s\n", empresa.nombre);
     printf("Direccion de correo electronico: %s\n", empresa.email);
@@ -192,7 +188,7 @@ void mostrarUnaEmpresa (stEmpresa empresa) //BORRAR MAS TARDE
 
 }
 
-void mostrarEmpresas (char archivo[]) //BORRAR MAS TARDE
+void mostrarEmpresas (char archivo[])
 {
     FILE* buffer=fopen(archivo, "rb");
     stEmpresa empresa;
@@ -212,16 +208,13 @@ void menuEmpresa(stEmpresa* empresaActual)
     char archivoEmpresa[200];
     sprintf(archivoEmpresa, "juegos_%s.dat", empresaActual->email);
 
-    // Calcular dimension inicial
     int dimension = calcularDimensionArchivoEmpresa(archivoEmpresa);
 
-    // Si no hay juegos todavía, evitamos malloc(0)
     if (dimension <= 0)
     {
         dimension = 1;
     }
 
-    // Crear arreglo dinámico
     stJuego* arregloDeJuegos = crearArregloJuegos(dimension);
 
     if (arregloDeJuegos == NULL)
@@ -230,9 +223,9 @@ void menuEmpresa(stEmpresa* empresaActual)
         return;
     }
 
-    // Cargar juegos desde el archivo de la empresa
     int validos = cargarArregloDesdeArchivoEmpresa(archivoEmpresa, &arregloDeJuegos, &dimension);
 
+    char opcionStr[10];
     char opcion;
 
     do
@@ -246,13 +239,21 @@ void menuEmpresa(stEmpresa* empresaActual)
         printf("Modificar datos de la empresa (5)\n");
         printf("Cerrar sesion (0)\n");
         printf("Seleccione una opcion: ");
-        scanf(" %c", &opcion);
-        getchar();
+        scanf("%9s", opcionStr);
+
+        opcion = opcionStr[0];
+
+        if (opcion != '0' && opcion != '1' && opcion != '2' && opcion != '3' && opcion!='4' && opcion!='5')
+        {
+            printf("Opcion invalida. Intente nuevamente.\n");
+            Sleep(1000);
+            system("cls");
+            continue;
+        }
 
         switch (opcion)
         {
         case '1':
-        {
             stJuego juegoNuevo;
 
             printf("Ingrese los datos del nuevo juego:\n");
@@ -268,15 +269,12 @@ void menuEmpresa(stEmpresa* empresaActual)
             juegoNuevo.id = generarIdUnicoJuego();
             juegoNuevo.idEmpresa = empresaActual->idEmpresa;
 
-            // Guardar en archivo propio de la empresa
             guardarJuegoEnArchivoEmpresa(*empresaActual, juegoNuevo);
 
-            // Guardar en arreglo dinámico de la empresa
             if (agregarJuegoAlArreglo(&arregloDeJuegos, &dimension, &validos, juegoNuevo) == 1)
             {
                 printf("Juego agregado correctamente.\n");
 
-                // Guardar también en el archivo general del catálogo
                 agregarJuegoAlCatalogo(juegoNuevo);
             }
             else
@@ -285,10 +283,10 @@ void menuEmpresa(stEmpresa* empresaActual)
             }
 
             break;
-        }
 
         case '2':
             mostrarJuegosEmpresa(arregloDeJuegos, validos);
+            system("pause");
             break;
 
         case '3':
@@ -305,8 +303,8 @@ void menuEmpresa(stEmpresa* empresaActual)
 
         case '5':
 
-             modificarDatosEmpresa(empresaActual);  // llamar función de modificación
-            actualizarEmpresaEnArchivo(*empresaActual);  // guardar cambios en archivo
+             modificarDatosEmpresa(empresaActual);
+            actualizarEmpresaEnArchivo(*empresaActual);
 
             break;
 
@@ -316,7 +314,8 @@ void menuEmpresa(stEmpresa* empresaActual)
             break;
 
         default:
-            printf("Opcion invalida.\n");
+
+            break;
         }
 
     }
@@ -479,7 +478,8 @@ void modificarJuego(stJuego* arreglo, int validos)
 {
     int id;
     printf("Ingrese el ID del juego que desea modificar: ");
-    scanf("%d", &id);
+    scanf("%i", &id);
+    limpiarBuffer();
 
     int pos = buscarJuegoPorId(arreglo, validos, id);
 
@@ -496,50 +496,54 @@ void modificarJuego(stJuego* arreglo, int validos)
 
     printf("\n=== MODIFICAR CAMPOS ===\n");
 
-    // NOMBRE
     printf("¿Desea cambiar el nombre? (s/n): ");
     scanf(" %c", &opcion);
+    limpiarBuffer();
+
     if (opcion == 's' || opcion == 'S')
     {
         printf("Nuevo nombre: ");
-        fflush(stdin);
         fgets(arreglo[pos].nombre, 50, stdin);
         arreglo[pos].nombre[strcspn(arreglo[pos].nombre, "\n")] = 0;
     }
 
-    // GENERO
-    printf("¿Desea cambiar el género? (s/n): ");
+    printf("¿Desea cambiar el genero? (s/n): ");
     scanf(" %c", &opcion);
+    limpiarBuffer();
+
     if (opcion == 's' || opcion == 'S')
     {
-        printf("Nuevo género: ");
-        fflush(stdin);
+        printf("Nuevo genero: ");
         fgets(arreglo[pos].genero, 30, stdin);
         arreglo[pos].genero[strcspn(arreglo[pos].genero, "\n")] = 0;
     }
 
-    // PLATAFORMA
     printf("¿Desea cambiar la plataforma? (s/n): ");
     scanf(" %c", &opcion);
+    limpiarBuffer();
+
     if (opcion == 's' || opcion == 'S')
     {
         printf("Nueva plataforma: ");
-        fflush(stdin);
         fgets(arreglo[pos].plataforma, 20, stdin);
         arreglo[pos].plataforma[strcspn(arreglo[pos].plataforma, "\n")] = 0;
     }
 
-    // PRECIO
     printf("¿Desea cambiar el precio? (s/n): ");
     scanf(" %c", &opcion);
+    limpiarBuffer();
+
     if (opcion == 's' || opcion == 'S')
     {
         printf("Nuevo precio: ");
         scanf("%f", &arreglo[pos].precio);
+        limpiarBuffer();
     }
 
     printf("\nJuego modificado correctamente.\n");
+    Sleep(800);
 }
+
 
 int borrarJuego(stJuego* arreglo, int* validos)
 {
@@ -552,6 +556,7 @@ int borrarJuego(stJuego* arreglo, int* validos)
     if (pos == -1)
     {
         printf("No existe un juego con ese ID.\n");
+        Sleep(800);
         return 0;
     }
 
@@ -563,6 +568,7 @@ int borrarJuego(stJuego* arreglo, int* validos)
     (*validos)--;
 
     printf("Juego borrado correctamente.\n");
+    Sleep(800);
 
     return 1;
 }
@@ -589,74 +595,94 @@ void modificarDatosEmpresa(stEmpresa* empresaActual)
 {
     stEmpresa modificado = *empresaActual;
     char opcion;
+    char buffer[50];
 
     printf("\n=== MODIFICAR DATOS DE LA EMPRESA ===\n");
 
-    // NOMBRE
-    printf("¿Desea cambiar el nombre de la empresa? (s/n): ");
-    scanf(" %c", &opcion);
+    do
+    {
+        printf("¿Desea cambiar el nombre de la empresa? (s/n): ");
+        scanf("%49s", buffer);
+        opcion = buffer[0];
+    }
+    while(opcion!='s' && opcion!='S' && opcion!='n' && opcion!='N');
+
     if (opcion == 's' || opcion == 'S')
     {
         printf("Nuevo nombre: ");
         scanf("%s", modificado.nombre);
     }
 
-    // EMAIL
-    printf("¿Desea cambiar el email de contacto? (s/n): ");
-    scanf(" %c", &opcion);
+    do
+    {
+        printf("¿Desea cambiar el email de contacto? (s/n): ");
+        scanf("%49s", buffer);
+        opcion = buffer[0];
+    }
+    while(opcion!='s' && opcion!='S' && opcion!='n' && opcion!='N');
+
     if (opcion == 's' || opcion == 'S')
     {
         printf("Nuevo email: ");
         scanf("%s", modificado.email);
     }
 
-    // PAIS
-    printf("¿Desea cambiar el país? (s/n): ");
-    scanf(" %c", &opcion);
+    do
+    {
+        printf("¿Desea cambiar el pais? (s/n): ");
+        scanf("%49s", buffer);
+        opcion = buffer[0];
+    }
+    while(opcion!='s' && opcion!='S' && opcion!='n' && opcion!='N');
+
     if (opcion == 's' || opcion == 'S')
     {
-        printf("Nuevo país: ");
+        printf("Nuevo pais: ");
         scanf("%s", modificado.pais);
     }
 
-    // CONTRASEÑA
-    printf("¿Desea cambiar la contraseña? (s/n): ");
-    scanf(" %c", &opcion);
+    do
+    {
+        printf("¿Desea cambiar la contrasenia? (s/n): ");
+        scanf("%49s", buffer);
+        opcion = buffer[0];
+    }
+    while(opcion!='s' && opcion!='S' && opcion!='n' && opcion!='N');
+
     if (opcion == 's' || opcion == 'S')
     {
-        printf("Nueva contraseña: ");
+        printf("Nueva contrasenia: ");
         scanf("%s", modificado.contrasenia);
     }
 
-    // DESCRIPCIÓN
-    printf("¿Desea cambiar la descripción? (s/n): ");
-    scanf(" %c", &opcion);
-    if (opcion == 's' || opcion == 'S')
-    {
-        fflush(stdin);
-        printf("Nueva descripción: ");
-        fgets(modificado.descripcion, 150, stdin);
-        modificado.descripcion[strcspn(modificado.descripcion, "\n")] = '\0';
-    }
 
-    // CONFIRMAR
-    printf("\n¿Confirmar modificaciones? (s/n): ");
-    scanf(" %c", &opcion);
+    do
+    {
+        printf("\n¿Confirmar modificaciones? (s/n): ");
+        scanf("%49s", buffer);
+        opcion = buffer[0];
+    }
+    while(opcion!='s' && opcion!='S' && opcion!='n' && opcion!='N');
 
     if (opcion == 's' || opcion == 'S')
     {
         *empresaActual = modificado;
         printf("Datos modificados correctamente.\n");
+
+        Sleep(800);
     }
     else
     {
-        printf("Modificación cancelada.\n");
+        printf("Modificacion cancelada.\n");
+
+        Sleep(800);
     }
 }
 
+
 void actualizarEmpresaEnArchivo(stEmpresa empresa)
 {
-    FILE* buffer = fopen(ARCHIVO_EMPRESAS, "r+b"); // abrir en modo lectura/escritura binaria
+    FILE* buffer = fopen(ARCHIVO_EMPRESAS, "r+b");
     if (buffer == NULL)
     {
         printf("No se pudo abrir el archivo de empresas.\n");
@@ -670,7 +696,6 @@ void actualizarEmpresaEnArchivo(stEmpresa empresa)
     {
         if(aux.idEmpresa == empresa.idEmpresa)
         {
-            // mover el puntero del archivo al inicio del registro encontrado
             fseek(buffer, -(long)sizeof(stEmpresa), SEEK_CUR);
             fwrite(&empresa, sizeof(stEmpresa), 1, buffer);
             encontrado = 1;
@@ -800,6 +825,13 @@ int validarContraseniaEmpresa (char contrasenia[])
 
     return 1;
 }
+
+void limpiarBuffer()
+{
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
 int validarPais (char pais[])
 {
     int tieneLetra=0;
@@ -855,3 +887,5 @@ Fecha cargarFechaManualEmpresa()
 
     return fecha;
 }
+
+

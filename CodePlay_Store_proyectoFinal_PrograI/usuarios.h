@@ -30,7 +30,7 @@ void menuUsuario(stLogin* usuarioActual);
 void inicializarArchivoUsuarios();
 void crearArchivoDeUnUsuario(stLogin usuario);
 void mostrarAyuda();
-void mostrarUnUsuario (stLogin user); //BORRAR MAS TARDE
-void mostrarUsuarios (char archivo[]); //BORRAR MAS TARDE
+void mostrarUnUsuario (stLogin user);
+void mostrarUsuarios (char archivo[]);
 
 #endif

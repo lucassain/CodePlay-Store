@@ -41,6 +41,7 @@ void modificarJuego(stJuego* arreglo, int validos);
 int borrarJuego(stJuego* arreglo, int* validos);
 void guardarArregloEnArchivoEmpresa(char nombreArchivo[], stJuego* arreglo, int validos);
 void modificarDatosEmpresa(stEmpresa* empresaActual);
+void limpiarBuffer();
 void actualizarEmpresaEnArchivo(stEmpresa empresa);
 int validarEmailEmpresa (char email[]);
 int validarNombreEmpresa (char nombreDeEmpresa[]);

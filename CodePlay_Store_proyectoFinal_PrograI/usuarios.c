@@ -11,6 +11,7 @@ int loginUsuarios(stLogin *usuarioActual)
     system("cls");
     int registro = 0;
     char opcion;
+    char opcionStr[10];
     stLogin usuario;
 
     do
@@ -20,7 +21,19 @@ int loginUsuarios(stLogin *usuarioActual)
         printf("Registrarse (R)\n");
         printf("Volver al menu principal (S)\n");
         printf("Ingrese una opcion: ");
-        scanf(" %c", &opcion);
+
+        scanf("%9s", opcionStr);
+        opcion = opcionStr[0];
+
+        if (opcion != 'i' && opcion != 'I' &&
+                opcion != 'r' && opcion != 'R' &&
+                opcion != 's' && opcion != 'S')
+        {
+            printf("Opcion invalida. Intente nuevamente.\n");
+            Sleep(1000);
+            system("cls");
+            continue;
+        }
 
         switch (opcion)
         {
@@ -375,7 +388,7 @@ int iniciarSesion(char archivo[], stLogin *usuarioActual)
 }
 
 
-void mostrarUnUsuario (stLogin user) //BORRAR MAS TARDE
+void mostrarUnUsuario (stLogin user)
 {
     printf("Nombre de usuario: %s\n", user.usuario);
     printf("Direccion de correo electronico: %s\n", user.email);
@@ -383,7 +396,7 @@ void mostrarUnUsuario (stLogin user) //BORRAR MAS TARDE
     printf("DNI: %s\n", user.DNI);
 }
 
-void mostrarUsuarios (char archivo[]) //BORRAR MAS TARDE
+void mostrarUsuarios (char archivo[])
 {
     FILE* usuarios=fopen(archivo, "rb");
     stLogin user;
@@ -511,7 +524,7 @@ void editarDatosPerfil(stLogin* usuarioActual)
 
     printf("\nPerfil actualizado correctamente.\n");
     *usuarioActual = modificado;
-        Sleep(800);
+    Sleep(800);
 
 
 }
@@ -546,6 +559,7 @@ void modificarPerfil (char DniABuscar[], stLogin usuarioModificado)
 
 void menuUsuario(stLogin* usuarioActual)
 {
+    char opcionStr[10];
     char opcion;
 
     do
@@ -557,7 +571,17 @@ void menuUsuario(stLogin* usuarioActual)
         printf("Configuracion (3)\n");
         printf("Cerrar sesion (0)\n");
         printf("Seleccione una opcion: ");
-        scanf(" %c", &opcion);
+
+        scanf("%9s", opcionStr);
+        opcion = opcionStr[0];
+
+        if (opcion != '0' && opcion != '1' && opcion != '2' && opcion != '3')
+        {
+            printf("Opcion invalida. Intente nuevamente.\n");
+            Sleep(1000);
+            system("cls");
+            continue;
+        }
 
         switch(opcion)
         {
@@ -590,8 +614,6 @@ void menuUsuario(stLogin* usuarioActual)
             break;
 
         default:
-
-            printf("Opcion invalida.\n");
 
             break;
         }
@@ -635,7 +657,7 @@ void mostrarAyuda()
 
     printf(">> ¿QUE ES CODEPLAY?\n");
     printf("CodePlay es una tienda digital de videojuegos. Permite comprar\n");
-    printf("juegos, administrar catálogos y registrar empresas creadoras de videojuegos,\n");
+    printf("juegos, administrar catalogos y registrar empresas creadoras de videojuegos,\n");
     printf("ademas permite .\n\n");
 
     printf(">> ¿COMO FUNCIONA PARA LOS USUARIOS?\n");
@@ -661,10 +683,10 @@ void mostrarAyuda()
     printf("   Si, es necesario iniciar sesion para registrar transacciones.\n\n");
 
 
-    printf(" - ¿Cómo realizo una compra?\n");
+    printf(" - ¿Como realizo una compra?\n");
     printf("   Una vez que inicies sesion , vas a la opcion de ver catalogo y te deja realizar la compra.\n\n");
 
-    printf(" - ¿Dónde se guardan mis recibos o historial de compras?\n");
+    printf(" - ¿Donde se guardan mis recibos o historial de compras?\n");
     printf("   Todas las compras se guardan en el archivo personal de cada usuario (creado cuando te registras).\n\n");
 
     printf(" - ¿Puedo reembolsar mis compras?\n");

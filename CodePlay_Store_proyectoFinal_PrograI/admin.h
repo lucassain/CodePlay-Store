@@ -15,7 +15,7 @@ typedef struct
 
 
 
-// Prototipo
+// Prototipado
 int loginAdmin(stAdmin *adminActual);
 void creacionAdmin ();
 int iniciarSesionAdmin(char archivo[], stAdmin *adminActual);
