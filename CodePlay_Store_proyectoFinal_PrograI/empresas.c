@@ -239,12 +239,12 @@ void menuEmpresa(stEmpresa* empresaActual)
     {
         system("cls");
         printf("\n===== MENU EMPRESA =====\n");
-        printf("1 - Publicar nuevo juego\n");
-        printf("2 - Ver mis juegos\n");
-        printf("3 - Modificar un juego\n");
-        printf("4 - Borrar un juego\n");
-        printf("5 - Modificar datos de la empresa\n");
-        printf("0 - Cerrar sesion\n");
+        printf("Publicar nuevo juego (1)\n");
+        printf("Ver mis juegos (2)\n");
+        printf("Modificar un juego (3)\n");
+        printf("Borrar un juego (4)\n");
+        printf("Modificar datos de la empresa (5)\n");
+        printf("Cerrar sesion (0)\n");
         printf("Seleccione una opcion: ");
         scanf(" %c", &opcion);
         getchar();

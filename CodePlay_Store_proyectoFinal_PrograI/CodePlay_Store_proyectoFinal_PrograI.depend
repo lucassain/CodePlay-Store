@@ -9,7 +9,7 @@
 	"juegos.h"
 	"transacciones.h"
 
-1763595603 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
+1763602034 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\usuarios.c
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
@@ -67,7 +67,7 @@
 	"usuarios.h"
 	"transacciones.h"
 
-1763597575 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
+1763600389 source:c:\users\lucas\documents\github\codeplay-store\codeplay_store_proyectofinal_prograi\empresas.c
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>

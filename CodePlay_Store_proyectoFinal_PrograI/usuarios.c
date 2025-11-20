@@ -635,37 +635,46 @@ void mostrarAyuda()
 
     printf(">> ¿QUE ES CODEPLAY?\n");
     printf("CodePlay es una tienda digital de videojuegos. Permite comprar\n");
-    printf("juegos, administrar catálogos, registrar empresas creadoras,\n");
-    printf("y gestionar ventas mediante transacciones.\n\n");
+    printf("juegos, administrar catálogos y registrar empresas creadoras de videojuegos,\n");
+    printf("ademas permite .\n\n");
 
     printf(">> ¿COMO FUNCIONA PARA LOS USUARIOS?\n");
     printf("- Crear cuenta o iniciar sesion.\n");
     printf("- Explorar el catalogo de juegos.\n");
-    printf("- Ver los detalles de cada juego.\n");
+    printf("- Busqueda de juegos.\n");
     printf("- Realizar compras y ver el historial personal.\n\n");
+    printf("- Modificar datos del perfil.\n\n");
 
     printf(">> ¿COMO FUNCIONA PARA LOS ADMINISTRADORES?\n");
-    printf("- Gestionar el catalogo completo.\n");
     printf("- Ver todas las transacciones de la tienda.\n");
     printf("- Consultar reportes y ventas.\n");
-    printf("- Administrar usuarios y empresas.\n\n");
+    printf("- Administrar usuarios.\n\n");
 
     printf(">> ¿COMO FUNCIONA PARA LAS EMPRESAS?\n");
-    printf("- Iniciar sesion como desarrolladora.\n");
+    printf("- Iniciar sesion como empresa desarrolladora.\n");
+    printf("- Publicar y modificar juegos.\n");
     printf("- Ver los juegos propios.\n");
-    printf("- Administrar el catalogo de sus productos.\n");
-    printf("- Revisar las ventas de la empresa.\n\n");
+    printf("- Modificar datos de la empresa.\n\n");
 
     printf(">> PREGUNTAS FRECUENTES\n");
     printf(" - ¿Necesito cuenta para comprar?\n");
     printf("   Si, es necesario iniciar sesion para registrar transacciones.\n\n");
 
-    printf(" - ¿Las compras se guardan por usuario?\n");
-    printf("   Si, cada usuario tiene su propio archivo de historial.\n\n");
 
-    printf(" - ¿Puedo borrar mis compras?\n");
-    printf("   No, por motivos de registro interno.\n\n");
+    printf(" - ¿Cómo realizo una compra?\n");
+    printf("   Una vez que inicies sesion , vas a la opcion de ver catalogo y te deja realizar la compra.\n\n");
 
+    printf(" - ¿Dónde se guardan mis recibos o historial de compras?\n");
+    printf("   Todas las compras se guardan en el archivo personal de cada usuario (creado cuando te registras).\n\n");
+
+    printf(" - ¿Puedo reembolsar mis compras?\n");
+    printf("   No es posible el reembolso.\n\n");
+
+    printf(" - ¿Puedo cambiar mi contrasenia?\n");
+    printf("   Si, puede cambiar su contrasenia desde configuracion.\n\n");
+
+    printf(" - ¿Puedo cambiar el email asociado a mi cuenta?\n");
+    printf("   Al igual que con la contrasenia, es posible desde la configuracion.\n\n");
 
     return;
 
